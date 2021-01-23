@@ -1,4 +1,4 @@
-package com.ironhack.crm.main;
+package lead;
 
 import org.junit.jupiter.api.Test;
 
