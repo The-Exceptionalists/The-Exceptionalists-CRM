@@ -1,7 +1,6 @@
 package com.ironhack.crm.classes;
 
-import com.ironhack.crm.enums.Product;
-import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.enums.*;
 
 public class Opportunity {
     private static int count = 1;
