@@ -12,9 +12,9 @@ public class Contact {
 
     public Contact(String name, String email, String companyName, String phoneNum) {
 
-        this.name = name;
+        setName(name);
         setEmail(email);
-        this.companyName = companyName;
+        setCompanyName(companyName);
         setPhoneNum(phoneNum);
 
     }
@@ -32,6 +32,7 @@ public class Contact {
     }
 
     private void setName(String name) {
+        if(!Validator.validateName(name)) throw new IllegalArgumentException("Name must be between 1 and 31 characters");
         this.name = name;
     }
 
@@ -49,6 +50,7 @@ public class Contact {
     }
 
     private void setCompanyName(String companyName) {
+        if(!Validator.validateName(companyName)) throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
         this.companyName = companyName;
     }
 
