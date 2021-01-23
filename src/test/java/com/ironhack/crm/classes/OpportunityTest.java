@@ -1,7 +1,7 @@
-package com.ironhack.classes;
+package com.ironhack.crm.classes;
 
-import com.ironhack.enums.Product;
-import com.ironhack.enums.Status;
+import com.ironhack.crm.enums.Product;
+import com.ironhack.crm.enums.Status;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
