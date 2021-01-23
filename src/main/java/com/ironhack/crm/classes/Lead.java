@@ -1,6 +1,5 @@
 package com.ironhack.crm.classes;
 
-
 import com.ironhack.crm.enums.ItemType;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;

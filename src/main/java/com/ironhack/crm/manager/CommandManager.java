@@ -172,16 +172,19 @@ public class CommandManager {
             System.out.println("Enter a correct name"); //Be more specific with the format
             name = sc.nextLine();
         }
+        System.out.println("Email: ");
         String email = sc.nextLine();
         while (!Validator.validateEmail(email)) {
             System.out.println("Enter a correct email"); //Be more specific with the format
             email = sc.nextLine();
         }
+        System.out.println("Company name: ");
         String companyName = sc.nextLine();
         while (!Validator.validateCompanyName(companyName)) {
             System.out.println("Enter a correct company name"); //Be more specific with the format
             companyName = sc.nextLine();
         }
+        System.out.println("Phone number: ");
         String phoneNumber = sc.nextLine();
         while (!Validator.validatePhoneNumber(phoneNumber)) {
             System.out.println("Enter a correct phone number"); //Be more specific with the format
