@@ -57,4 +57,13 @@ public class Validator {
         }
         return false;
     }
+
+    public static boolean validateIndustry(String industry) {
+        switch (industry) {
+            case "produce", "ecommerce", "manufacturing", "medical", "other" -> {
+                return true;
+            }
+        }
+        return false;
+    }
 }
