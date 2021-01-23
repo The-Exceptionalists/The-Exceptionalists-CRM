@@ -1,7 +1,6 @@
 package com.ironhack.crm.classes;
 
 
-import com.ironhack.crm.utils.ValidateHelpers;
 import com.ironhack.crm.utils.Validator;
 
 public class Lead {
@@ -55,7 +54,6 @@ public class Lead {
     }
 
     public void setEmail(String email) {
-        //"\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b" esta es una regex alternativa que vi por internet, se puede borrar
 
         if (!Validator.validateEmail(email)){
             throw new IllegalArgumentException("Name wasn't correct");
@@ -69,6 +67,12 @@ public class Lead {
     }
 
     public void setCompanyName(String companyName) {
+
+        if(!Validator.validateCompanyName(companyName)) {
+
+            throw new IllegalArgumentException("Company name wasn't correct");
+        }
+
         this.companyName = companyName;
     }
 

@@ -15,6 +15,18 @@ public class Validator {
     public static boolean validateName(String name) {
         return validate(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*${1,31}");
     }
+    public static boolean validateCompanyName(String name) {
+
+        boolean correctName = false;
+
+        if(name.length() > 0 && name.length() < 31) {
+            correctName = true;
+        }else {
+            correctName = false;
+        }
+
+       return correctName;
+    }
 
     public static boolean validateEmail(String email) {
         return validate(email, "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");

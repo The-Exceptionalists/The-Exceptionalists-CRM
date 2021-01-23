@@ -58,9 +58,14 @@ class LeadTest {
 
     @Test
     void setCompanyName_noEmpty_true() {
+        Lead lead = new Lead ("Antonio Jesús", "juan@juan.es", "Juan's Company", "669695702");
+
+        assertThrows(IllegalArgumentException.class, ()->lead.setCompanyName(""));
     }
     @Test
     void setCompanyName_noMoreThan30_true() {
+        Lead lead = new Lead ("Antonio Jesús", "juan@juan.es", "Juan's Company", "669695702");
+        assertThrows(IllegalArgumentException.class, ()->lead.setCompanyName("juanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuanjuan"));
     }
 
 
