@@ -1,6 +1,7 @@
-package com.ironhack.crm.main;
+package com.ironhack.crm.classes;
 
-import com.ironhack.crm.main.helpers.ValidateHelpers;
+
+import com.ironhack.crm.utils.ValidateHelpers;
 
 public class Lead {
 
@@ -42,7 +43,7 @@ public class Lead {
 
     public void setName(String name) {
 
-        ValidateHelpers.validateString(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*$");
+       ValidateHelpers.validateString(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*$");
 
 
         this.name = name;

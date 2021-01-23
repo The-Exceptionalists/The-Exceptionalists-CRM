@@ -1,4 +1,4 @@
-package com.ironhack.crm.main.helpers;
+package com.ironhack.crm.utils;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -78,7 +78,7 @@ public class ValidateHelpers {
 
         int selection;
 
-        Pattern pattern = Pattern.compile(regex;
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(arg);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("insert a correct number");
@@ -89,7 +89,7 @@ public class ValidateHelpers {
 
     public static String validateString(String arg, String regex) {
 
-        Pattern pattern = Pattern.compile(regex;
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(arg);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("insert a correct number");

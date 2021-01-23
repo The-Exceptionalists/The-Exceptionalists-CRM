@@ -1,6 +1,6 @@
-package lead;
+package com.ironhack.crm.classes;
 
-import com.ironhack.crm.main.Lead;
+import com.ironhack.crm.classes.Lead;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
