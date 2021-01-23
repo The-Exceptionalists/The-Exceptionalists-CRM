@@ -15,7 +15,7 @@ public class Lead {
 
     public Lead(String name, String email, String companyName, String phoneNumber) {
         counter++;
-        setId();
+        setId(Storage.getNewId(ItemType.LEAD));
         setName(name);
         setEmail(email);
         setCompanyName(companyName);
@@ -34,9 +34,9 @@ public class Lead {
         return id;
     }
 
-    public void setId() {
-        Storage.getNewId(ItemType.LEAD);
-        this.id = "" + counter;
+    public void setId(String id) {
+
+        this.id = id;
     }
 
     public String getName() {
