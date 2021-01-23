@@ -21,10 +21,16 @@ Functionalities
 ## Usage
 
 Usage
+
+## Diagrams
+
+![user-case-diagram]('URL')
+
+![class-diagram]('URL')
    
 ## Screenshots
 
-![alt text]('URL')
+![screen1]('URL')
 
 ## Authors
 **The Excepcionalist Team**: Adrià López, Jaume Sánchez, Salvatore Corsaro, Antonio Navarro, Iván Trujillo.
