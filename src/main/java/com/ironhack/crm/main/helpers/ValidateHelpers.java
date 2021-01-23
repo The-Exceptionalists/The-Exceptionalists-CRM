@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class validateHelpers {
+public class ValidateHelpers {
 
     //Scanner Input validates
 
@@ -86,7 +86,7 @@ public class validateHelpers {
         return selection;
     }
 
-    public static String validateString(String arg, String regex) {
+    public static Boolean validateString(String arg, String regex) {
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(arg);
@@ -94,6 +94,6 @@ public class validateHelpers {
             throw new IllegalArgumentException("insert a correct input");
         }
 
-        return arg;
+        return matcher.matches();
     }
 }

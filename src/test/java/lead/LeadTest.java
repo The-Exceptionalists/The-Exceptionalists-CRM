@@ -11,18 +11,29 @@ class LeadTest {
 
     @Test
     void setName_noEmpty_true() {
-        Lead lead = new Lead ("Juan", "juan@juan.es", "Juan's Company", "669695702");
+        Lead lead = new Lead ("Juan Alberto", "juan@juan.es", "Juan's Company", "669695702");
         assertTrue(lead.getName().length() > 0);
     }
     @Test
     void setName_noMoreThan30Char_true() {
-        Lead lead = new Lead ("Juan", "juan@juan.es", "Juan's Company", "669695702");
+        Lead lead = new Lead ("Juan Alberto", "juan@juan.es", "Juan's Company", "669695702");
         assertTrue(lead.getName().length() < 31);
     }
     @Test
+    void setName_work_name() {
+        Lead lead = new Lead ("Juan Alberto", "juan@juan.es", "Juan's Company", "669695702");
+        lead.setName("Juan");
+        assertEquals("Juan", lead.getName());
+        lead.setName("Juan Alberto");
+        assertEquals("Juan Alberto", lead.getName());
+        lead.setName("Antonio Jesús");
+        assertEquals("Antonio Jesús", lead.getName());
+    }
+
+    @Test
     void setName_throwEmptyError_IllegalArgumentException() {
         Lead lead = new Lead ("", "juan@juan.es", "Juan's Company", "669695702");
-        assertThrows(IllegalArgumentException.class, ()->lead.getName());
+        assertThrows(IllegalArgumentException.class, ()->lead.setName("h"));
     }
     @Test
     void setName_throw31CharError_IllegalArgumentException() {
