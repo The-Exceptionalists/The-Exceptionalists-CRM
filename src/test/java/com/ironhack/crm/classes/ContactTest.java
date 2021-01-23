@@ -3,11 +3,13 @@ package com.ironhack.crm.classes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ContactTest {
 
     Contact contact;
+
     @BeforeEach
     void setUp() {
         contact = new Contact("Perico Perez", "perico@perez.com", "Microsoft", "665566544");
@@ -84,6 +86,7 @@ class ContactTest {
         assertThrows(IllegalArgumentException.class, () -> contact.setEmail("pe/pe@pepecom"));
         assertThrows(IllegalArgumentException.class, () -> contact.setEmail("pe*pe@pepecom"));
     }
+
     @Test
     void setEmail_spacesInBetween_ThrowsIllegal() {
         assertThrows(IllegalArgumentException.class, () -> contact.setEmail("pe pe@pepecom"));
@@ -91,10 +94,68 @@ class ContactTest {
 
 
     @Test
-    void setCompanyName() {
+    void setCompanyName_entersRegularName_OK() {
+        contact.setCompanyName("Apple");
+        assertEquals("Apple", contact.getCompanyName());
     }
 
     @Test
-    void setPhoneNum() {
+    void setCompanyName_emptyString_ThrowsIllegal() {
+        assertThrows(IllegalArgumentException.class, () -> contact.setCompanyName(""));
     }
+
+    @Test
+    void setCompanyName_stringTooLong_ThrowsIllegal() {
+        assertThrows(IllegalArgumentException.class, () -> contact.setCompanyName("12345678901234567890123456789012345"));
+    }
+
+    @Test
+    void setCompanyName_blankSpace_ThrowsIllegal() {
+        assertThrows(IllegalArgumentException.class, () -> contact.setCompanyName(" "));
+    }
+
+    @Test
+    void setPhoneNum_regularPhone_OK() {
+        contact.setPhoneNum("666666666");
+        assertEquals("666666666", contact.getPhoneNum());
+    }
+
+    @Test
+    void setPhoneNum_withSpaces_OK() {
+        contact.setPhoneNum("666 666 666");
+        assertEquals("666 666 666", contact.getPhoneNum());
+    }
+
+    @Test
+    void setPhoneNum_countryCode_OK() {
+        contact.setPhoneNum("+34 666 666 666");
+        assertEquals("+34 666 666 666", contact.getPhoneNum());
+        contact.setPhoneNum("+34666666666");
+        assertEquals("+34666666666", contact.getPhoneNum());
+    }
+
+    @Test
+    void setPhoneNum_withBrackets_OK() {
+        contact.setPhoneNum("+34 (666) 666 666");
+        assertEquals("+34 (666) 666 666", contact.getPhoneNum());
+        contact.setPhoneNum("(346)66666666");
+        assertEquals("(346)66666666", contact.getPhoneNum());
+    }
+
+    @Test
+    void setPhoneNum_withLetters_throwsException() {
+
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum("66i553328"));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum("abc222111"));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum("96I4234"));
+    }
+
+    @Test
+    void setPhoneNum_emptyOrBlankSpaces_throwsException() {
+
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum(""));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum(" "));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum("  "));
+    }
+
 }
