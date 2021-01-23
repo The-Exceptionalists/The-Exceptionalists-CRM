@@ -42,10 +42,18 @@ class LeadTest {
     }
 
     @Test
-    void setEmail_noEmpty_true() {
+    void setEmail_workCorrect_email() {
+        Lead lead = new Lead ("Antonio Jesús", "juan@juan.es", "Juan's Company", "669695702");
+        assertEquals("juan@juan.es", lead.getEmail());
     }
     @Test
-    void setEmail_emailStructure_correctEmail() {
+    void setEmail_checkStructureAndSendExceptionIfNotCorrect_IllegalArgumentException() {
+        Lead lead = new Lead ("Antonio Jesús", "juan@juan.es", "Juan's Company", "669695702");
+        assertThrows(IllegalArgumentException.class, ()->lead.setEmail("juan"));
+        assertThrows(IllegalArgumentException.class, ()->lead.setEmail("@juan"));
+        assertThrows(IllegalArgumentException.class, ()->lead.setEmail("juan@juan"));
+        assertThrows(IllegalArgumentException.class, ()->lead.setEmail("juan.com"));
+        assertThrows(IllegalArgumentException.class, ()->lead.setEmail(""));
     }
 
     @Test

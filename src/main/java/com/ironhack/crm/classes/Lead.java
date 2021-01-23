@@ -44,8 +44,6 @@ public class Lead {
 
     public void setName(String name) {
 
-       //ValidateHelpers.validateString(name, );
-
         if (!Validator.validateName(name)){
             throw new IllegalArgumentException("Name wasn't correct");
         }
@@ -57,7 +55,12 @@ public class Lead {
     }
 
     public void setEmail(String email) {
-        //"\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b"
+        //"\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b" esta es una regex alternativa que vi por internet, se puede borrar
+
+        if (!Validator.validateEmail(email)){
+            throw new IllegalArgumentException("Name wasn't correct");
+        }
+
         this.email = email;
     }
 
