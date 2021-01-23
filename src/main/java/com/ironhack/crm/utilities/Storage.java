@@ -175,6 +175,7 @@ public class Storage {
      * Return a unique id generated involving the item class
      * @param itemType
      * @return
+     *
      */
     public static String getNewId(ItemType itemType) {
         String prefix = null;
