@@ -12,6 +12,7 @@ public class Contact {
 
     public Contact(String name, String email, String companyName, String phoneNum) {
 
+        id = "co" + contactCounter++;
         setName(name);
         setEmail(email);
         setCompanyName(companyName);
@@ -31,7 +32,7 @@ public class Contact {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         if(!Validator.validateName(name)) throw new IllegalArgumentException("Name must be between 1 and 31 characters");
         this.name = name;
     }
@@ -40,7 +41,7 @@ public class Contact {
         return email;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         if(!Validator.validateEmail(email)) throw new IllegalArgumentException();
         this.email = email;
     }
@@ -49,7 +50,7 @@ public class Contact {
         return companyName;
     }
 
-    private void setCompanyName(String companyName) {
+    public void setCompanyName(String companyName) {
         if(!Validator.validateName(companyName)) throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
         this.companyName = companyName;
     }
@@ -58,7 +59,7 @@ public class Contact {
         return phoneNum;
     }
 
-    private void setPhoneNum(String phoneNum) {
+    public void setPhoneNum(String phoneNum) {
         if(!Validator.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException();
 
         this.phoneNum = phoneNum;
