@@ -6,7 +6,10 @@ import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
 import com.ironhack.crm.enums.ItemType;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 //class Item<T>{
 //    T obj;
@@ -24,24 +27,20 @@ public class Storage {
     private static HashMap<String, Lead> leadHashMap = new HashMap<>();
     private static HashMap<String, Opportunity> opportunityHashMap = new HashMap<>();
 
-    public static int add(Account item) {
+    public static void add(Account item) {
         accountHashMap.put(item.getId(), item);
-        return 0;
     }
 
-    public static int add(Contact item) {
+    public static void add(Contact item) {
         contactHashMap.put(item.getId(), item);
-        return 0;
     }
 
-    public static int add(Opportunity item) {
+    public static void add(Opportunity item) {
         opportunityHashMap.put(item.getId(), item);
-        return 0;
     }
 
-    public static int add(Lead item) {
+    public static void add(Lead item) {
         leadHashMap.put(item.getId(), item);
-        return 0;
     }
 
     public static void update(Account item) {
@@ -86,6 +85,26 @@ public class Storage {
 
     public static Lead searchLead(String id) {
         return leadHashMap.get(id);
+    }
+
+    public static List<Account> getAllAccounts(){
+        Collection<Account> values = accountHashMap.values();
+        return new ArrayList<>(values);
+    }
+
+    public static List<Contact> getAllContacts(){
+        Collection<Contact> values = contactHashMap.values();
+        return new ArrayList<>(values);
+    }
+
+    public static List<Opportunity> getAllOpportunities(){
+        Collection<Opportunity> values = opportunityHashMap.values();
+        return new ArrayList<>(values);
+    }
+
+    public static List<Lead> getAllLeads(){
+        Collection<Lead> values = leadHashMap.values();
+        return new ArrayList<>(values);
     }
 
     public static String getNewId(ItemType itemType) {
