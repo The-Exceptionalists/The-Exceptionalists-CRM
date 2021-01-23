@@ -8,7 +8,7 @@ public class Account {
 
     //Properties
     private static int count = 1;
-    private int id;
+    private String id;
     private String companyName;
     private Industry industry;
     private int employeeCount;
@@ -30,13 +30,12 @@ public class Account {
     }
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = count;
-        count++;
+    public void setId() {
+
     }
 
     public String getCompanyName() {

@@ -4,15 +4,14 @@ import com.ironhack.crm.enums.Product;
 import com.ironhack.crm.enums.Status;
 
 public class Opportunity {
-    private static int count = 1;
-    private int id;
+    private static String count;
+    private String id;
     private Product product;
     private int quantity;
     private Contact decisionMaker;
     private Status status;
 
     public Opportunity(Product product, int quantity, Contact decisionMaker, Status status) {
-        count++;
         setProduct(product);
         setQuantity(quantity);
         setDecisionMaker(decisionMaker);
@@ -20,7 +19,7 @@ public class Opportunity {
         setId();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
