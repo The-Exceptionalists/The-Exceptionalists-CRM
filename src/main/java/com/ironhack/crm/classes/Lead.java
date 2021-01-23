@@ -1,6 +1,8 @@
 package com.ironhack.crm.classes;
 
 
+import com.ironhack.crm.enums.ItemType;
+import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
 public class Lead {
@@ -34,6 +36,7 @@ public class Lead {
     }
 
     public void setId() {
+        Storage.getNewId(ItemType.LEAD);
         this.id = "" + counter;
     }
 
