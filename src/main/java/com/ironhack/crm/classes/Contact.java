@@ -11,15 +11,46 @@ public class Contact {
     private String phoneNum;
 
     public Contact(String name, String email, String companyName, String phoneNum) {
-        if(!Validator.validateEmail(email)) throw new IllegalArgumentException();
 
         this.name = name;
-        this.email = email;
+        setEmail(email);
         this.companyName = companyName;
-        this.phoneNum = phoneNum;
+        setPhoneNum(phoneNum);
         contactID = contactCounter++;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    private void setName(String name) {
+        this.name = name;
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    private void setEmail(String email) {
+        if(!Validator.validateEmail(email)) throw new IllegalArgumentException();
+        this.email = email;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    private void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    private void setPhoneNum(String phoneNum) {
+        if(!Validator.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException();
+
+        this.phoneNum = phoneNum;
+    }
 }

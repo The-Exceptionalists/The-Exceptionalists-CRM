@@ -11,4 +11,11 @@ public class Validator {
 
         return matcher.matches();
     }
+    public static boolean validatePhoneNumber(String phoneNumber) {
+        Pattern pattern = Pattern.compile("^\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$");
+        Matcher matcher = pattern.matcher(phoneNumber);
+
+        return matcher.matches();
+
+    }
 }
