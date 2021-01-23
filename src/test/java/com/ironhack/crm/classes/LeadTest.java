@@ -32,13 +32,13 @@ class LeadTest {
 
     @Test
     void setName_throwEmptyError_IllegalArgumentException() {
-        Lead lead = new Lead ("", "juan@juan.es", "Juan's Company", "669695702");
-        assertThrows(IllegalArgumentException.class, ()->lead.setName("h"));
+        Lead lead = new Lead ("Juan", "juan@juan.es", "Juan's Company", "669695702");
+        assertThrows(IllegalArgumentException.class, ()->lead.setName(""));
     }
     @Test
     void setName_throw31CharError_IllegalArgumentException() {
-        Lead lead = new Lead ("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj", "juan@juan.es", "Juan's Company", "669695702");
-        assertThrows(IllegalArgumentException.class, ()->lead.getName());
+        Lead lead = new Lead ("Antonio Jesús", "juan@juan.es", "Juan's Company", "669695702");
+        assertThrows(IllegalArgumentException.class, ()->lead.setName("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"));
     }
 
     @Test

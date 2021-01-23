@@ -43,7 +43,7 @@ public class Lead {
 
     public void setName(String name) {
 
-       ValidateHelpers.validateString(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*$");
+       ValidateHelpers.validateString(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*${1,31}");
 
 
         this.name = name;
