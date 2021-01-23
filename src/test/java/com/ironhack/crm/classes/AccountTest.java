@@ -1,6 +1,8 @@
 package com.ironhack.crm.classes;
 
 import com.ironhack.crm.enums.Industry;
+import com.ironhack.crm.enums.Product;
+import com.ironhack.crm.enums.Status;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,9 +20,9 @@ class AccountTest {
     @BeforeEach
     void setUp() {
         contactList = new ArrayList<>();
-        contactList.add(new Contact());
+        contactList.add(new Contact("Ivan", "asd@hotmail.com", "Hehe", "+34 922 33 22 11"));
         opportunityList = new ArrayList<>();
-        opportunityList.add(new Opportunity());
+        opportunityList.add(new Opportunity(Product.BOX, 20, contactList.get(0), Status.OPEN));
     }
 
     @Test
