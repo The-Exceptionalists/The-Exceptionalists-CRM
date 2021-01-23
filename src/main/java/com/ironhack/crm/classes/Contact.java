@@ -4,7 +4,7 @@ import com.ironhack.crm.utils.Validator;
 
 public class Contact {
     private static int contactCounter = 0;
-    private int contactID;
+    private String id;
     private String name;
     private String email;
     private String companyName;
@@ -16,7 +16,15 @@ public class Contact {
         setEmail(email);
         this.companyName = companyName;
         setPhoneNum(phoneNum);
-        contactID = contactCounter++;
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
