@@ -2,6 +2,7 @@ package com.ironhack.crm.classes;
 
 
 import com.ironhack.crm.utils.ValidateHelpers;
+import com.ironhack.crm.utils.Validator;
 
 public class Lead {
 
@@ -45,6 +46,9 @@ public class Lead {
 
        //ValidateHelpers.validateString(name, );
 
+        if (!Validator.validateName(name)){
+            throw new IllegalArgumentException("Name wasn't correct");
+        }
         this.name = name;
     }
 
