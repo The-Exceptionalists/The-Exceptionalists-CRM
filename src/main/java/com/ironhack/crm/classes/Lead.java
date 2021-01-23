@@ -6,7 +6,7 @@ import com.ironhack.crm.utils.ValidateHelpers;
 public class Lead {
 
     private static int counter;
-    private int id;
+    private String id;
     private String name;
     private String email;
     private String companyName;
@@ -14,7 +14,7 @@ public class Lead {
 
     public Lead(String name, String email, String companyName, String phoneNumber) {
         counter++;
-        setId(counter);
+        setId();
         setName(name);
         setEmail(email);
         setCompanyName(companyName);
@@ -29,12 +29,12 @@ public class Lead {
         Lead.counter = counter;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId() {
+        this.id = "" + counter;
     }
 
     public String getName() {
