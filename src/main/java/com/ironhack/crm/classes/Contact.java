@@ -33,7 +33,8 @@ public class Contact {
     }
 
     public void setName(String name) {
-        if(!Validator.validateName(name)) throw new IllegalArgumentException("Name must be between 1 and 31 characters");
+        if (!Validator.validateName(name))
+            throw new IllegalArgumentException("Name must be between 1 and 31 characters");
         this.name = name;
     }
 
@@ -42,7 +43,7 @@ public class Contact {
     }
 
     public void setEmail(String email) {
-        if(!Validator.validateEmail(email)) throw new IllegalArgumentException();
+        if (!Validator.validateEmail(email)) throw new IllegalArgumentException();
         this.email = email;
     }
 
@@ -51,7 +52,8 @@ public class Contact {
     }
 
     public void setCompanyName(String companyName) {
-        if(!Validator.validateName(companyName)) throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
+        if (!Validator.validateName(companyName))
+            throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
         this.companyName = companyName;
     }
 
@@ -60,8 +62,18 @@ public class Contact {
     }
 
     public void setPhoneNum(String phoneNum) {
-        if(!Validator.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException();
+        if (!Validator.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException();
 
         this.phoneNum = phoneNum;
+    }
+
+    public String toString() {
+        return "Contact{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                '}';
     }
 }

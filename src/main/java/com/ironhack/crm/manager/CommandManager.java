@@ -7,6 +7,7 @@ import com.ironhack.crm.classes.Opportunity;
 import com.ironhack.crm.enums.Industry;
 import com.ironhack.crm.enums.Product;
 import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
 import java.util.ArrayList;
@@ -43,18 +44,19 @@ public class CommandManager {
     }
 
     private static void closeOpportunity(int id, Status closedLost) {
-        //Storage method to get the Opportunity by id and change status
+        Opportunity opportunity = Storage.searchOpportunity("op" + id);
+        opportunity.setStatus(closedLost);
+        Storage.update(opportunity);
     }
 
     private static void convertLeadToOpportunity(int id) {
-        //Storage method to get Lead by id
-        //Lead lead = Storage.getLeadById();
-        //Contact contact = leadToContact(lead);
-        //Opportunity opportunity = promptOpportunity();
-        //Account account = promptAccount(contact.companyName, contact, opportunity);
-        //Storage method to add new Contact
-        //Storage method to add new Opportunity
-        //Storage method to add new Account
+        Lead lead = Storage.searchLead("le" + id);
+        Contact contact = leadToContact(lead);
+        Opportunity opportunity = promptOpportunity(contact);
+        Account account = promptAccount(contact.getCompanyName(), contact, opportunity);
+        Storage.add(contact);
+        Storage.add(opportunity);
+        Storage.add(account);
         //Storage method to convert Lead to Null
     }
 
@@ -63,7 +65,8 @@ public class CommandManager {
         switch (word) {
             case "lead" -> {
                 Lead lead = promptLead();
-                //Storage method for inserting new lead in Storage
+                Storage.add(lead);
+                System.out.println("New lead successfully added!");
             }
         }
     }
@@ -195,11 +198,30 @@ public class CommandManager {
     }
 
     public static void showList(String objectType) {
-        //Storage method for returning the list of a specific object
+        switch (objectType) {
+            case "leads" -> {
+                List<Lead> leadList = Storage.getAllLeads();
+                printLeadList(leadList);
+            }
+        }
+    }
+
+    private static void printLeadList(List<Lead> leadList) {
+        System.out.println("=======List of Lead=======");
+        for (Lead lead : leadList) {
+            System.out.println(lead);
+        }
+        System.out.println();
     }
 
     public static void showObject(String objectType, int id) {
-        //Storage method for returning an object by id
+        switch (objectType) {
+            case "opportunity" -> {
+                Opportunity opportunity = Storage.searchOpportunity("op" + id);
+                System.out.println(opportunity);
+                System.out.println();
+            }
+        }
     }
 
     public static void printCommandList() {

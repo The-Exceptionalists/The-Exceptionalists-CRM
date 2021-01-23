@@ -88,4 +88,14 @@ public class Lead {
 
         this.phoneNumber = phoneNumber;
     }
+
+    public String toString() {
+        return "Lead{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }
