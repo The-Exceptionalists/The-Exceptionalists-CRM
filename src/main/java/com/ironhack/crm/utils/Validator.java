@@ -15,6 +15,16 @@ public class Validator {
     public static boolean validateName(String name) {
         return validate(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*${1,31}");
     }
+
+    public static boolean validateProduct(String product) {
+        switch (product) {
+            case "hybrid", "flatbed", "box" -> {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean validateCompanyName(String name) {
 
        return name.length() > 0 && name.length() < 31 ;
@@ -34,5 +44,17 @@ public class Validator {
         validPhoneNumbers= {"2055550125","202 555 0125", "(202) 555-0125", "+111 (202) 555-0125",
                 "636 856 789", "+111 636 856 789", "636 85 67 89", "+111 636 85 67 89"};*/
         return validate(phoneNumber, regex);
+    }
+
+    public static boolean validateCommand(String command) {
+        //validates if all the words in the command are correct
+        return true;
+    }
+
+    public static boolean validateNumber(String number) {
+        if (validate(number, "[0-9]+") && Integer.parseInt(number) > 0) {
+            return true;
+        }
+        return false;
     }
 }
