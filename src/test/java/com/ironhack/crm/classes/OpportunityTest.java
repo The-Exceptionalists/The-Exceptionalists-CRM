@@ -1,6 +1,7 @@
 package com.ironhack.crm.classes;
 
-import com.ironhack.crm.enums.*;
+import com.ironhack.crm.enums.Product;
+import com.ironhack.crm.enums.Status;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -26,4 +27,6 @@ class OpportunityTest {
         assertThrows(IllegalArgumentException.class, () -> new Opportunity(Product.HYBRID, -5, contact, Status.OPEN));
         assertThrows(IllegalArgumentException.class, () -> new Opportunity(Product.HYBRID, 0, contact, Status.OPEN));
     }
+
+
 }
