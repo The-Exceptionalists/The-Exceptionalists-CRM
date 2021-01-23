@@ -40,11 +40,47 @@ public class Buffer {
         }
     }
 
+    public static void insertCentralPrompt() {
+        //h6 14 w 2 42
+        for (int i = 0; i < 4; i++){
+            screenBuffer[15 + i][2] = 'P';
+            screenBuffer[15 + i][3] = (char)(i + '0');
+        }
+    }
+
+    public static void insertLogo() {
+        //h 0 3 w 2 6
+        for (int i = 0; i < 4; i++){
+            screenBuffer[1 + i][2] = 'L';
+            screenBuffer[1 + i][3] = 'L';
+            screenBuffer[1 + i][4] = 'L';
+            screenBuffer[1 + i][5] = 'L';
+        }
+    }
+
+    public static void insertAppName() {
+        //h 0 3 w 2 6
+            screenBuffer[1 ][8] = 'A';
+
+    }
+
+    public static void insertUserName() {
+        //h 0 3 w 2 6
+        screenBuffer[1 ][47] = 'U';
+
+    }
+
+    public static void insertCompanyName() {
+        //h 0 3 w 2 6
+        screenBuffer[3 ][8] = 'C';
+
+    }
+
     public static void insertSideBox() {
         //h4 19 w 47 57
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 15; i++){
             screenBuffer[4 + i][47] = 'S';
-            screenBuffer[4 + i][48] = (char)(i + '0');
+            screenBuffer[4 + i][48] = (char)(i + 'a');
         }
     }
 }
