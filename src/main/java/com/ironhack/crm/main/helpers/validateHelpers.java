@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 public class validateHelpers {
 
-
     //Scanner Input validates
 
     //We use this function to validate a correct int
@@ -78,7 +77,7 @@ public class validateHelpers {
 
         int selection;
 
-        Pattern pattern = Pattern.compile(regex;
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(arg);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("insert a correct number");
@@ -89,10 +88,10 @@ public class validateHelpers {
 
     public static String validateString(String arg, String regex) {
 
-        Pattern pattern = Pattern.compile(regex;
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(arg);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("insert a correct number");
+            throw new IllegalArgumentException("insert a correct input");
         }
 
         return arg;
