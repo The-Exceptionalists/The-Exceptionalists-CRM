@@ -1,5 +1,7 @@
 package com.ironhack.crm.main;
 
+import com.ironhack.crm.main.helpers.ValidateHelpers;
+
 public class Lead {
 
     private static int counter;
@@ -9,7 +11,7 @@ public class Lead {
     private String companyName;
     private String phoneNumber;
 
-    public Lead(int id, String name, String email, String companyName, String phoneNumber) {
+    public Lead(String name, String email, String companyName, String phoneNumber) {
         counter++;
         setId(counter);
         setName(name);
@@ -39,6 +41,10 @@ public class Lead {
     }
 
     public void setName(String name) {
+
+        ValidateHelpers.validateString(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*$");
+
+
         this.name = name;
     }
 
