@@ -46,7 +46,7 @@ public class Lead {
 
     public void setName(String name) {
 
-        if (!Validator.validateName(name)){
+        if (!Validator.validateName(name)) {
             throw new IllegalArgumentException("Name wasn't correct");
         }
         this.name = name;
@@ -57,11 +57,9 @@ public class Lead {
     }
 
     public void setEmail(String email) {
-
-        if (!Validator.validateEmail(email)){
+        if (!Validator.validateEmail(email)) {
             throw new IllegalArgumentException("Name wasn't correct");
         }
-
         this.email = email;
     }
 
@@ -71,7 +69,7 @@ public class Lead {
 
     public void setCompanyName(String companyName) {
 
-        if(!Validator.validateCompanyName(companyName)) {
+        if (!Validator.validateCompanyName(companyName)) {
 
             throw new IllegalArgumentException("Company name wasn't correct");
         }
@@ -85,7 +83,7 @@ public class Lead {
 
     public void setPhoneNumber(String phoneNumber) {
 
-        if(!Validator.validatePhoneNumber(phoneNumber)){
+        if (!Validator.validatePhoneNumber(phoneNumber)) {
             throw new IllegalArgumentException("Phone wasn't correct");
         }
 
