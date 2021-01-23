@@ -27,24 +27,20 @@ public class Storage {
     private static HashMap<String, Lead> leadHashMap = new HashMap<>();
     private static HashMap<String, Opportunity> opportunityHashMap = new HashMap<>();
 
-    public static int add(Account item) {
+    public static void add(Account item) {
         accountHashMap.put(item.getId(), item);
-        return 0;
     }
 
-    public static int add(Contact item) {
+    public static void add(Contact item) {
         contactHashMap.put(item.getId(), item);
-        return 0;
     }
 
-    public static int add(Opportunity item) {
+    public static void add(Opportunity item) {
         opportunityHashMap.put(item.getId(), item);
-        return 0;
     }
 
-    public static int add(Lead item) {
+    public static void add(Lead item) {
         leadHashMap.put(item.getId(), item);
-        return 0;
     }
 
     public static void update(Account item) {
