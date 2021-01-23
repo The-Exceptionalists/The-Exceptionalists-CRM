@@ -16,6 +16,15 @@ public class Validator {
         return validate(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*${1,31}");
     }
 
+    public static boolean validateProduct(String product) {
+        switch (product) {
+            case "hybrid", "flatbed", "box" -> {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean validateCompanyName(String name) {
 
         return name.length() > 0 && name.length() < 31;
@@ -40,5 +49,12 @@ public class Validator {
     public static boolean validateCommand(String command) {
         //validates if all the words in the command are correct
         return true;
+    }
+
+    public static boolean validateNumber(String number) {
+        if (validate(number, "[0-9]+") && Integer.parseInt(number) > 0) {
+            return true;
+        }
+        return false;
     }
 }

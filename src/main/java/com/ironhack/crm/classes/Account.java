@@ -1,13 +1,14 @@
 package com.ironhack.crm.classes;
 
 import com.ironhack.crm.enums.Industry;
+import com.ironhack.crm.enums.ItemType;
+import com.ironhack.crm.utilities.Storage;
 
 import java.util.List;
 
 public class Account {
 
     //Properties
-    private static int count = 1;
     private String id;
     private String companyName;
     private Industry industry;
@@ -20,6 +21,7 @@ public class Account {
     //Constructor
 
     public Account(String companyName, Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
+        setId(Storage.getNewId(ItemType.ACCOUNT));
         setCompanyName(companyName);
         setIndustry(industry);
         setEmployeeCount(employeeCount);
@@ -34,8 +36,8 @@ public class Account {
         return id;
     }
 
-    public void setId() {
-
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCompanyName() {
