@@ -1,8 +1,10 @@
 package com.ironhack.crm.manager;
 
+import com.ironhack.crm.classes.Account;
 import com.ironhack.crm.classes.Contact;
 import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
+import com.ironhack.crm.enums.Industry;
 import com.ironhack.crm.enums.Product;
 import com.ironhack.crm.enums.Status;
 import com.ironhack.crm.utils.Validator;
@@ -74,16 +76,57 @@ public class CommandManager {
         return new Contact(name, email, companyName, phoneNumber);
     }
 
-//    private static Account promptAccount(String companyName, Contact contact, Opportunity opportunity) {
-//        //Output for prompt Account
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Type of truck (Hybrid, Flatbed or Box): ");
-//        String product = sc.nextLine().toLowerCase();
-//        while (!Validator.validateProduct(product)) {
-//            System.out.println("Enter a correct product(Hybrid, Flatbed or Box): ");
-//            product = sc.nextLine().toLowerCase();
-//        }
-//    }
+    private static Account promptAccount(String companyName, Contact contact, Opportunity opportunity) {
+        //Output for prompt Account
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
+        String industry = sc.nextLine().toLowerCase();
+        while (!Validator.validateIndustry(industry)) {
+            System.out.println("Enter a correct industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
+            industry = sc.nextLine().toLowerCase();
+        }
+        Industry industryEnum = findIndustryEnum(industry);
+        System.out.println("Employee count: ");
+        String employeeCount = sc.nextLine();
+        while (!Validator.validateNumber(employeeCount)) {
+            System.out.println("Enter a correct number of employees: ");
+            employeeCount = sc.nextLine();
+        }
+        System.out.println("City: ");
+        String city = sc.nextLine();
+        while (!Validator.validateName(city)) {
+            System.out.println("Enter a correct value: ");
+            city = sc.nextLine();
+        }
+        System.out.println("City: ");
+        String country = sc.nextLine();
+        while (!Validator.validateName(country)) {
+            System.out.println("Enter a correct value: ");
+            country = sc.nextLine();
+        }
+        return new Account(companyName, industryEnum, Integer.parseInt(employeeCount), city, country, contact, opportunity);
+    }
+
+    private static Industry findIndustryEnum(String industry) {
+        switch (industry) {
+            case "produce" -> {
+                return Industry.PRODUCE;
+            }
+            case "ecommerce" -> {
+                return Industry.ECOMMERCE;
+            }
+            case "manufacturing" -> {
+                return Industry.MANUFACTURING;
+            }
+            case "medical" -> {
+                return Industry.MEDICAL;
+            }
+            case "other" -> {
+                return Industry.OTHER;
+            }
+        }
+        return null;
+    }
 
     private static Opportunity promptOpportunity(Contact contact) {
         //Output for prompt Opportunity
@@ -172,6 +215,7 @@ public class CommandManager {
         commandList.add("Lookup Opportunity <id> : Shows an Opportunity.");
         commandList.add("Close-Won <id> : Closes an Opportunity as won.");
         commandList.add("Close-Lost <id> : Closes an Opportunity as lost.");
+        commandList.add("Exit : Closes the CRM.");
     }
 
 }
