@@ -1,6 +1,10 @@
 package com.ironhack.crm.classes;
 
 
+import com.ironhack.crm.enums.ItemType;
+import com.ironhack.crm.utilities.Storage;
+import com.ironhack.crm.utils.Validator;
+
 public class Lead {
 
     private static int counter;
@@ -11,7 +15,7 @@ public class Lead {
     private String phoneNumber;
 
     public Lead(String name, String email, String companyName, String phoneNumber) {
-
+        counter++;
         setId();
         setName(name);
         setEmail(email);
@@ -32,7 +36,8 @@ public class Lead {
     }
 
     public void setId() {
-        this.id = id;
+        Storage.getNewId(ItemType.LEAD);
+        this.id = "" + counter;
     }
 
     public String getName() {
@@ -41,9 +46,9 @@ public class Lead {
 
     public void setName(String name) {
 
-       // ValidateHelpers.validateString(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*$");
-
-
+        if (!Validator.validateName(name)){
+            throw new IllegalArgumentException("Name wasn't correct");
+        }
         this.name = name;
     }
 
@@ -52,7 +57,11 @@ public class Lead {
     }
 
     public void setEmail(String email) {
-        //"\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b"
+
+        if (!Validator.validateEmail(email)){
+            throw new IllegalArgumentException("Name wasn't correct");
+        }
+
         this.email = email;
     }
 
@@ -61,6 +70,12 @@ public class Lead {
     }
 
     public void setCompanyName(String companyName) {
+
+        if(!Validator.validateCompanyName(companyName)) {
+
+            throw new IllegalArgumentException("Company name wasn't correct");
+        }
+
         this.companyName = companyName;
     }
 
@@ -70,23 +85,10 @@ public class Lead {
 
     public void setPhoneNumber(String phoneNumber) {
 
-        /*@Test
-        public void whenMatchesPhoneNumber_thenCorrect() {
-            String patterns
-                    = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
-                    + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
-                    + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$";
+        if(!Validator.validatePhoneNumber(phoneNumber)){
+            throw new IllegalArgumentException("Phone wasn't correct");
+        }
 
-            String[] validPhoneNumbers
-                    = {"2055550125","202 555 0125", "(202) 555-0125", "+111 (202) 555-0125",
-                    "636 856 789", "+111 636 856 789", "636 85 67 89", "+111 636 85 67 89"};
-
-            Pattern pattern = Pattern.compile(patterns);
-            for(String phoneNumber : validPhoneNumbers) {
-                Matcher matcher = pattern.matcher(phoneNumber);
-                assertTrue(matcher.matches());
-            }
-        }*/
         this.phoneNumber = phoneNumber;
     }
 }
