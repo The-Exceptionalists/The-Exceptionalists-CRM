@@ -2,7 +2,6 @@ package com.ironhack.crm.utilities;
 
 import com.ironhack.crm.classes.Account;
 import com.ironhack.crm.classes.Contact;
-import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
 import com.ironhack.crm.enums.ItemType;
 
