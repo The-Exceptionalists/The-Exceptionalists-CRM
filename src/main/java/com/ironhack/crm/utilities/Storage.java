@@ -4,6 +4,7 @@ import com.ironhack.crm.classes.Account;
 import com.ironhack.crm.classes.Contact;
 import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
+import com.ironhack.crm.enums.ItemType;
 
 import java.util.HashMap;
 
@@ -50,8 +51,15 @@ public class Storage{
         Storage.id = id;
     }
 
-    public static int getNewId() {
+    public static String getNewId(ItemType itemType) {
+        String prefix = null;
+        switch(itemType){
+            case LEAD -> prefix = "le";
+            case ACCOUNT -> prefix = "ac";
+            case CONTACT -> prefix = "ct";
+            case OPPORTUNITY -> prefix = "ct";
+        }
         Storage.id++;
-        return Storage.id;
+        return prefix + Storage.id;
     }
 }
