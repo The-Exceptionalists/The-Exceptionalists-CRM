@@ -57,7 +57,7 @@ public class Storage{
             case LEAD -> prefix = "le";
             case ACCOUNT -> prefix = "ac";
             case CONTACT -> prefix = "ct";
-            case OPPORTUNITY -> prefix = "ct";
+            case OPPORTUNITY -> prefix = "op";
         }
         Storage.id++;
         return prefix + Storage.id;
