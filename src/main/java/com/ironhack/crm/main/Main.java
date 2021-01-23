@@ -9,6 +9,8 @@ import com.ironhack.crm.classes.Contact;
 import com.ironhack.crm.classes.Opportunity;
 import com.ironhack.crm.enums.Industry;
 import com.ironhack.crm.enums.Product;
+import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.enums.Product;
 
 import com.ironhack.crm.utilities.Storage;
 

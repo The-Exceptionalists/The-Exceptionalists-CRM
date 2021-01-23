@@ -179,7 +179,7 @@ public class Storage {
      */
     public static String getNewId(ItemType itemType) {
         String prefix = null;
-        switch (itemType) {
+        switch(itemType){
             case LEAD -> prefix = "le";
             case ACCOUNT -> prefix = "ac";
             case CONTACT -> prefix = "ct";

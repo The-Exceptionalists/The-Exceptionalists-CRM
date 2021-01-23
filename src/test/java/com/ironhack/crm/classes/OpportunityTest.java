@@ -5,14 +5,15 @@ import com.ironhack.crm.enums.Status;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OpportunityTest {
     static Contact contact;
 
     @BeforeAll
     public static void beforeAll() {
-        contact = new Contact("Ivan", "ivan@gmail.com", "Company", "+34 922 33 22 11");
+        contact = new Contact("Ivan", "ivan@gmail.com", "Company", "922 33 22 11");
     }
 
     @Test
