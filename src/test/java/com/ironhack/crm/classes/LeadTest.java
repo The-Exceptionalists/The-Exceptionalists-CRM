@@ -70,9 +70,19 @@ class LeadTest {
 
 
     @Test
+    void setPhoneNumber_getCorrectNumber_correctNumber() {
+        Lead lead = new Lead ("Antonio Jesús", "juan@juan.es", "Juan's Company", "669695702");
+        assertEquals("669695702", lead.getPhoneNumber());
+    }
+
+    @Test
     void setPhoneNumber_noEmpty_correctPhone() {
+        Lead lead = new Lead ("Antonio Jesús", "juan@juan.es", "Juan's Company", "669695702");
+        assertTrue(lead.getPhoneNumber().length() > 0);
     }
     @Test
     void setPhoneNumber_phoneStructure_correctPhone() {
+        Lead lead = new Lead ("Antonio Jesús", "juan@juan.es", "Juan's Company", "669695702");
+        assertThrows(IllegalArgumentException.class, ()->lead.setPhoneNumber("fahksdjhflah"));
     }
 }
