@@ -6,7 +6,10 @@ import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
 import com.ironhack.crm.enums.ItemType;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 //class Item<T>{
 //    T obj;
@@ -86,6 +89,26 @@ public class Storage {
 
     public static Lead searchLead(String id) {
         return leadHashMap.get(id);
+    }
+
+    public static List<Account> getAllAccounts(){
+        Collection<Account> values = accountHashMap.values();
+        return new ArrayList<>(values);
+    }
+
+    public static List<Contact> getAllContacts(){
+        Collection<Contact> values = contactHashMap.values();
+        return new ArrayList<>(values);
+    }
+
+    public static List<Opportunity> getAllOpportunities(){
+        Collection<Opportunity> values = opportunityHashMap.values();
+        return new ArrayList<>(values);
+    }
+
+    public static List<Lead> getAllLeads(){
+        Collection<Lead> values = leadHashMap.values();
+        return new ArrayList<>(values);
     }
 
     public static String getNewId(ItemType itemType) {
