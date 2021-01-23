@@ -59,6 +59,7 @@ public class CommandManager {
     }
 
     private static void createObject(String word) {
+        //Switch used for future functionalities of createObject
         switch (word) {
             case "lead" -> {
                 Lead lead = promptLead();
