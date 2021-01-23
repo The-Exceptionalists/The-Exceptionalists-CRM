@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class CommandManager {
     private static List<String> commandList;
 
-
     public List<String> getCommandList() {
         return commandList;
     }
@@ -98,7 +97,7 @@ public class CommandManager {
             System.out.println("Enter a correct value: ");
             city = sc.nextLine();
         }
-        System.out.println("City: ");
+        System.out.println("Country: ");
         String country = sc.nextLine();
         while (!Validator.validateName(country)) {
             System.out.println("Enter a correct value: ");
