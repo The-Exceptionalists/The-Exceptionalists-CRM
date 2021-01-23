@@ -27,7 +27,7 @@ public class Validator {
 
     public static boolean validateCompanyName(String name) {
 
-       return name.length() > 0 && name.length() < 31 ;
+        return name.length() > 0 && name.length() < 31;
     }
 
     public static boolean validateEmail(String email) {
