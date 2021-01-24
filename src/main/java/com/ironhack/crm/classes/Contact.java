@@ -1,5 +1,7 @@
 package com.ironhack.crm.classes;
 
+import com.ironhack.crm.enums.ItemType;
+import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
 public class Contact {
@@ -12,7 +14,7 @@ public class Contact {
 
     public Contact(String name, String email, String companyName, String phoneNum) {
 
-        id = "co" + contactCounter++;
+        setId(Storage.getNewId(ItemType.CONTACT));
         setName(name);
         setEmail(email);
         setCompanyName(companyName);
