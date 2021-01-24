@@ -26,8 +26,11 @@ public class CommandManager {
         System.out.println("Introduce a command from the list:");
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-        if (!Validator.validateCommand(command)) throw new IllegalArgumentException();
-        processCommand(command);
+        if (Validator.validateCommand(command)) {
+            processCommand(command);
+        } else {
+            System.out.println("Command not found");
+        }
     }
 
     public static void processCommand(String command) {
@@ -230,7 +233,7 @@ public class CommandManager {
     }
 
     private static void printLeadList(List<Lead> leadList) {
-        System.out.println("=======List of Lead=======");
+        System.out.println("=======List of Leads=======");
         for (Lead lead : leadList) {
             System.out.println(lead);
         }

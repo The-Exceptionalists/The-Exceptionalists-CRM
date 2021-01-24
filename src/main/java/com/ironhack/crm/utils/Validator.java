@@ -54,7 +54,7 @@ public class Validator {
                     //Convert switch to if when no more functionalities are added
                     switch (word[1]) {
                         case "lead" -> {
-                            return true;
+                            return word.length == 2;
                         }
                     }
                 }
@@ -62,7 +62,7 @@ public class Validator {
                     //Convert switch to if when no more functionalities are added
                     switch (word[1]) {
                         case "leads" -> {
-                            return true;
+                            return word.length == 2;
                         }
                     }
                 }
@@ -75,9 +75,7 @@ public class Validator {
                     }
                 }
                 case "convert", "close-won", "close-lost" -> {
-                    if (validateNumber(word[1])) {
-                        return true;
-                    }
+                    return validateNumber(word[1]);
                 }
                 case "exit" -> {
                     return true;
