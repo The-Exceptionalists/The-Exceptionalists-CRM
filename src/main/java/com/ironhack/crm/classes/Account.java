@@ -1,42 +1,52 @@
 package com.ironhack.crm.classes;
 
 import com.ironhack.crm.enums.Industry;
+import com.ironhack.crm.enums.ItemType;
+import com.ironhack.crm.utilities.Storage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
 
     //Properties
-    private static int count = 1;
-    private int id;
+    private String id;
     private String companyName;
     private Industry industry;
     private int employeeCount;
     private String city;
     private String country;
-    private List<Contact> contactList;
-    private List<Opportunity> opportunityList;
+    private List<Contact> contactList = new ArrayList<>();
+    private List<Opportunity> opportunityList = new ArrayList<>();
 
     //Constructor
 
-    public Account(String companyName, Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
+    public Account(String companyName, Industry industry, int employeeCount, String city, String country, Contact contact, Opportunity opportunity) {
+        setId(Storage.getNewId(ItemType.ACCOUNT));
         setCompanyName(companyName);
         setIndustry(industry);
         setEmployeeCount(employeeCount);
         setCity(city);
         setCountry(country);
-        setContactList(contactList);
-        setOpportunityList(opportunityList);
+        addContactToList(contact);
+        addOpportunityToList(opportunity);
+    }
+
+    private void addOpportunityToList(Opportunity opportunity) {
+        opportunityList.add(opportunity);
+    }
+
+    private void addContactToList(Contact contact) {
+        contactList.add(contact);
     }
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = count;
-        count++;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCompanyName() {

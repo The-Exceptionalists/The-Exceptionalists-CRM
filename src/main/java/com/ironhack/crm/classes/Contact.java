@@ -4,7 +4,7 @@ import com.ironhack.crm.utils.Validator;
 
 public class Contact {
     private static int contactCounter = 0;
-    private int contactID;
+    private String id;
     private String name;
     private String email;
     private String companyName;
@@ -12,18 +12,29 @@ public class Contact {
 
     public Contact(String name, String email, String companyName, String phoneNum) {
 
-        this.name = name;
+        id = "co" + contactCounter++;
+        setName(name);
         setEmail(email);
-        this.companyName = companyName;
+        setCompanyName(companyName);
         setPhoneNum(phoneNum);
-        contactID = contactCounter++;
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
+        if (!Validator.validateName(name))
+            throw new IllegalArgumentException("Name must be between 1 and 31 characters");
         this.name = name;
     }
 
@@ -31,8 +42,8 @@ public class Contact {
         return email;
     }
 
-    private void setEmail(String email) {
-        if(!Validator.validateEmail(email)) throw new IllegalArgumentException();
+    public void setEmail(String email) {
+        if (!Validator.validateEmail(email)) throw new IllegalArgumentException();
         this.email = email;
     }
 
@@ -40,7 +51,9 @@ public class Contact {
         return companyName;
     }
 
-    private void setCompanyName(String companyName) {
+    public void setCompanyName(String companyName) {
+        if (!Validator.validateName(companyName))
+            throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
         this.companyName = companyName;
     }
 
@@ -48,9 +61,19 @@ public class Contact {
         return phoneNum;
     }
 
-    private void setPhoneNum(String phoneNum) {
-        if(!Validator.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException();
+    public void setPhoneNum(String phoneNum) {
+        if (!Validator.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException();
 
         this.phoneNum = phoneNum;
+    }
+
+    public String toString() {
+        return "Contact{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                '}';
     }
 }

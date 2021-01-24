@@ -4,9 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ironhack.the-exceptionalist</groupId>
+    <groupId>com.ironhack</groupId>
     <artifactId>The-Exceptionalists-CRM</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -15,9 +17,12 @@
         </dependency>
     </dependencies>
 
+
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
+
+
 
 </project>

@@ -1,9 +1,10 @@
 package com.ironhack.crm.classes;
 
-import com.ironhack.crm.enums.*;
-import com.ironhack.crm.utilities.Storage;
+import com.ironhack.crm.enums.Product;
+import com.ironhack.crm.enums.Status;
 
 public class Opportunity {
+    private static String count;
     private String id;
     private Product product;
     private int quantity;
@@ -23,7 +24,7 @@ public class Opportunity {
     }
 
     public void setId() {
-        this.id = Storage.getNewId(ItemType.OPPORTUNITY);
+        this.id = count;
     }
 
     public Product getProduct() {
