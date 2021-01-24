@@ -162,35 +162,19 @@ class ValidatorTest {
     }
 
     @Test
-    public void validateCommand_NotValidExitCommand_True() {
+    public void validateCommand_NotValidExitCommand_False() {
         assertFalse(Validator.validateCommand("exit lead"));
-        assertFalse(Validator.validateCommand("new"));
-        assertFalse(Validator.validateCommand("new opportunity"));
-        assertFalse(Validator.validateCommand("new 120"));
-        assertFalse(Validator.validateCommand("show"));
-        assertFalse(Validator.validateCommand("show lead"));
-        assertFalse(Validator.validateCommand("show opportunities"));
-        assertFalse(Validator.validateCommand("show 120"));
-        assertFalse(Validator.validateCommand("lookup"));
-        assertFalse(Validator.validateCommand("lookup lead"));
-        assertFalse(Validator.validateCommand("lookup 120"));
-        assertFalse(Validator.validateCommand("convert"));
-        assertFalse(Validator.validateCommand("convert lead"));
-        assertFalse(Validator.validateCommand("close-won"));
-        assertFalse(Validator.validateCommand("close-won opportunity"));
-        assertFalse(Validator.validateCommand("close-lost"));
-        assertFalse(Validator.validateCommand("close-lost opportunity"));
     }
 
     @Test
-    public void validateCommand_NotValidNewCommand_True() {
+    public void validateCommand_NotValidNewCommand_False() {
         assertFalse(Validator.validateCommand("new"));
         assertFalse(Validator.validateCommand("new opportunity"));
         assertFalse(Validator.validateCommand("new 120"));
     }
 
     @Test
-    public void validateCommand_NotValidShowCommand_True() {
+    public void validateCommand_NotValidShowCommand_False() {
         assertFalse(Validator.validateCommand("show"));
         assertFalse(Validator.validateCommand("show lead"));
         assertFalse(Validator.validateCommand("show opportunities"));
@@ -198,20 +182,20 @@ class ValidatorTest {
     }
 
     @Test
-    public void validateCommand_NotValidLookupCommand_True() {
+    public void validateCommand_NotValidLookupCommand_False() {
         assertFalse(Validator.validateCommand("lookup"));
         assertFalse(Validator.validateCommand("lookup lead"));
         assertFalse(Validator.validateCommand("lookup 120"));
     }
 
     @Test
-    public void validateCommand_NotValidConvertCommand_True() {
+    public void validateCommand_NotValidConvertCommand_False() {
         assertFalse(Validator.validateCommand("convert"));
         assertFalse(Validator.validateCommand("convert lead"));
     }
 
     @Test
-    public void validateCommand_NotValidCloseCommand_True() {
+    public void validateCommand_NotValidCloseCommand_False() {
         assertFalse(Validator.validateCommand("close-won"));
         assertFalse(Validator.validateCommand("close-won opportunity"));
         assertFalse(Validator.validateCommand("close-lost"));
