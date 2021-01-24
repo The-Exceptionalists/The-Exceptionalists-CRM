@@ -43,23 +43,6 @@ public class CommandManager {
         }
     }
 
-    private static void closeOpportunity(int id, Status closedLost) {
-        Opportunity opportunity = Storage.searchOpportunity("op" + id);
-        opportunity.setStatus(closedLost);
-        Storage.update(opportunity);
-    }
-
-    private static void convertLeadToOpportunity(int id) {
-        Lead lead = Storage.searchLead("le" + id);
-        Contact contact = leadToContact(lead);
-        Opportunity opportunity = promptOpportunity(contact);
-        Account account = promptAccount(contact.getCompanyName(), contact, opportunity);
-        Storage.add(contact);
-        Storage.add(opportunity);
-        Storage.add(account);
-        //Storage method to convert Lead to Null
-    }
-
     private static void createObject(String word) {
         //Switch used for future functionalities of createObject
         switch (word) {
@@ -71,12 +54,56 @@ public class CommandManager {
         }
     }
 
+    public static void showList(String objectType) {
+        switch (objectType) {
+            case "leads" -> {
+                List<Lead> leadList = Storage.getAllLeads();
+                printLeadList(leadList);
+            }
+        }
+    }
+
+    private static void convertLeadToOpportunity(int id) {
+        try {
+            Lead lead = Storage.searchLead("le" + id);
+            Contact contact = leadToContact(lead);
+            Opportunity opportunity = promptOpportunity(contact);
+            Account account = promptAccount(contact.getCompanyName(), contact, opportunity);
+            Storage.add(contact);
+            Storage.add(opportunity);
+            Storage.add(account);
+            //Storage method to convert Lead to Null
+        } catch (IllegalArgumentException e) {
+            System.out.println("Lead with id " + id + " not found.");
+        }
+    }
+
     private static Contact leadToContact(Lead lead) {
         String name = lead.getName();
         String email = lead.getEmail();
         String companyName = lead.getCompanyName();
         String phoneNumber = lead.getPhoneNumber();
         return new Contact(name, email, companyName, phoneNumber);
+    }
+
+    private static Opportunity promptOpportunity(Contact contact) {
+        //Output for prompt Opportunity
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Type of truck (Hybrid, Flatbed or Box): ");
+        String product = sc.nextLine().toLowerCase();
+        while (!Validator.validateProduct(product)) {
+            System.out.println("Enter a correct product (Hybrid, Flatbed or Box): ");
+            product = sc.nextLine().toLowerCase();
+        }
+        Product productEnum = findProductEnum(product);
+        System.out.println("Number of trucks: ");
+        String number = sc.nextLine();
+        while (!Validator.validateNumber(number)) {
+            System.out.println("Enter a correct number of trucks: ");
+            number = sc.nextLine();
+        }
+        return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
+
     }
 
     private static Account promptAccount(String companyName, Contact contact, Opportunity opportunity) {
@@ -110,6 +137,31 @@ public class CommandManager {
         return new Account(companyName, industryEnum, Integer.parseInt(employeeCount), city, country, contact, opportunity);
     }
 
+    public static void showObject(String objectType, int id) {
+        switch (objectType) {
+            case "opportunity" -> {
+                try {
+                    Opportunity opportunity = Storage.searchOpportunity("op" + id);
+                    System.out.println(opportunity);
+                    System.out.println();
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Opportunity with id " + id + " not found.");
+                }
+            }
+        }
+    }
+
+    private static void closeOpportunity(int id, Status closedLost) {
+        try {
+            Opportunity opportunity = Storage.searchOpportunity("op" + id);
+            opportunity.setStatus(closedLost);
+            Storage.update(opportunity);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Opportunity with id " + id + " not found.");
+        }
+
+    }
+
     private static Industry findIndustryEnum(String industry) {
         switch (industry) {
             case "produce" -> {
@@ -129,26 +181,6 @@ public class CommandManager {
             }
         }
         return null;
-    }
-
-    private static Opportunity promptOpportunity(Contact contact) {
-        //Output for prompt Opportunity
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Type of truck (Hybrid, Flatbed or Box): ");
-        String product = sc.nextLine().toLowerCase();
-        while (!Validator.validateProduct(product)) {
-            System.out.println("Enter a correct product (Hybrid, Flatbed or Box): ");
-            product = sc.nextLine().toLowerCase();
-        }
-        Product productEnum = findProductEnum(product);
-        System.out.println("Number of trucks: ");
-        String number = sc.nextLine();
-        while (!Validator.validateNumber(number)) {
-            System.out.println("Enter a correct number of trucks: ");
-            number = sc.nextLine();
-        }
-        return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
-
     }
 
     private static Product findProductEnum(String product) {
@@ -197,31 +229,12 @@ public class CommandManager {
         return new Lead(name, email, companyName, phoneNumber);
     }
 
-    public static void showList(String objectType) {
-        switch (objectType) {
-            case "leads" -> {
-                List<Lead> leadList = Storage.getAllLeads();
-                printLeadList(leadList);
-            }
-        }
-    }
-
     private static void printLeadList(List<Lead> leadList) {
         System.out.println("=======List of Lead=======");
         for (Lead lead : leadList) {
             System.out.println(lead);
         }
         System.out.println();
-    }
-
-    public static void showObject(String objectType, int id) {
-        switch (objectType) {
-            case "opportunity" -> {
-                Opportunity opportunity = Storage.searchOpportunity("op" + id);
-                System.out.println(opportunity);
-                System.out.println();
-            }
-        }
     }
 
     public static void printCommandList() {

@@ -105,36 +105,6 @@ public class Storage {
 //    example on how it should be used work
 //    if (idIsAccount(id)){ searchAccount(id)}
 
-
-    public static boolean doesExistById(String id) {
-        if (idIsAccount(id)) {
-            for (Account account : getAllAccounts()) {
-                if (account.getId().equals(id)) {
-                    return true;
-                }
-            }
-        } else if (idIsContact(id)) {
-            for (Contact contact : getAllContacts()) {
-                if (contact.getId().equals(id)) {
-                    return true;
-                }
-            }
-        } else if (idIsOpportunity(id)) {
-            for (Opportunity opportunity : getAllOpportunities()) {
-                if (opportunity.getId().equals(id)) {
-                    return true;
-                }
-            }
-        } else if (idIsLead(id)) {
-            for (Lead lead : getAllLeads()) {
-                if (lead.getId().equals(id)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     /**
      * Search for an item and returns it
      *
