@@ -26,7 +26,8 @@ public class CommandManager {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         command = command.toLowerCase();
-        if (Validator.validateCommand(command)) {
+
+      if (Validator.validateCommand(command)) {
             processCommand(command);
         } else {
             System.out.println("Command not found");
