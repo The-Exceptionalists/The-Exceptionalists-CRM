@@ -39,9 +39,15 @@ public class CommandManager {
         switch (words[0]) {
             case "new" -> createObject(words[1]);
             case "show" -> showList(words[1]);
-            case "convert" -> convertLeadToOpportunity(Integer.parseInt(words[1]));
+            case "convert" ->
+                    //TODO: need the next condition "if the lead with id doesn't exist, send a message "this
+                    //TODO: list doesn't exist.
+                    convertLeadToOpportunity(Integer.parseInt(words[1]));
             case "lookup" -> showObject(words[1], Integer.parseInt(words[2]));
-            case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
+            case "close-won" ->
+                    //TODO: need the next condition "if the lead with id doesn't exist, send a message "this
+                    //TODO: list doesn't exist. also in close-lost
+                    closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
             case "help" -> printCommandList();
             case "exit" -> System.exit(0);
