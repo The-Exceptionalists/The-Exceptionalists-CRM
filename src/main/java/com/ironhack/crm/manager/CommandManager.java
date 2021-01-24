@@ -7,6 +7,7 @@ import com.ironhack.crm.classes.Opportunity;
 import com.ironhack.crm.enums.Industry;
 import com.ironhack.crm.enums.Product;
 import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.utilities.State;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
@@ -42,8 +43,20 @@ public class CommandManager {
             case "lookup" -> showObject(words[1], Integer.parseInt(words[2]));
             case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
-            case "exit" -> System.exit(0);
+            case "exit" -> saveStateAndExit();
         }
+    }
+
+    private static void saveStateAndExit() {
+        new Thread(new State()).run();
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.exit(0);
     }
 
     private static void createObject(String word) {

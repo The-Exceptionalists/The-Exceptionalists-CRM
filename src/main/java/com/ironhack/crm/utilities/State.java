@@ -15,7 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class State {
+public class State implements Runnable {
 
     public static void saveState() {
         writeLeads();
@@ -103,4 +103,8 @@ public class State {
     }
 
 
+    @Override
+    public void run() {
+        writeLeads();
+    }
 }

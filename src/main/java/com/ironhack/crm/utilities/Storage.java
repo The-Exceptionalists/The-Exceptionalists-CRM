@@ -10,12 +10,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 public class Storage {
 
     private static int id = 0;
 
+    ReentrantLock reentrantLock = new ReentrantLock();
     private static HashMap<String, Account> accountHashMap = new HashMap<>();
     private static HashMap<String, Contact> contactHashMap = new HashMap<>();
     private static HashMap<String, Lead> leadHashMap = new HashMap<>();
@@ -27,7 +31,10 @@ public class Storage {
      * @param item
      */
     public static void add(Account item) {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
         accountHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
     }
 
     /**
@@ -36,7 +43,11 @@ public class Storage {
      * @param item
      */
     public static void add(Contact item) {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
         contactHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
+
     }
 
     /**
@@ -45,7 +56,11 @@ public class Storage {
      * @param item
      */
     public static void add(Opportunity item) {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
         opportunityHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
+
     }
 
     /**
@@ -54,7 +69,11 @@ public class Storage {
      * @param item
      */
     public static void add(Lead item) {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
         leadHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
+
     }
 
     /**
