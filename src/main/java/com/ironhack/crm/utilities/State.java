@@ -15,7 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-abstract class State {
+public class State {
 
     public static void saveState() {
         writeLeads();
