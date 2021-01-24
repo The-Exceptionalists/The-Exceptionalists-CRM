@@ -105,22 +105,14 @@ public class Validator {
                 case "lookup":
                     switch (word[1]) {
                         case "opportunity":
-                            if (!validateNumber(word[2])) {
-                                System.out.println("the format of the number is incorrect");
-                            } else {
-                                check = word.length == 2;
+
+                            if (word.length == 3){
+                                check = validateNumber(word[2]);
                             }
+
                             break;
                     }
                     break;
-                case "lookup2":
-                    //Convert switch to if when no more functionalities are added
-                    switch (word[1]) {
-                        case "opportunity" -> {
-                            return word.length == 2;
-                        }
-                    }
-                break;
                 case "convert", "close-won", "close-lost":
                     if (!validateNumber(word[1])) {
                         System.out.println("the formart of the number is incorrect");

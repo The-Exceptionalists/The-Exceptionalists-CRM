@@ -166,7 +166,7 @@ class ValidatorTest {
     }
     @Test
     public void validateCommand_ValidLookupCommand_True() {
-        assertTrue(Validator.validateCommand("lookup opportunity"));
+        assertFalse(Validator.validateCommand("lookup opportunity"));
     }
 
     @Test
@@ -196,7 +196,6 @@ class ValidatorTest {
     public void validateCommand_NotValidShowCommand_False() {
         assertFalse(Validator.validateCommand("show"));
         assertFalse(Validator.validateCommand("show lead"));
-        assertFalse(Validator.validateCommand("show opportunities"));
         assertFalse(Validator.validateCommand("show 120"));
     }
 
