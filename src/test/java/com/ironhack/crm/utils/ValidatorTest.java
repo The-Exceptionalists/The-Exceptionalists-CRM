@@ -146,6 +146,23 @@ class ValidatorTest {
     }
 
     @Test
+    public void introduceCommand_addCorrectInputNoCaseSentive_True() {
+        assertTrue(Validator.validateCommand("new Lead"));
+        assertTrue(Validator.validateCommand("New Lead"));
+        assertTrue(Validator.validateCommand("New lead"));
+        assertTrue(Validator.validateCommand("new lead"));
+        assertTrue(Validator.validateCommand("NEw LeaD"));
+        assertTrue(Validator.validateCommand("Show Leads"));
+        assertTrue(Validator.validateCommand("show leads"));
+        assertTrue(Validator.validateCommand("Show LeAds"));
+        assertTrue(Validator.validateCommand("Show leads"));
+    }
+
+    @Test
+    public void introduceCommand_checkEmptlyInput_false(){
+        assertFalse(Validator.validateCommand(""));
+    }
+    @Test
     public void validateCommand_ValidLookupCommand_True() {
         assertTrue(Validator.validateCommand("lookup opportunity"));
     }

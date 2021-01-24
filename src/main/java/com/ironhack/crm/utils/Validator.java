@@ -37,12 +37,6 @@ public class Validator {
     public static boolean validatePhoneNumber(String phoneNumber) {
         String regex = "^\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$";
 
-        /*String regex = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
-                + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
-                + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$";
-
-        validPhoneNumbers= {"2055550125","202 555 0125", "(202) 555-0125", "+111 (202) 555-0125",
-                "636 856 789", "+111 636 856 789", "636 85 67 89", "+111 636 85 67 89"};*/
         return validate(phoneNumber, regex);
     }
 
@@ -77,9 +71,14 @@ public class Validator {
                 case "convert", "close-won", "close-lost" -> {
                     return validateNumber(word[1]);
                 }
+
             }
-        } else if(word[0].equals("exit")) {
-            return true;
+        } else if (word.length == 1) {
+            if(word[0].equals("help")) {
+                return true;
+            }else if(word[0].equals("exit")) {
+                return true;
+            }
         }
 
         return false;

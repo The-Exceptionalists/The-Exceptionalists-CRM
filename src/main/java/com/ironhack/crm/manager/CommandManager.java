@@ -22,10 +22,10 @@ public class CommandManager {
     }
 
     public static void introduceCommand() {
-        printCommandList();
         System.out.println("Introduce a command from the list:");
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
+        command = command.toLowerCase();
         if (Validator.validateCommand(command)) {
             processCommand(command);
         } else {
@@ -42,6 +42,7 @@ public class CommandManager {
             case "lookup" -> showObject(words[1], Integer.parseInt(words[2]));
             case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
+            case "help" -> printCommandList();
             case "exit" -> System.exit(0);
         }
     }
@@ -105,6 +106,7 @@ public class CommandManager {
             System.out.println("Enter a correct number of trucks: ");
             number = sc.nextLine();
         }
+        System.out.println("Oportunity created");
         return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
 
     }
@@ -137,6 +139,7 @@ public class CommandManager {
             System.out.println("Enter a correct value: ");
             country = sc.nextLine();
         }
+        System.out.println("Account added");
         return new Account(companyName, industryEnum, Integer.parseInt(employeeCount), city, country, contact, opportunity);
     }
 
@@ -240,8 +243,17 @@ public class CommandManager {
         System.out.println();
     }
 
+    private static void printOportunitiesList(List<Opportunity> oportunityList) {
+        System.out.println("=======List of Oportunities=======");
+        for (Opportunity oportunity : oportunityList) {
+            System.out.println(oportunity);
+        }
+        System.out.println();
+    }
+
     public static void printCommandList() {
         System.out.println("=====Command List=====");
+        setCommandList();
         for (String string : commandList) {
             System.out.println(string);
         }
@@ -256,6 +268,7 @@ public class CommandManager {
         commandList.add("Lookup Opportunity <id> : Shows an Opportunity.");
         commandList.add("Close-Won <id> : Closes an Opportunity as won.");
         commandList.add("Close-Lost <id> : Closes an Opportunity as lost.");
+        commandList.add("Help : Show the command list");
         commandList.add("Exit : Closes the CRM.");
     }
 
