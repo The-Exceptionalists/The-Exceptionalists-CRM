@@ -47,8 +47,43 @@ public class Validator {
     }
 
     public static boolean validateCommand(String command) {
-        //validates if all the words in the command are correct
-        return true;
+        String[] word = command.split(" ");
+        if (word.length > 1) {
+            switch (word[0]) {
+                case "new" -> {
+                    //Convert switch to if when no more functionalities are added
+                    switch (word[1]) {
+                        case "lead" -> {
+                            return word.length == 2;
+                        }
+                    }
+                }
+                case "show" -> {
+                    //Convert switch to if when no more functionalities are added
+                    switch (word[1]) {
+                        case "leads" -> {
+                            return word.length == 2;
+                        }
+                    }
+                }
+                case "lookup" -> {
+                    //Convert switch to if when no more functionalities are added
+                    switch (word[1]) {
+                        case "opportunity" -> {
+                            return true;
+                        }
+                    }
+                }
+                case "convert", "close-won", "close-lost" -> {
+                    return validateNumber(word[1]);
+                }
+                case "exit" -> {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public static boolean validateNumber(String number) {
