@@ -40,7 +40,7 @@ public class Validator {
         return validate(phoneNumber, regex);
     }
 
-    public static boolean validateCommand(String command) {
+    /*public static boolean validateCommand(String command) {
         String[] word = command.split(" ");
         if (word.length > 1) {
             switch (word[0]) {
@@ -64,7 +64,7 @@ public class Validator {
                     //Convert switch to if when no more functionalities are added
                     switch (word[1]) {
                         case "opportunity" -> {
-                            return true;
+                            return word.length == 2;
                         }
                     }
                 }
@@ -82,7 +82,56 @@ public class Validator {
         }
 
         return false;
+    }*/
+    public static boolean validateCommand(String command) {
+        boolean check = false;
+        String[] word = command.split(" ");
+        switch (word[0]){
+            case "new":
+                switch (word[1]){
+                    case "lead":
+                        check = true;
+                        break;
+                }
+                break;
+            case "show":
+                switch (word[1]){
+                    case "leads","opportunities":
+                        check = true;
+                }
+                break;
+            case "lookup":
+                switch (word[1]){
+                    case "opportunity":
+                        if(!validateNumber(word[2])){
+                            System.out.println("the formart of the number is incorrect");
+                        }else{
+                            check = true;
+                        }
+                        break;
+                }
+            case "convert", "close-won", "close-lost":
+                if(!validateNumber(word[1])){
+                    System.out.println("the formart of the number is incorrect");
+                }else{
+                    check = true;
+                }
+                break;
+            case "help", "exit":
+                if(word.length < 2){
+                    check = true;
+                }else{
+                    System.out.println("Unkown command");
+                }
+                break;
+            default:
+                System.out.println("add a correct input");
+                break;
+                }
+
+        return check;
     }
+
 
     public static boolean validateNumber(String number) {
         if(number.length() < 10) {
