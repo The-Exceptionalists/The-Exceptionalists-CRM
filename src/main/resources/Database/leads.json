@@ -1,0 +1,30 @@
+[
+  {
+    "id": "le1",
+    "name": "Juan Alberto",
+    "email": "name@name.com",
+    "companyName": "Company",
+    "phoneNumber": "666666666"
+  },
+  {
+    "id": "le2",
+    "name": "Pepe Juan",
+    "email": "name2@name.com",
+    "companyName": "Company2",
+    "phoneNumber": "666666676"
+  },
+  {
+    "id": "le3",
+    "name": "Antonio Jose",
+    "email": "name3@name.com",
+    "companyName": "Company2",
+    "phoneNumber": "668666676"
+  },
+  {
+    "id": "le4",
+    "name": "Name surname",
+    "email": "name3@name.com",
+    "companyName": "Company2",
+    "phoneNumber": "668666676"
+  }
+]
