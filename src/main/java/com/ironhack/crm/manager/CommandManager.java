@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class CommandManager {
     private static List<String> commandList;
 
-    public List<String> getCommandList() {
+    public static List<String> getCommandList() {
         return commandList;
     }
 
