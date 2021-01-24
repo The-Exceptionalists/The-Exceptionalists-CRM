@@ -15,20 +15,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class JsonPersistence {
+abstract class Persistence {
 
     public static void saveState() {
-        leadsToJson();
-        accountsToJson();
+        writeLeads();
+        writeAccounts();
     }
 
     public static void restoreState() {
-        leadsFromJson();
-        accountsFromJson();
+        readLeads();
+        readAccounts();
 
     }
 
-    private static void leadsToJson() {
+    private static void writeLeads() {
         List<Lead> leads = Storage.getAllLeads();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String path = "src/main/resources/Database/leads.json";
@@ -43,7 +43,7 @@ public class JsonPersistence {
 
     }
 
-    private static void leadsFromJson() {
+    private static void readLeads() {
         String path = "src/main/resources/Database/leads.json";
         Reader reader = null;
         try {
@@ -60,7 +60,7 @@ public class JsonPersistence {
         }
     }
 
-    private static void accountsToJson() {
+    private static void writeAccounts() {
         List<Account> accounts = Storage.getAllAccounts();
         Gson gson;
         gson = new GsonBuilder().setPrettyPrinting().create();
@@ -76,7 +76,7 @@ public class JsonPersistence {
 
     }
 
-    private static void accountsFromJson() {
+    private static void readAccounts() {
 
 
         String path = "src/main/resources/Database/opportunities.json";
