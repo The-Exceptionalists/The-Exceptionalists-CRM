@@ -3,6 +3,8 @@ package com.ironhack.crm.main;
 import com.ironhack.crm.manager.CommandManager;
 import com.ironhack.crm.utils.Validator;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -10,6 +12,8 @@ public class Main {
         while(true) {
             CommandManager.introduceCommand();
         }
+
+
 
     }
 }
