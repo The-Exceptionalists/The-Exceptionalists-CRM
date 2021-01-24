@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class CommandManager {
     private static List<String> commandList;
 
-    public List<String> getCommandList() {
+    public static List<String> getCommandList() {
         return commandList;
     }
 
@@ -111,6 +111,9 @@ public class CommandManager {
             number = sc.nextLine();
         }
         System.out.println("Oportunity created");
+        System.out.println("\n");
+        System.out.printf("Now we start to create an Account to your opportunity:");
+        System.out.println("\n");
         return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
 
     }
@@ -118,7 +121,7 @@ public class CommandManager {
     private static Account promptAccount(String companyName, Contact contact, Opportunity opportunity) {
         //Output for prompt Account
         Scanner sc = new Scanner(System.in);
-        System.out.println("Industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
+        System.out.println("Choose an Industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
         String industry = sc.nextLine().toLowerCase();
         while (!Validator.validateIndustry(industry)) {
             System.out.println("Enter a correct industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
@@ -242,7 +245,7 @@ public class CommandManager {
     private static void printLeadList(List<Lead> leadList) {
         System.out.println("=======List of Leads=======");
         for (Lead lead : leadList) {
-            System.out.println(lead);
+            System.out.println(lead + "\n");
         }
         System.out.println();
     }
@@ -250,7 +253,7 @@ public class CommandManager {
     private static void printOportunityList(List<Opportunity> oportunityList) {
         System.out.println("=======List of Oportunities=======");
         for (Opportunity oportunity : oportunityList) {
-            System.out.println(oportunity);
+            System.out.println(oportunity + "\n");
         }
         System.out.println();
     }

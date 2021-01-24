@@ -1,10 +1,12 @@
 package com.ironhack.crm.classes;
 
+import com.ironhack.crm.enums.ItemType;
 import com.ironhack.crm.enums.Product;
 import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.utilities.Storage;
 
 public class Opportunity {
-    private static String count;
+    private static int count;
     private String id;
     private Product product;
     private int quantity;
@@ -12,19 +14,20 @@ public class Opportunity {
     private Status status;
 
     public Opportunity(Product product, int quantity, Contact decisionMaker, Status status) {
+        count++;
         setProduct(product);
         setQuantity(quantity);
         setDecisionMaker(decisionMaker);
         setStatus(status);
-        setId();
+        setId(Storage.getNewId(ItemType.OPPORTUNITY));
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId() {
-        this.id = count;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Product getProduct() {
