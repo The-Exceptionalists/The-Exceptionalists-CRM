@@ -58,6 +58,9 @@ public class Validator {
                         case "leads" -> {
                             return word.length == 2;
                         }
+                        case "opportunities" -> {
+                            return word.length == 2;
+                        }
                     }
                 }
                 case "lookup" -> {

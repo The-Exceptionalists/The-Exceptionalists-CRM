@@ -64,6 +64,10 @@ public class CommandManager {
                 List<Lead> leadList = Storage.getAllLeads();
                 printLeadList(leadList);
             }
+            case "opportunities" -> {
+                List<Opportunity> opportunityList = Storage.getAllOpportunities();
+                printOportunityList(opportunityList);
+            }
         }
     }
 
@@ -243,7 +247,7 @@ public class CommandManager {
         System.out.println();
     }
 
-    private static void printOportunitiesList(List<Opportunity> oportunityList) {
+    private static void printOportunityList(List<Opportunity> oportunityList) {
         System.out.println("=======List of Oportunities=======");
         for (Opportunity oportunity : oportunityList) {
             System.out.println(oportunity);
@@ -265,6 +269,7 @@ public class CommandManager {
         commandList.add("New Lead : Add a new Lead");
         commandList.add("Show Leads : Shows a list of all the Leads");
         commandList.add("Convert <id> : Converts a Lead into an Opportunity");
+        commandList.add("Show Opportunities: Shows a list of all the leads");
         commandList.add("Lookup Opportunity <id> : Shows an Opportunity.");
         commandList.add("Close-Won <id> : Closes an Opportunity as won.");
         commandList.add("Close-Lost <id> : Closes an Opportunity as lost.");
