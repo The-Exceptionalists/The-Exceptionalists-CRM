@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class Main {
     public static void main(String[] args) {
 
-       CommandManager.printCommandList();
+       /*CommandManager.printCommandList();
         while(true) {
             CommandManager.introduceCommand();
-        }
+        }*/
 
-
+        System.out.println(Validator.validateCommand("lookup opportunity"));
 
     }
 }

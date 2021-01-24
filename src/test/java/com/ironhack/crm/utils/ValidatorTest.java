@@ -149,7 +149,7 @@ class ValidatorTest {
     public void introduceCommand_addCorrectInputNoCaseSentive_True() {
 
         //TODO: i don't know where is the problem. i will ask a TA tomorrow
-        assertEquals(true, Validator.validateCommand("new Lead"));
+        assertEquals(true, Validator.validateCommand("new lead"));
         assertTrue(Validator.validateCommand("New Lead"));
         assertTrue(Validator.validateCommand("New lead"));
         assertTrue(Validator.validateCommand("new lead"));

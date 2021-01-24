@@ -25,7 +25,6 @@ public class CommandManager {
         System.out.println("Introduce a command from the list:");
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-        command = command.toLowerCase();
 
       if (Validator.validateCommand(command)) {
             processCommand(command);

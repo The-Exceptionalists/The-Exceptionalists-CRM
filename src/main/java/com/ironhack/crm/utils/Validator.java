@@ -85,38 +85,47 @@ public class Validator {
     }*/
     public static boolean validateCommand(String command) {
         boolean check = false;
-        String[] word = command.split(" ");
+        String[] word = command.toLowerCase().split(" ");
 
         if(word.length > 1){
             switch (word[0]) {
                 case "new":
                     switch (word[1]) {
                         case "lead":
-                            check = true;
+                            check = word.length == 2;
                             break;
                     }
                     break;
                 case "show":
                     switch (word[1]) {
                         case "leads", "opportunities":
-                            check = true;
+                            check = word.length == 2;
                     }
                     break;
                 case "lookup":
                     switch (word[1]) {
                         case "opportunity":
                             if (!validateNumber(word[2])) {
-                                System.out.println("the formart of the number is incorrect");
+                                System.out.println("the format of the number is incorrect");
                             } else {
-                                check = true;
+                                check = word.length == 2;
                             }
                             break;
                     }
+                    break;
+                case "lookup2":
+                    //Convert switch to if when no more functionalities are added
+                    switch (word[1]) {
+                        case "opportunity" -> {
+                            return word.length == 2;
+                        }
+                    }
+                break;
                 case "convert", "close-won", "close-lost":
                     if (!validateNumber(word[1])) {
                         System.out.println("the formart of the number is incorrect");
                     } else {
-                        check = true;
+                        check = word.length == 2;
                     }
                     break;
                 default:
@@ -124,16 +133,18 @@ public class Validator {
                     break;
             }
 
-        }
-        switch (word[0]) {
+        }else {
+            switch (word[0]) {
                 case "help", "exit":
-                        check = true;
-                        System.out.println("Unkown command");
+                    check = true;
+                    System.out.println("Unkown command");
                     break;
                 default:
                     System.out.println("add a correct input");
                     break;
             }
+        }
+
 
 
 
