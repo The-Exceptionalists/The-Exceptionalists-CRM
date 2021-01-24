@@ -48,12 +48,6 @@ public class CommandManager {
     private static void saveStateAndExit() {
         new Thread(new State()).run();
 
-        try {
-            Thread.currentThread().join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         System.exit(0);
     }
 
