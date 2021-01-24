@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Add item to the correct hashmap
+     *
      * @param item
      */
     public static void add(Account item) {
@@ -31,6 +32,7 @@ public class Storage {
 
     /**
      * Add item to the correct hashmap
+     *
      * @param item
      */
     public static void add(Contact item) {
@@ -39,6 +41,7 @@ public class Storage {
 
     /**
      * Add item to the correct hashmap
+     *
      * @param item
      */
     public static void add(Opportunity item) {
@@ -47,6 +50,7 @@ public class Storage {
 
     /**
      * Add item to the correct hashmap
+     *
      * @param item
      */
     public static void add(Lead item) {
@@ -55,6 +59,7 @@ public class Storage {
 
     /**
      * Receive the updated version of an item and store it in the right place.
+     *
      * @param item
      */
     public static void update(Account item) {
@@ -65,6 +70,7 @@ public class Storage {
 
     /**
      * Receive the updated version of an item and store it in the right place.
+     *
      * @param item
      */
     public static void update(Contact item) {
@@ -75,6 +81,7 @@ public class Storage {
 
     /**
      * Receive the updated version of an item and store it in the right place.
+     *
      * @param item
      */
     public static void update(Opportunity item) {
@@ -85,6 +92,7 @@ public class Storage {
 
     /**
      * Receive the updated version of an item and store it in the right place.
+     *
      * @param item
      */
     public static void update(Lead item) {
@@ -98,9 +106,39 @@ public class Storage {
 //    if (idIsAccount(id)){ searchAccount(id)}
 
 
+    public static boolean doesExistById(String id) {
+        if (idIsAccount(id)) {
+            for (Account account : getAllAccounts()) {
+                if (account.getId().equals(id)) {
+                    return true;
+                }
+            }
+        } else if (idIsContact(id)) {
+            for (Contact contact : getAllContacts()) {
+                if (contact.getId().equals(id)) {
+                    return true;
+                }
+            }
+        } else if (idIsOpportunity(id)) {
+            for (Opportunity opportunity : getAllOpportunities()) {
+                if (opportunity.getId().equals(id)) {
+                    return true;
+                }
+            }
+        } else if (idIsLead(id)) {
+            for (Lead lead : getAllLeads()) {
+                if (lead.getId().equals(id)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Search for an item and returns it
-      * @param id String id of item you are searching
+     *
+     * @param id String id of item you are searching
      * @return
      */
     public static Account searchAccount(String id) {
@@ -109,6 +147,7 @@ public class Storage {
 
     /**
      * Search for an item and returns it
+     *
      * @param id String id of item you are searching
      * @return
      */
@@ -118,6 +157,7 @@ public class Storage {
 
     /**
      * Search for an item and returns it
+     *
      * @param id String id of item you are searching
      * @return
      */
@@ -127,6 +167,7 @@ public class Storage {
 
     /**
      * Search for an item and returns it
+     *
      * @param id String id of item you are searching
      * @return
      */
@@ -136,36 +177,40 @@ public class Storage {
 
     /**
      * All items of a type finder
+     *
      * @return an ArrayList of all item of a type
      */
-    public static List<Account> getAllAccounts(){
+    public static List<Account> getAllAccounts() {
         Collection<Account> values = accountHashMap.values();
         return new ArrayList<>(values);
     }
 
     /**
      * All items of a type finder
+     *
      * @return an ArrayList of all item of a type
      */
-    public static List<Contact> getAllContacts(){
+    public static List<Contact> getAllContacts() {
         Collection<Contact> values = contactHashMap.values();
         return new ArrayList<>(values);
     }
 
     /**
      * All items of a type finder
+     *
      * @return an ArrayList of all item of a type
      */
-    public static List<Opportunity> getAllOpportunities(){
+    public static List<Opportunity> getAllOpportunities() {
         Collection<Opportunity> values = opportunityHashMap.values();
         return new ArrayList<>(values);
     }
 
     /**
      * All items of a type finder
+     *
      * @return an ArrayList of all item of a type
      */
-    public static List<Lead> getAllLeads(){
+    public static List<Lead> getAllLeads() {
         Collection<Lead> values = leadHashMap.values();
         return new ArrayList<>(values);
     }
@@ -173,13 +218,13 @@ public class Storage {
 
     /**
      * Return a unique id generated involving the item class
+     *
      * @param itemType
      * @return
-     *
      */
     public static String getNewId(ItemType itemType) {
         String prefix = null;
-        switch(itemType){
+        switch (itemType) {
             case LEAD -> prefix = "le";
             case ACCOUNT -> prefix = "ac";
             case CONTACT -> prefix = "ct";
@@ -189,19 +234,19 @@ public class Storage {
         return prefix + Storage.id;
     }
 
-    public static boolean idIsAccount(String id){
+    public static boolean idIsAccount(String id) {
         return id.startsWith("ac") ? true : false;
     }
 
-    public static boolean idIsContact(String id){
+    public static boolean idIsContact(String id) {
         return id.startsWith("ct") ? true : false;
     }
 
-    public static boolean idIsLead(String id){
+    public static boolean idIsLead(String id) {
         return id.startsWith("le") ? true : false;
     }
 
-    public static boolean idIsOpportunity(String id){
+    public static boolean idIsOpportunity(String id) {
         return id.startsWith("op") ? true : false;
     }
 

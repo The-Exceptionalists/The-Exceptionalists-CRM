@@ -137,7 +137,7 @@ public class CommandManager {
         System.out.println("Type of truck (Hybrid, Flatbed or Box): ");
         String product = sc.nextLine().toLowerCase();
         while (!Validator.validateProduct(product)) {
-            System.out.println("Enter a correct product(Hybrid, Flatbed or Box): ");
+            System.out.println("Enter a correct product (Hybrid, Flatbed or Box): ");
             product = sc.nextLine().toLowerCase();
         }
         Product productEnum = findProductEnum(product);
