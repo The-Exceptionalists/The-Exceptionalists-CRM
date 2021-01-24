@@ -23,6 +23,8 @@ class LeadTest {
         Lead lead = new Lead("Juan Alberto", "juan@juan.es", "Juan's Company", "669695702");
         lead.setName("Juan");
         assertEquals("Juan", lead.getName());
+        lead.setName("juan");
+        assertEquals("juan", lead.getName());
         lead.setName("Juan Alberto");
         assertEquals("Juan Alberto", lead.getName());
         lead.setName("Antonio Jesús");
