@@ -77,18 +77,19 @@ public class Validator {
                 case "convert", "close-won", "close-lost" -> {
                     return validateNumber(word[1]);
                 }
-                case "exit" -> {
-                    return true;
-                }
             }
+        } else if(word[0].equals("exit")) {
+            return true;
         }
 
         return false;
     }
 
     public static boolean validateNumber(String number) {
-        if (validate(number, "[0-9]+") && Integer.parseInt(number) > 0) {
-            return true;
+        if(number.length() < 10) {
+            if (validate(number, "[0-9]+") && Integer.parseInt(number) > 0) {
+                return true;
+            }
         }
         return false;
     }
