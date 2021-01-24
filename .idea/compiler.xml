@@ -9,5 +9,8 @@
         <module name="The-Exceptionalists-CRM" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="The-Exceptionalists-CRM" target="15" />
+    </bytecodeTargetLevel>
   </component>
 </project>
