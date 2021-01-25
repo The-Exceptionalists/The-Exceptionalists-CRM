@@ -146,6 +146,16 @@ public class Storage {
     }
 
     /**
+     * Method to nullify a lead stored in the hashmap.
+     * @param id
+     */
+    public static void nullifyLead(String id) {
+        if (leadHashMap.containsKey(id))
+            leadHashMap.replace(id, null);
+        else throw new IllegalArgumentException(id + "not found");
+    }
+
+    /**
      * All items of a type finder
      *
      * @return an ArrayList of all item of a type
