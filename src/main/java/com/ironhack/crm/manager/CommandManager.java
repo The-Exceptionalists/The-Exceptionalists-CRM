@@ -325,14 +325,14 @@ public class CommandManager {
 
     public static void setCommandList() {
         commandList = new ArrayList<>();
-        commandList.add("New Lead : Add a new Lead");
-        commandList.add("Show Leads : Shows a list of all the Leads");
-        commandList.add("Convert <id> : Converts a Lead into an Opportunity");
-        commandList.add("Show Opportunities: Shows a list of all the leads");
+        commandList.add("New Lead : Add a new Lead.");
+        commandList.add("Show Leads : Shows a list of all the Leads.");
+        commandList.add("Convert <id> : Converts a Lead into an Opportunity.");
+        commandList.add("Show Opportunities: Shows a list of all the leads.");
         commandList.add("Lookup Opportunity <id> : Shows an Opportunity.");
         commandList.add("Close-Won <id> : Closes an Opportunity as won.");
         commandList.add("Close-Lost <id> : Closes an Opportunity as lost.");
-        commandList.add("Help : Show the command list");
+        commandList.add("Help : Show the command list.");
         commandList.add("Exit : Closes the CRM.");
     }
 
