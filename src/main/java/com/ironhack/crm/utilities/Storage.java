@@ -165,6 +165,7 @@ public class Storage {
 
     /**
      * Method to nullify a lead stored in the hashmap.
+     *
      * @param id
      */
     public static void nullifyLead(String id) {
@@ -225,7 +226,7 @@ public class Storage {
         switch (itemType) {
             case LEAD -> prefix = "le";
             case ACCOUNT -> prefix = "ac";
-            case CONTACT -> prefix = "ct";
+            case CONTACT -> prefix = "co";
             case OPPORTUNITY -> prefix = "op";
         }
         Storage.id++;

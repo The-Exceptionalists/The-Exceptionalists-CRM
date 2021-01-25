@@ -40,7 +40,7 @@ public class Validator {
         return validate(phoneNumber, regex);
     }
 
-    /*public static boolean validateCommand(String command) {
+    public static boolean validateCommand(String command) {
         String[] word = command.split(" ");
         if (word.length > 1) {
             switch (word[0]) {
@@ -55,7 +55,7 @@ public class Validator {
                 case "show" -> {
                     //Convert switch to if when no more functionalities are added
                     switch (word[1]) {
-                        case "leads", "opportunities" -> {
+                        case "leads", "opportunities", "contacts", "accounts" -> {
                             return word.length == 2;
                         }
                     }
@@ -63,31 +63,37 @@ public class Validator {
                 case "lookup" -> {
                     //Convert switch to if when no more functionalities are added
                     switch (word[1]) {
-                        case "opportunity" -> {
-                            return word.length == 2;
+                        case "opportunity", "contact", "lead", "account" -> {
+                            if (word.length == 3) {
+                                return validateNumber(word[2]);
+                            }
+                            return false;
                         }
                     }
                 }
                 case "convert", "close-won", "close-lost" -> {
-                    return validateNumber(word[1]);
+                    if (word.length == 2) {
+                        return validateNumber(word[1]);
+                    }
+                    return false;
                 }
 
             }
         } else if (word.length == 1) {
-            if(word[0].equals("help")) {
+            if (word[0].equals("help")) {
                 return true;
-            }else if(word[0].equals("exit")) {
+            } else if (word[0].equals("exit")) {
                 return true;
             }
         }
 
         return false;
-    }*/
-    public static boolean validateCommand(String command) {
+    }
+    /*public static boolean validateCommand(String command) {
         boolean check = false;
         String[] word = command.toLowerCase().split(" ");
 
-        if(word.length > 1){
+        if (word.length > 1) {
             switch (word[0]) {
                 case "new":
                     switch (word[1]) {
@@ -106,7 +112,7 @@ public class Validator {
                     switch (word[1]) {
                         case "opportunity":
 
-                            if (word.length == 3){
+                            if (word.length == 3) {
                                 check = validateNumber(word[2]);
                             }
 
@@ -125,7 +131,7 @@ public class Validator {
                     break;
             }
 
-        }else {
+        } else {
             switch (word[0]) {
                 case "help", "exit":
                     check = true;
@@ -138,14 +144,12 @@ public class Validator {
         }
 
 
-
-
         return check;
-    }
+    }*/
 
 
     public static boolean validateNumber(String number) {
-        if(number.length() < 10) {
+        if (number.length() < 10) {
             if (validate(number, "[0-9]+") && Integer.parseInt(number) > 0) {
                 return true;
             }
