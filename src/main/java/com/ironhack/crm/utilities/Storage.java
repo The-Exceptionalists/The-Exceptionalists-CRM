@@ -1,25 +1,16 @@
 package com.ironhack.crm.utilities;
 
-import com.ironhack.crm.classes.Account;
-import com.ironhack.crm.classes.Contact;
-import com.ironhack.crm.classes.Lead;
-import com.ironhack.crm.classes.Opportunity;
-import com.ironhack.crm.enums.ItemType;
+import com.ironhack.crm.classes.*;
+import com.ironhack.crm.enums.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.*;
+import java.util.concurrent.locks.*;
 
 
 public class Storage {
 
     private static int id = 0;
 
-    ReentrantLock reentrantLock = new ReentrantLock();
     private static HashMap<String, Account> accountHashMap = new HashMap<>();
     private static HashMap<String, Contact> contactHashMap = new HashMap<>();
     private static HashMap<String, Lead> leadHashMap = new HashMap<>();
@@ -72,6 +63,14 @@ public class Storage {
         ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
         reentrantLock.writeLock();
         leadHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
+
+    }
+
+    public static void setUpId() {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
+        id++;
         reentrantLock.writeLock();
 
     }

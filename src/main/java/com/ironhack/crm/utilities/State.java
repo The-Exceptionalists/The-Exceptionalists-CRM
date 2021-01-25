@@ -1,19 +1,12 @@
 package com.ironhack.crm.utilities;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.ironhack.crm.classes.Account;
-import com.ironhack.crm.classes.Contact;
-import com.ironhack.crm.classes.Lead;
-import com.ironhack.crm.classes.Opportunity;
+import com.google.gson.*;
+import com.google.gson.reflect.*;
+import com.ironhack.crm.classes.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+import java.io.*;
+import java.nio.file.*;
+import java.util.*;
 
 public class State implements Runnable {
 
@@ -79,7 +72,7 @@ public class State implements Runnable {
     private static void readAccounts() {
 
 
-        String path = "src/main/resources/Database/opportunities.json";
+        String path = "src/main/resources/Database/accounts.json";
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(Paths.get(path));
@@ -89,14 +82,24 @@ public class State implements Runnable {
         List<Account> accounts = new Gson().fromJson(reader, new TypeToken<List<Account>>() {
         }.getType());
 
+        if (accounts != null) {
 
-        for (Account account : accounts) {
-            Storage.add(account);
-            for (Opportunity opportunity : account.getOpportunityList()) {
-                Storage.add(opportunity);
-            }
-            for (Contact contact : account.getContactList()) {
-                Storage.add(contact);
+            for (Account account : accounts) {
+                Storage.add(account);
+                Storage.setUpId();
+                if (account.getOpportunityList() != null) {
+                    for (Opportunity opportunity : account.getOpportunityList()) {
+                        Storage.add(opportunity);
+                        Storage.setUpId();
+                    }
+                }
+                if (account.getContactList() != null) {
+
+                    for (Contact contact : account.getContactList()) {
+                        Storage.add(contact);
+                        Storage.setUpId();
+                    }
+                }
             }
         }
 
@@ -106,5 +109,6 @@ public class State implements Runnable {
     @Override
     public void run() {
         writeLeads();
+        Thread.currentThread().interrupt();
     }
 }
