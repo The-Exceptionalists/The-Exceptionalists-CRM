@@ -230,7 +230,12 @@ public class Storage {
             case OPPORTUNITY -> prefix = "op";
         }
         Storage.id++;
-        return prefix + Storage.id;
+        StringBuilder zeros = new StringBuilder();
+        int length = String.valueOf(id).length();
+        for (int i = 0; i < 10 - length; i++) {
+            zeros.append("0");
+        }
+        return prefix + zeros + Storage.id;
     }
 
     public static boolean idIsAccount(String id) {
