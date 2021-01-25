@@ -50,6 +50,7 @@ public class State implements Runnable {
 
         for (Lead lead : leads) {
             Storage.add(lead);
+            Storage.setUpId();
         }
     }
 
