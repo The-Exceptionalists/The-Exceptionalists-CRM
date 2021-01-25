@@ -54,7 +54,7 @@ public class Contact {
     }
 
     public void setCompanyName(String companyName) {
-        if (!Validator.validateName(companyName))
+        if (!Validator.validateCompanyName(companyName))
             throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
         this.companyName = companyName;
     }
