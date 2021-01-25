@@ -17,129 +17,118 @@ public class Output {
             for (int j = 0; j < Buffer.screenBuffer[i].length; ++j) {
                 switch (Buffer.screenBuffer[i][j]) {
                     case ' ' -> System.out.print(BLOCK);
-                    case 'S' -> {
-                        switch (Buffer.screenBuffer[i][j + 1]) {
+                    case 'i' -> {
+                        switch(Buffer.screenBuffer[i][j + 1]){
                             case 'a' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationOne()) + DEFAULT);
+                                j += 14;
                             }
                             case 'b' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationTwo()) + DEFAULT);
+                                j += 14;
                             }
                             case 'c' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationThree()) + DEFAULT);
+                                j += 14;
                             }
                             case 'd' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationFour()) + DEFAULT);
+                                j += 14;
                             }
                             case 'e' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationFive()) + DEFAULT);
+                                j += 14;
                             }
                             case 'f' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationSix()) + DEFAULT);
+                                j += 14;
                             }
                             case 'g' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationSeven()) + DEFAULT);
+                                j += 14;
                             }
                             case 'h' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationEight()) + DEFAULT);
+                                j += 14;
                             }
                             case 'i' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationOne()) + DEFAULT);
+                                j += 14;
                             }
                             case 'j' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationTwo()) + DEFAULT);
+                                j += 14;
                             }
                             case 'k' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationThree()) + DEFAULT);
+                                j += 14;
                             }
                             case 'l' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationFour()) + DEFAULT);
+                                j += 14;
                             }
                             case 'm' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationFive()) + DEFAULT);
+                                j += 14;
                             }
                             case 'n' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationSix()) + DEFAULT);
+                                j += 14;
                             }
                             case 'o' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationSeven()) + DEFAULT);
+                                j += 14;
                             }
                             case 'p' -> {
-                                System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
-                                j += 9;
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationEight()) + DEFAULT);
+                                j += 14;
                             }
+                            case 'q' -> {
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationOne()) + DEFAULT);
+                                j += 14;
+                            }
+                            case 'r' -> {
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationTwo()) + DEFAULT);
+                                j += 14;
+                            }
+                            case 's' -> {
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationThree()) + DEFAULT);
+                                j += 14;
+                            }
+                            case 't' -> {
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationFour()) + DEFAULT);
+                                j += 14;
+                            }
+                            case 'u' -> {
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationFive()) + DEFAULT);
+                                j += 14;
+                            }
+                            case 'v' -> {
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationSix()) + DEFAULT);
+                                j += 14;
+                            }
+                            case 'w' -> {
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationSeven()) + DEFAULT);
+                                j += 14;
+                            }
+                            case 'x' -> {
+                                System.out.print(MAGENTA_BCK + insertText(Buffer.getLocationEight()) + DEFAULT);
+                                j += 14;
+                            }
+
                         }
+                    }
+                    case 'S' -> {
+                        System.out.print(YELLOW_BCK + fillWithSpaces(20) + DEFAULT);
+                        j += 9;
                     }
                     case 'B' -> {
-                        switch (Buffer.screenBuffer[i][j + 1]) {
-                            case '0' -> {
-                                System.out.print(MAGENTA_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '1' -> {
-                                System.out.print(MAGENTA_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '2' -> {
-                                System.out.print(MAGENTA_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '3' -> {
-                                System.out.print(MAGENTA_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '4' -> {
-                                System.out.print(MAGENTA_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '5' -> {
-                                System.out.print(MAGENTA_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '6' -> {
-                                System.out.print(MAGENTA_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '7' -> {
-                                System.out.print(MAGENTA_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                        }
+                        System.out.print(MAGENTA_BCK + fillWithSpaces(2) + DEFAULT);
+//                        j += 41;
                     }
                     case 'P' -> {
-                        switch (Buffer.screenBuffer[i][j + 1]){
-                            case '0' -> {
-                                System.out.print(GREEN_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '1' -> {
-                                System.out.print(GREEN_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '2' -> {
-                                System.out.print(GREEN_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                            case '3' -> {
-                                System.out.print(GREEN_BCK + fillWithSpaces(80) + DEFAULT);
-                                j += 39;
-                            }
-                        }
+                        System.out.print(GREEN_BCK + fillWithSpaces(84) + DEFAULT);
+                        j += 41;
                     }
                     case 'L' -> {
                         System.out.print(BLUE_BCK + BLOCK + DEFAULT);
@@ -167,5 +156,12 @@ public class Output {
         StringBuilder r = new StringBuilder();
         if (len > 0) r.append(" ".repeat(len));
         return r.toString();
+    }
+
+    public static String insertText(String text) {
+        int strLen = text.length();
+        int len = 30;
+        text = strLen > len ? text.substring(0, len) : text;
+        return text + Output.fillWithSpaces(len - strLen);
     }
 }

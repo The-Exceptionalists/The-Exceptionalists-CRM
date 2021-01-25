@@ -14,7 +14,7 @@ public class Opportunity {
     private Status status;
 
     public Opportunity(Product product, int quantity, Contact decisionMaker, Status status) {
-        count++;
+        count++; //do we need this?
         setProduct(product);
         setQuantity(quantity);
         setDecisionMaker(decisionMaker);
