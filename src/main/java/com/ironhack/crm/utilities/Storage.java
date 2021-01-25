@@ -83,7 +83,7 @@ public class Storage {
     public static void update(Account item) {
         if (accountHashMap.containsKey(item.getId()))
             accountHashMap.replace(item.getId(), item);
-        else throw new IllegalArgumentException(item.getId() + "not found");
+        else throw new IllegalArgumentException(item.getId() + " not found");
     }
 
     /**
@@ -231,8 +231,7 @@ public class Storage {
         }
         Storage.id++;
         StringBuilder zeros = new StringBuilder();
-        int length = String.valueOf(id).length();
-        for (int i = 0; i < 10 - length; i++) {
+        for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
             zeros.append("0");
         }
         return prefix + zeros + Storage.id;
