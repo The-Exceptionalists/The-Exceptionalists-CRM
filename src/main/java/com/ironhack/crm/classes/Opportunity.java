@@ -6,22 +6,32 @@ import com.ironhack.crm.enums.Status;
 import com.ironhack.crm.utilities.Storage;
 
 public class Opportunity {
-    private static int count;
+    //Properties
     private String id;
     private Product product;
     private int quantity;
     private Contact decisionMaker;
     private Status status;
 
-    public Opportunity(Product product, int quantity, Contact decisionMaker, Status status) {
-        count++;
+    //Constructor for the database
+    public Opportunity(String id, Product product, int quantity, Contact decisionMaker, Status status) {
+        setId(id);
         setProduct(product);
         setQuantity(quantity);
         setDecisionMaker(decisionMaker);
         setStatus(status);
-        setId(Storage.getNewId(ItemType.OPPORTUNITY));
     }
 
+    //Constructor for a new Opportunity
+    public Opportunity(Product product, int quantity, Contact decisionMaker, Status status) {
+        setId(Storage.getNewId(ItemType.OPPORTUNITY));
+        setProduct(product);
+        setQuantity(quantity);
+        setDecisionMaker(decisionMaker);
+        setStatus(status);
+    }
+
+    //Getters and setters
     public String getId() {
         return id;
     }

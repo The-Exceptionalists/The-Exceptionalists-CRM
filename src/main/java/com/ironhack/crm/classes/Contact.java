@@ -5,23 +5,32 @@ import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
 public class Contact {
-    private static int contactCounter = 0;
+    //Properties
     private String id;
     private String name;
     private String email;
     private String companyName;
     private String phoneNum;
 
-    public Contact(String name, String email, String companyName, String phoneNum) {
+    //Constructor for the database
+    public Contact(String id, String name, String email, String companyName, String phoneNum) {
+        setId(id);
+        setName(name);
+        setEmail(email);
+        setCompanyName(companyName);
+        setPhoneNum(phoneNum);
+    }
 
+    //Constructor for a new Contact
+    public Contact(String name, String email, String companyName, String phoneNum) {
         setId(Storage.getNewId(ItemType.CONTACT));
         setName(name);
         setEmail(email);
         setCompanyName(companyName);
         setPhoneNum(phoneNum);
-
     }
 
+    //Getters and setters
     public String getId() {
         return id;
     }
