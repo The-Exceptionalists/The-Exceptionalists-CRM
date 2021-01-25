@@ -4,9 +4,8 @@ import com.ironhack.crm.classes.Account;
 import com.ironhack.crm.classes.Contact;
 import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
-import com.ironhack.crm.enums.Industry;
-import com.ironhack.crm.enums.Product;
-import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.enums.*;
+import com.ironhack.crm.utilities.State;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
@@ -52,6 +51,12 @@ public class CommandManager {
             case "help" -> printCommandList();
             case "exit" -> System.exit(0);
         }
+    }
+
+    private static void saveStateAndExit() {
+        new Thread(new State()).run();
+
+        System.exit(0);
     }
 
     private static void createObject(String word) {
