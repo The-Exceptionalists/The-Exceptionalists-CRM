@@ -8,11 +8,11 @@ import com.ironhack.crm.utilities.Output;
 
 public class Main {
     public static void main(String[] args) {
-        //State.restoreState();
-        CommandManager.setCommandList();
-        while (true) {
-            CommandManager.introduceCommand();
-        }
+//        State.restoreState();
+//        CommandManager.setCommandList();
+//        while (true) {
+//            CommandManager.introduceCommand();
+//        }
 
 //       CommandManager.printCommandList();
 //        while(true) {
