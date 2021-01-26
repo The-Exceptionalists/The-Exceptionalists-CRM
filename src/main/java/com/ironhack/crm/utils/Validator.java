@@ -41,7 +41,7 @@ public class Validator {
     }
 
     public static boolean validateCommand(String command) {
-        String[] word = command.split(" ");
+        String[] word = command.toLowerCase().split(" ");
         if (word.length > 1) {
             switch (word[0]) {
                 case "new" -> {
@@ -89,64 +89,6 @@ public class Validator {
 
         return false;
     }
-    /*public static boolean validateCommand(String command) {
-        boolean check = false;
-        String[] word = command.toLowerCase().split(" ");
-
-        if (word.length > 1) {
-            switch (word[0]) {
-                case "new":
-                    switch (word[1]) {
-                        case "lead":
-                            check = word.length == 2;
-                            break;
-                    }
-                    break;
-                case "show":
-                    switch (word[1]) {
-                        case "leads", "opportunities":
-                            check = word.length == 2;
-                    }
-                    break;
-                case "lookup":
-                    switch (word[1]) {
-                        case "opportunity":
-
-                            if (word.length == 3) {
-                                check = validateNumber(word[2]);
-                            }
-
-                            break;
-                    }
-                    break;
-                case "convert", "close-won", "close-lost":
-                    if (!validateNumber(word[1])) {
-                        System.out.println("the formart of the number is incorrect");
-                    } else {
-                        check = word.length == 2;
-                    }
-                    break;
-                default:
-                    System.out.println("add a correct input");
-                    break;
-            }
-
-        } else {
-            switch (word[0]) {
-                case "help", "exit":
-                    check = true;
-                    System.out.println("Unkown command");
-                    break;
-                default:
-                    System.out.println("add a correct input");
-                    break;
-            }
-        }
-
-
-        return check;
-    }*/
-
 
     public static boolean validateNumber(String number) {
         if (number.length() < 10) {

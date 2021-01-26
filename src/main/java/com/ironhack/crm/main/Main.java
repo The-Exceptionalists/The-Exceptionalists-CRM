@@ -8,21 +8,22 @@ import com.ironhack.crm.utilities.Output;
 
 public class Main {
     public static void main(String[] args) {
-//        State.restoreState();
-//        CommandManager.setCommandList();
-//        while (true) {
-//            CommandManager.introduceCommand();
-//        }
+        State.restoreState();
+        CommandManager.setCommandList();
+        CommandManager.printCommandList();
+        while (true) {
+            CommandManager.introduceCommand();
+        }
 
-//       CommandManager.printCommandList();
-//        while(true) {
-//            CommandManager.introduceCommand();
-//        }
+       /*CommandManager.printCommandList();
+        while(true) {
+            CommandManager.introduceCommand();
+        }*/
 
 
 
 
-        Buffer.initStringsRepository();
+        /*Buffer.initStringsRepository();
         Buffer.insertStringIntoRepository("AC0000042", 10);
         Buffer.insertStringIntoRepository("Peppino Impastato", 11);
         Buffer.insertStringIntoRepository("peppino@gmail.com", 12);
@@ -39,7 +40,7 @@ public class Main {
 
         Output.printScreen();
 
-        //System.out.println(Validator.validateCommand("lookup opportunity"));
+        //System.out.println(Validator.validateCommand("lookup opportunity"));*/
 
     }
 
