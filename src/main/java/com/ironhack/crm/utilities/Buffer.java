@@ -1,5 +1,7 @@
 package com.ironhack.crm.utilities;
 
+import java.util.Arrays;
+
 public class Buffer {
 
 
@@ -53,38 +55,36 @@ public class Buffer {
 
     };
 
+    private static String singleSpace = " ";
+    private static String appName = singleSpace + "Deja Vu";
+    private static String companyName = singleSpace + "GlobalService Co.";
+    private static String userName = singleSpace + "Ironhacker User";
+    private static String currentLanguage = singleSpace + "En";
+    private static String promptLineOne = "";
+    private static String promptLineTwo = "";
 
-    private static String appName = "";
-    private static String companyName = "";
-    private static String userName = "";
-    private static String currentLanguage = "";
 
-    private static String locationOne = "";
-    private static String locationTwo = "";
-    private static String locationThree = "";
-    private static String locationFour = "";
-    private static String locationFive = "";
-    private static String locationSix = "";
-    private static String locationSeven = "";
-    private static String locationEight = "";
 
-    private static String locationNine = "";
-    private static String locationTen = "";
-    private static String locationEleven = "";
-    private static String locationTwelve = "";
-    private static String locationThirteen = "";
-    private static String locationFourteen = "";
-    private static String locationSixteen = "";
-    private static String locationSeventeen = "";
+    private static String[] stringsRepository;
 
-    private static String locationEighteen = "";
-    private static String locationNineteen = "";
-    private static String locationTwenty = "";
-    private static String locationTwentyOne = "";
-    private static String locationTwentyTwo = "";
-    private static String locationTwentyThree = "";
-    private static String locationTwentyFour = "";
-    private static String locationTwentyFive = "";
+    public static void initStringsRepository(){
+        stringsRepository = new String[40];
+        Arrays.fill(stringsRepository, "");
+    }
+
+    public static void insertStringIntoRepository(String str, int index){
+        if (index > stringsRepository.length -1 || index < 0){
+            throw new IllegalArgumentException();
+        }
+        stringsRepository[index] = str;
+    }
+
+    public static String getStringFromRepository(int index){
+        if (index > stringsRepository.length -1  || index < 0){
+            throw new IllegalArgumentException();
+        }
+        return stringsRepository[index];
+    }
 
 
     public static void printSize() {
@@ -110,6 +110,22 @@ public class Buffer {
                 screenBuffer[21 + i][2 + j] = 'P';
             }
         }
+    }
+
+    public static void insertCentralPromptPoints(int itemIndex){
+        switch(itemIndex){
+            case 1 -> {
+                screenBuffer[22][4] = 'p';
+                screenBuffer[22][5] = '1';
+            }
+            case 2 -> {
+                screenBuffer[24][4] = 'p';
+                screenBuffer[24][5] = '2';
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + itemIndex);
+        }
+
+
     }
 
     public static void insertLogo() {
@@ -167,8 +183,8 @@ public class Buffer {
     }
 
     public static void insertItemListByThree(int startingRow, int itemIndex){
-        char startingLocationA = 0;
-        char startingLocationB = 0;
+        char startingLocationA ;
+        char startingLocationB ;
         switch(itemIndex){
             case 1 -> {
                 startingLocationA = 'a';
@@ -195,27 +211,15 @@ public class Buffer {
         }
     }
 
-    public static void insertItemList(){
-        screenBuffer[6][4] = 'i';
-        screenBuffer[6][5] = '1';
-        screenBuffer[7][4] = 'i';
-        screenBuffer[7][5] = '2';
-        screenBuffer[8][4] = 'i';
-        screenBuffer[8][5] = '3';
-        screenBuffer[9][4] = 'i';
-        screenBuffer[9][5] = '4';
-        screenBuffer[6][24] = 'i';
-        screenBuffer[6][25] = '5';
-        screenBuffer[7][24] = 'i';
-        screenBuffer[7][25] = '6';
-        screenBuffer[8][24] = 'i';
-        screenBuffer[8][25] = '7';
-        screenBuffer[8][24] = 'i';
-        screenBuffer[8][25] = '8';
+    public static void setUpLayout() {
+        insertCentralBox();
+        insertUserName();
+        insertCentralPrompt();
+        insertLogo();
+        insertAppName();
+        insertCompanyName();
+        insertSideBox();
     }
-
-
-
 
     public static String getAppName() {
         return appName;
@@ -249,67 +253,19 @@ public class Buffer {
         Buffer.currentLanguage = currentLanguage;
     }
 
-    public static String getLocationOne() {
-        return locationOne;
+    public static String getPromptLineOne() {
+        return promptLineOne;
     }
 
-    public static void setLocationOne(String locationOne) {
-        Buffer.locationOne = locationOne;
+    public static void setPromptLineOne(String promptLineOne) {
+        Buffer.promptLineOne = promptLineOne;
     }
 
-    public static String getLocationTwo() {
-        return locationTwo;
+    public static String getPromptLineTwo() {
+        return promptLineTwo;
     }
 
-    public static void setLocationTwo(String locationTwo) {
-        Buffer.locationTwo = locationTwo;
-    }
-
-    public static String getLocationThree() {
-        return locationThree;
-    }
-
-    public static void setLocationThree(String locationThree) {
-        Buffer.locationThree = locationThree;
-    }
-
-    public static String getLocationFour() {
-        return locationFour;
-    }
-
-    public static void setLocationFour(String locationFour) {
-        Buffer.locationFour = locationFour;
-    }
-
-    public static String getLocationFive() {
-        return locationFive;
-    }
-
-    public static void setLocationFive(String locationFive) {
-        Buffer.locationFive = locationFive;
-    }
-
-    public static String getLocationSix() {
-        return locationSix;
-    }
-
-    public static void setLocationSix(String locationSix) {
-        Buffer.locationSix = locationSix;
-    }
-
-    public static String getLocationSeven() {
-        return locationSeven;
-    }
-
-    public static void setLocationSeven(String locationSeven) {
-        Buffer.locationSeven = locationSeven;
-    }
-
-    public static String getLocationEight() {
-        return locationEight;
-    }
-
-    public static void setLocationEight(String locationEight) {
-        Buffer.locationEight = locationEight;
+    public static void setPromptLineTwo(String promptLineTwo) {
+        Buffer.promptLineTwo = promptLineTwo;
     }
 }
