@@ -24,7 +24,7 @@ Usage
 
 ## Diagrams
 
-![user-case-diagram]('URL')
+![user-case-diagram]('https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM-UseCase-Diagram.jpg')
 
 ![class-diagram]('URL')
    
