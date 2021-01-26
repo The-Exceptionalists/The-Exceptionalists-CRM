@@ -1,10 +1,18 @@
 package com.ironhack.crm.main;
 
+import com.ironhack.crm.manager.CommandManager;
+import com.ironhack.crm.utilities.*;
+import com.ironhack.crm.enums.*;
 import com.ironhack.crm.utilities.Buffer;
 import com.ironhack.crm.utilities.Output;
 
 public class Main {
     public static void main(String[] args) {
+        //State.restoreState();
+        CommandManager.setCommandList();
+        while (true) {
+            CommandManager.introduceCommand();
+        }
 
 //       CommandManager.printCommandList();
 //        while(true) {
@@ -12,14 +20,6 @@ public class Main {
 //        }
 
 
-//        Buffer.setLocationOne("AC0000042");
-//        Buffer.setLocationTwo("Peppino Impastato");
-//        Buffer.setLocationThree("peppino@gmail.com");
-//        Buffer.setLocationFour("Google");
-//        Buffer.setLocationFive("+346654345");
-//        Buffer.setLocationSix("");
-//        Buffer.setLocationSeven("");
-//        Buffer.setLocationEight("");
 
 
         Buffer.initStringsRepository();

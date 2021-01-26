@@ -5,16 +5,24 @@ import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
 public class Lead {
-
-    private static int counter;
+    //Properties
     private String id;
     private String name;
     private String email;
     private String companyName;
     private String phoneNumber;
 
+    //Constructor for the database
+    public Lead(String id, String name, String email, String companyName, String phoneNumber) {
+        setId(id);
+        setName(name);
+        setEmail(email);
+        setCompanyName(companyName);
+        setPhoneNumber(phoneNumber);
+    }
+
+    //Constructor for a new Lead
     public Lead(String name, String email, String companyName, String phoneNumber) {
-        counter++;
         setId(Storage.getNewId(ItemType.LEAD));
         setName(name);
         setEmail(email);
@@ -22,14 +30,7 @@ public class Lead {
         setPhoneNumber(phoneNumber);
     }
 
-    public static int getCounter() {
-        return counter;
-    }
-
-    public static void setCounter(int counter) {
-        Lead.counter = counter;
-    }
-
+    //Getters and setters
     public String getId() {
         return id;
     }

@@ -4,9 +4,8 @@ import com.ironhack.crm.classes.Account;
 import com.ironhack.crm.classes.Contact;
 import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
-import com.ironhack.crm.enums.Industry;
-import com.ironhack.crm.enums.Product;
-import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.enums.*;
+import com.ironhack.crm.utilities.State;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
@@ -27,7 +26,7 @@ public class CommandManager {
         String command = sc.nextLine();
         command = command.toLowerCase();
 
-      if (Validator.validateCommand(command)) {
+        if (Validator.validateCommand(command)) {
             processCommand(command);
         } else {
             System.out.println("Command not found");
@@ -39,19 +38,19 @@ public class CommandManager {
         switch (words[0]) {
             case "new" -> createObject(words[1]);
             case "show" -> showList(words[1]);
-            case "convert" ->
-                    //TODO: need the next condition "if the lead with id doesn't exist, send a message "this
-                    //TODO: list doesn't exist.
-                    convertLeadToOpportunity(Integer.parseInt(words[1]));
+            case "convert" -> convertLeadToOpportunity(Integer.parseInt(words[1]));
             case "lookup" -> showObject(words[1], Integer.parseInt(words[2]));
-            case "close-won" ->
-                    //TODO: need the next condition "if the lead with id doesn't exist, send a message "this
-                    //TODO: list doesn't exist. also in close-lost
-                    closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
+            case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
             case "help" -> printCommandList();
             case "exit" -> System.exit(0);
         }
+    }
+
+    private static void saveStateAndExit() {
+        new Thread(new State()).run();
+
+        System.exit(0);
     }
 
     private static void createObject(String word) {
@@ -75,8 +74,17 @@ public class CommandManager {
                 List<Opportunity> opportunityList = Storage.getAllOpportunities();
                 printOportunityList(opportunityList);
             }
+            case "contacts" -> {
+                List<Contact> contactList = Storage.getAllContacts();
+                printContactList(contactList);
+            }
+            case "accounts" -> {
+                List<Account> accountList = Storage.getAllAccounts();
+                printAccountList(accountList);
+            }
         }
     }
+
 
     private static void convertLeadToOpportunity(int id) {
         try {
@@ -87,7 +95,7 @@ public class CommandManager {
             Storage.add(contact);
             Storage.add(opportunity);
             Storage.add(account);
-            //Storage method to convert Lead to Null
+            Storage.nullifyLead("le" + id);
         } catch (IllegalArgumentException e) {
             System.out.println("Lead with id " + id + " not found.");
         }
@@ -117,12 +125,10 @@ public class CommandManager {
             System.out.println("Enter a correct number of trucks: ");
             number = sc.nextLine();
         }
-        System.out.println("Oportunity created");
+        System.out.println("Opportunity created");
         System.out.println("\n");
-        System.out.printf("Now we start to create an Account to your opportunity:");
-        System.out.println("\n");
+        System.out.printf("New Account creation:");
         return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
-
     }
 
     private static Account promptAccount(String companyName, Contact contact, Opportunity opportunity) {
@@ -166,6 +172,33 @@ public class CommandManager {
                     System.out.println();
                 } catch (IllegalArgumentException e) {
                     System.out.println("Opportunity with id " + id + " not found.");
+                }
+            }
+            case "lead" -> {
+                try {
+                    Lead lead = Storage.searchLead("le" + id);
+                    System.out.println(lead);
+                    System.out.println();
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Lead with id " + id + " not found.");
+                }
+            }
+            case "contact" -> {
+                try {
+                    Contact contact = Storage.searchContact("co" + id);
+                    System.out.println(contact);
+                    System.out.println();
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Contact with id " + id + " not found.");
+                }
+            }
+            case "account" -> {
+                try {
+                    Account account = Storage.searchAccount("ac" + id);
+                    System.out.println(account);
+                    System.out.println();
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Account with id " + id + " not found.");
                 }
             }
         }
@@ -259,8 +292,24 @@ public class CommandManager {
 
     private static void printOportunityList(List<Opportunity> oportunityList) {
         System.out.println("=======List of Oportunities=======");
-        for (Opportunity oportunity : oportunityList) {
-            System.out.println(oportunity + "\n");
+        for (Opportunity opportunity : oportunityList) {
+            System.out.println(opportunity + "\n");
+        }
+        System.out.println();
+    }
+
+    private static void printContactList(List<Contact> contactList) {
+        System.out.println("=======List of Contacts=======");
+        for (Contact contact : contactList) {
+            System.out.println(contact + "\n");
+        }
+        System.out.println();
+    }
+
+    private static void printAccountList(List<Account> accountList) {
+        System.out.println("=======List of Accounts=======");
+        for (Account account : accountList) {
+            System.out.println(account + "\n");
         }
         System.out.println();
     }
@@ -276,14 +325,14 @@ public class CommandManager {
 
     public static void setCommandList() {
         commandList = new ArrayList<>();
-        commandList.add("New Lead : Add a new Lead");
-        commandList.add("Show Leads : Shows a list of all the Leads");
-        commandList.add("Convert <id> : Converts a Lead into an Opportunity");
-        commandList.add("Show Opportunities: Shows a list of all the leads");
+        commandList.add("New Lead : Add a new Lead.");
+        commandList.add("Show Leads : Shows a list of all the Leads.");
+        commandList.add("Convert <id> : Converts a Lead into an Opportunity.");
+        commandList.add("Show Opportunities: Shows a list of all the leads.");
         commandList.add("Lookup Opportunity <id> : Shows an Opportunity.");
         commandList.add("Close-Won <id> : Closes an Opportunity as won.");
         commandList.add("Close-Lost <id> : Closes an Opportunity as lost.");
-        commandList.add("Help : Show the command list");
+        commandList.add("Help : Show the command list.");
         commandList.add("Exit : Closes the CRM.");
     }
 

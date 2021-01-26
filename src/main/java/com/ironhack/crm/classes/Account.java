@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-
     //Properties
     private String id;
     private String companyName;
@@ -19,8 +18,19 @@ public class Account {
     private List<Contact> contactList = new ArrayList<>();
     private List<Opportunity> opportunityList = new ArrayList<>();
 
-    //Constructor
+    //Constructor for the database
+    public Account(String id, String companyName, Industry industry, int employeeCount, String city, String country, Contact contact, Opportunity opportunity) {
+        setId(id);
+        setCompanyName(companyName);
+        setIndustry(industry);
+        setEmployeeCount(employeeCount);
+        setCity(city);
+        setCountry(country);
+        addContactToList(contact);
+        addOpportunityToList(opportunity);
+    }
 
+    //Constructor for a new Account
     public Account(String companyName, Industry industry, int employeeCount, String city, String country, Contact contact, Opportunity opportunity) {
         setId(Storage.getNewId(ItemType.ACCOUNT));
         setCompanyName(companyName);
@@ -32,6 +42,7 @@ public class Account {
         addOpportunityToList(opportunity);
     }
 
+    //Methods
     private void addOpportunityToList(Opportunity opportunity) {
         opportunityList.add(opportunity);
     }
@@ -40,7 +51,7 @@ public class Account {
         contactList.add(contact);
     }
 
-
+    //Getters and setters
     public String getId() {
         return id;
     }

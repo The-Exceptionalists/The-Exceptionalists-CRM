@@ -1,15 +1,10 @@
 package com.ironhack.crm.utilities;
 
-import com.ironhack.crm.classes.Account;
-import com.ironhack.crm.classes.Contact;
-import com.ironhack.crm.classes.Lead;
-import com.ironhack.crm.classes.Opportunity;
-import com.ironhack.crm.enums.ItemType;
+import com.ironhack.crm.classes.*;
+import com.ironhack.crm.enums.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.locks.*;
 
 
 public class Storage {
@@ -27,7 +22,10 @@ public class Storage {
      * @param item
      */
     public static void add(Account item) {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
         accountHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
     }
 
     /**
@@ -36,7 +34,11 @@ public class Storage {
      * @param item
      */
     public static void add(Contact item) {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
         contactHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
+
     }
 
     /**
@@ -45,7 +47,11 @@ public class Storage {
      * @param item
      */
     public static void add(Opportunity item) {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
         opportunityHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
+
     }
 
     /**
@@ -54,7 +60,19 @@ public class Storage {
      * @param item
      */
     public static void add(Lead item) {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
         leadHashMap.put(item.getId(), item);
+        reentrantLock.writeLock();
+
+    }
+
+    public static void setUpId() {
+        ReadWriteLock reentrantLock = new ReentrantReadWriteLock();
+        reentrantLock.writeLock();
+        id++;
+        reentrantLock.writeLock();
+
     }
 
     /**
@@ -65,7 +83,7 @@ public class Storage {
     public static void update(Account item) {
         if (accountHashMap.containsKey(item.getId()))
             accountHashMap.replace(item.getId(), item);
-        else throw new IllegalArgumentException(item.getId() + "not found");
+        else throw new IllegalArgumentException(item.getId() + " not found");
     }
 
     /**
@@ -147,6 +165,7 @@ public class Storage {
 
     /**
      * Method to nullify a lead stored in the hashmap.
+     *
      * @param id
      */
     public static void nullifyLead(String id) {
@@ -207,11 +226,15 @@ public class Storage {
         switch (itemType) {
             case LEAD -> prefix = "le";
             case ACCOUNT -> prefix = "ac";
-            case CONTACT -> prefix = "ct";
+            case CONTACT -> prefix = "co";
             case OPPORTUNITY -> prefix = "op";
         }
         Storage.id++;
-        return prefix + Storage.id;
+        StringBuilder zeros = new StringBuilder();
+        for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
+            zeros.append("0");
+        }
+        return prefix + zeros + Storage.id;
     }
 
     public static boolean idIsAccount(String id) {
