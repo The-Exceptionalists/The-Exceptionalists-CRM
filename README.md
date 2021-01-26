@@ -16,7 +16,15 @@ The Exceptionalists CRM is a
 
 ## Functionalities
 
-Functionalities
+1. Functionality 1
+
+2. Functionality 2
+
+   Extra-Funtionalities
+   
+1. Extra-Functionality 1
+
+2. Extra-Functionality 2
   
 ## Usage
 
