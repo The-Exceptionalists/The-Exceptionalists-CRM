@@ -39,13 +39,14 @@ public class State implements Runnable {
     private static void readLeads() {
         String path = "src/main/resources/Database/leads.json";
         Reader reader = null;
+        List<Lead> leads = null;
         try {
             reader = Files.newBufferedReader(Paths.get(path));
+            leads = new Gson().fromJson(reader, new TypeToken<List<Lead>>() {
+            }.getType());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("No hay leads en la base de datos");
         }
-        List<Lead> leads = new Gson().fromJson(reader, new TypeToken<List<Lead>>() {
-        }.getType());
 
         if (leads != null) {
             for (Lead lead : leads) {
@@ -76,13 +77,14 @@ public class State implements Runnable {
 
         String path = "src/main/resources/Database/accounts.json";
         Reader reader = null;
+        List<Account> accounts = null;
         try {
             reader = Files.newBufferedReader(Paths.get(path));
+            accounts = new Gson().fromJson(reader, new TypeToken<List<Account>>() {
+            }.getType());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("No hay contactos en la base de datos");
         }
-        List<Account> accounts = new Gson().fromJson(reader, new TypeToken<List<Account>>() {
-        }.getType());
 
         if (accounts != null) {
 
