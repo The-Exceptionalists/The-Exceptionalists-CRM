@@ -41,7 +41,7 @@ public class CommandManager {
             case "new" -> createObject(words[1]);
             case "show" -> showList(words[1]);
             case "convert" -> convertLeadToOpportunity(Integer.parseInt(words[1]));
-            case "lookup" -> showObject(words[1], Integer.parseInt(words[2]));
+            case "lookup" -> showObject(words[1], words[2]);
             case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
             case "help" -> printCommandList();
@@ -169,15 +169,12 @@ public class CommandManager {
         return new Account(companyName, industryEnum, Integer.parseInt(employeeCount), city, country, contact, opportunity);
     }
 
-    public static void showObject(String objectType, int id) {
-        StringBuilder zeros = new StringBuilder();
-        for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
-            zeros.append("0");
-        }
+    public static void showObject(String objectType, String id) {
+
         switch (objectType) {
             case "opportunity" -> {
                 try {
-                    Opportunity opportunity = Storage.searchOpportunity("op" + zeros + id);
+                    Opportunity opportunity = Storage.searchOpportunity(id);
                     System.out.println(opportunity);
                     System.out.println();
                 } catch (IllegalArgumentException | NullPointerException e) {
@@ -186,7 +183,7 @@ public class CommandManager {
             }
             case "lead" -> {
                 try {
-                    Lead lead = Storage.searchLead("le" + zeros + id);
+                    Lead lead = Storage.searchLead(id);
                     System.out.println(lead);
                     System.out.println();
                 } catch (IllegalArgumentException | NullPointerException e) {
@@ -195,7 +192,7 @@ public class CommandManager {
             }
             case "contact" -> {
                 try {
-                    Contact contact = Storage.searchContact("co" + zeros + id);
+                    Contact contact = Storage.searchContact(id);
                     System.out.println(contact);
                     System.out.println();
                 } catch (IllegalArgumentException | NullPointerException e) {
@@ -204,7 +201,7 @@ public class CommandManager {
             }
             case "account" -> {
                 try {
-                    Account account = Storage.searchAccount("ac" + zeros + id);
+                    Account account = Storage.searchAccount(id);
                     System.out.println(account);
                     System.out.println();
                 } catch (IllegalArgumentException | NullPointerException e) {
@@ -214,13 +211,11 @@ public class CommandManager {
         }
     }
 
-    private static void closeOpportunity(int id, Status closedLost) {
+
+    private static void closeOpportunity(String id, Status closedLost) {
         try {
-            StringBuilder zeros = new StringBuilder();
-            for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
-                zeros.append("0");
-            }
-            Opportunity opportunity = Storage.searchOpportunity("op" + zeros + id);
+
+            Opportunity opportunity = Storage.searchOpportunity(id);
             opportunity.setStatus(closedLost);
             Storage.update(opportunity);
         } catch (IllegalArgumentException | NullPointerException e) {
@@ -340,9 +335,12 @@ public class CommandManager {
         commandList = new ArrayList<>();
         commandList.add("New Lead : Add a new Lead.");
         commandList.add("Show Leads : Shows a list of all the Leads.");
+        commandList.add("Lookup Lead <id> : Shows a Lead.");
         commandList.add("Convert <id> : Converts a Lead into an Opportunity.");
-        commandList.add("Show Opportunities: Shows a list of all the leads.");
+        commandList.add("Show Opportunities: Shows a list of all the Opportunities.");
         commandList.add("Lookup Opportunity <id> : Shows an Opportunity.");
+        commandList.add("Show Accounts: Shows a list of all the Accounts.");
+        commandList.add("Lookup Account <id> : Shows an Account.");
         commandList.add("Close-Won <id> : Closes an Opportunity as won.");
         commandList.add("Close-Lost <id> : Closes an Opportunity as lost.");
         commandList.add("Help : Show the command list.");

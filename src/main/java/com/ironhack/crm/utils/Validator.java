@@ -65,7 +65,8 @@ public class Validator {
                     switch (word[1]) {
                         case "opportunity", "contact", "lead", "account" -> {
                             if (word.length == 3) {
-                                return validateNumber(word[2]);
+                                return true;
+                                //return validateNumber(word[2]);
                             }
                             return false;
                         }
