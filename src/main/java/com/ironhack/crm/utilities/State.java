@@ -110,6 +110,7 @@ public class State implements Runnable {
     @Override
     public void run() {
         writeLeads();
+        writeAccounts();
         Thread.currentThread().interrupt();
     }
 }

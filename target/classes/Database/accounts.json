@@ -1,0 +1,34 @@
+[
+  {
+    "id": "ac0000000007",
+    "companyName": "asda",
+    "industry": "PRODUCE",
+    "employeeCount": 10,
+    "city": "Madrid",
+    "country": "Usa",
+    "contactList": [
+      {
+        "id": "co0000000005",
+        "name": "Jose Sje",
+        "email": "jaso@ssdf.com",
+        "companyName": "asda",
+        "phoneNum": "34234"
+      }
+    ],
+    "opportunityList": [
+      {
+        "id": "op0000000006",
+        "product": "HYBRID",
+        "quantity": 10,
+        "decisionMaker": {
+          "id": "co0000000005",
+          "name": "Jose Sje",
+          "email": "jaso@ssdf.com",
+          "companyName": "asda",
+          "phoneNum": "34234"
+        },
+        "status": "OPEN"
+      }
+    ]
+  }
+]
