@@ -1,5 +1,7 @@
 package com.ironhack.crm.utils;
 
+import com.ironhack.crm.utilities.Storage;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,7 +67,7 @@ public class Validator {
                     switch (word[1]) {
                         case "opportunity", "contact", "lead", "account" -> {
                             if (word.length == 3) {
-                                return true;
+                                return validateId(word[1], word[2]);
                                 //return validateNumber(word[2]);
                             }
                             return false;
@@ -74,7 +76,8 @@ public class Validator {
                 }
                 case "convert", "close-won", "close-lost" -> {
                     if (word.length == 2) {
-                        return validateNumber(word[1]);
+                        return validateId("opportunity", word[1]);
+                        //return validateNumber(word[1]);
                     }
                     return false;
                 }
@@ -98,6 +101,38 @@ public class Validator {
             }
         }
         return false;
+    }
+
+    public static boolean validateId(String value, String id) {
+        boolean check = false;
+
+        switch (value){
+            case "lead":
+                if(Storage.searchLead(id).getId().equals(id)){
+                    check = true;
+                }
+                break;
+            case "opportunity":
+                if(Storage.searchOpportunity(id).getId().equals(id)){
+                    check = true;
+                }
+                break;
+            case "contact":
+                if(Storage.searchContact(id).getId().equals(id)){
+                    check = true;
+                }
+                break;
+            case "account":
+                if(Storage.searchAccount(id).getId().equals(id)){
+                    check = true;
+                }
+                break;
+            default:
+                check = false;
+
+        }
+
+        return check;
     }
 
     public static boolean validateIndustry(String industry) {

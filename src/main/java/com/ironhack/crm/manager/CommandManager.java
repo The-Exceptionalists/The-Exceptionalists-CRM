@@ -40,10 +40,10 @@ public class CommandManager {
         switch (words[0]) {
             case "new" -> createObject(words[1]);
             case "show" -> showList(words[1]);
-            case "convert" -> convertLeadToOpportunity(Integer.parseInt(words[1]));
+            case "convert" -> convertLeadToOpportunity(words[1]);
             case "lookup" -> showObject(words[1], words[2]);
-            case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
-            case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
+            case "close-won" -> closeOpportunity(words[1], Status.CLOSED_WON);
+            case "close-lost" -> closeOpportunity(words[1], Status.CLOSED_LOST);
             case "help" -> printCommandList();
             case "exit" -> System.exit(0);
         }
@@ -88,20 +88,17 @@ public class CommandManager {
     }
 
 
-    private static void convertLeadToOpportunity(int id) {
+    private static void convertLeadToOpportunity(String id) {
         try {
-            StringBuilder zeros = new StringBuilder();
-            for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
-                zeros.append("0");
-            }
-            Lead lead = Storage.searchLead("le" + zeros + id);
+
+            Lead lead = Storage.searchLead(id);
             Contact contact = leadToContact(lead);
             Opportunity opportunity = promptOpportunity(contact);
             Account account = promptAccount(contact.getCompanyName(), contact, opportunity);
             Storage.add(contact);
             Storage.add(opportunity);
             Storage.add(account);
-            Storage.removeLead("le" + zeros + id);
+            Storage.removeLead(id);
         } catch (IllegalArgumentException | NullPointerException e) {
             System.out.println("Lead with id " + id + " not found.");
         }
