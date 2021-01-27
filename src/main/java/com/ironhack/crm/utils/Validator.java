@@ -108,13 +108,17 @@ public class Validator {
 
         switch (value){
             case "lead":
-                if(Storage.searchLead(id).getId().equals(id)){
-                    check = true;
+                if(validate(id, "[l,e][0,9]+")){
+                    if(Storage.searchLead(id).getId().equals(id)){
+                        check = true;
+                    }
                 }
                 break;
             case "opportunity":
-                if(Storage.searchOpportunity(id).getId().equals(id)){
-                    check = true;
+                if(validate(id, "[o,p][0,9]+")){
+                    if(Storage.searchOpportunity(id).getId().equals(id)){
+                        check = true;
+                    }
                 }
                 break;
             case "contact":
