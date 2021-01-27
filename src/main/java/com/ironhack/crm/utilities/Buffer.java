@@ -55,13 +55,17 @@ public class Buffer {
 
     };
 
+
+
     private static String singleSpace = " ";
-    private static String appName = singleSpace + "Deja Vu";
+    private static String appName = singleSpace + "DÉJÀ VU: your console CRM ";
     private static String companyName = singleSpace + "GlobalService Co.";
-    private static String userName = singleSpace + "Ironhacker User";
+    private static String userName = singleSpace + "IronHacker";
     private static String currentLanguage = singleSpace + "En";
     private static String promptLineOne = "";
     private static String promptLineTwo = "";
+    private static String resultItem = "Result ";
+    private static String appVersion = "ver: 1.0";
 
 
 
@@ -95,7 +99,7 @@ public class Buffer {
 
     public static void insertCentralBox() {
         //h6 18 w 2 42
-        for (int i = 0; i < 14; i++){
+        for (int i = 0; i < 17; i++){
             for (int j = 0; j < 42; j++){
                 screenBuffer[6 + i][2 + j] = 'B';
             }
@@ -107,7 +111,7 @@ public class Buffer {
         //h21 25 w 2 42
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 42; j++){
-                screenBuffer[21 + i][2 + j] = 'P';
+                screenBuffer[24 + i][2 + j] = 'P';
             }
         }
     }
@@ -115,27 +119,49 @@ public class Buffer {
     public static void insertCentralPromptPoints(int itemIndex){
         switch(itemIndex){
             case 1 -> {
-                screenBuffer[22][4] = 'p';
-                screenBuffer[22][5] = '1';
+                screenBuffer[25][4] = 'p';
+                screenBuffer[25][5] = '1';
             }
             case 2 -> {
-                screenBuffer[24][4] = 'p';
-                screenBuffer[24][5] = '2';
+                screenBuffer[27][4] = 'p';
+                screenBuffer[27][5] = '2';
             }
             default -> throw new IllegalStateException("Unexpected value: " + itemIndex);
         }
+    }
 
-
+    public static void insertVersionIndicator(){
+        screenBuffer[27][53] = 'v';
     }
 
     public static void insertLogo() {
         //h 0 3 w 2 6
-        for (int i = 0; i < 4; i++){
-            screenBuffer[1 + i][2] = 'L';
-            screenBuffer[1 + i][3] = 'L';
-            screenBuffer[1 + i][4] = 'L';
-            screenBuffer[1 + i][5] = 'L';
-        }
+
+//        screenBuffer[0][2] = ' ';
+//        screenBuffer[0][3] = ' ';
+//        screenBuffer[0][4] = 'm';
+//        screenBuffer[0][5] = 'm';
+//        screenBuffer[0][6] = 'm';
+        screenBuffer[1][2] = ' ';
+        screenBuffer[1][3] = ' ';
+        screenBuffer[1][4] = 'm';
+        screenBuffer[1][5] = 'm';
+        screenBuffer[1][6] = 'm';
+        screenBuffer[2][2] = 'n';
+        screenBuffer[2][3] = 'n';
+        screenBuffer[2][4] = 'n';
+        screenBuffer[2][5] = 'm';
+        screenBuffer[2][6] = 'm';
+        screenBuffer[3][2] = 'n';
+        screenBuffer[3][3] = 'n';
+        screenBuffer[3][4] = 'n';
+        screenBuffer[3][5] = 'm';
+        screenBuffer[3][6] = 'm';
+        screenBuffer[4][2] = 'n';
+        screenBuffer[4][3] = 'n';
+        screenBuffer[4][4] = 'n';
+        screenBuffer[4][5] = ' ';
+        screenBuffer[4][6] = ' ';
     }
 
     public static void insertAppName() {
@@ -165,11 +191,51 @@ public class Buffer {
         }
     }
 
+    public static void insertOptionsAnchors(int itemIndex){
+        switch(itemIndex){
+            case 1 -> {
+                screenBuffer[5][48] = 's';
+                screenBuffer[5][49] = 'a';
+            }
+            case 2 -> {
+                screenBuffer[7][48] = 's';
+                screenBuffer[7][49] = 'b';
+            }
+            case 3 -> {
+                screenBuffer[9][48] = 's';
+                screenBuffer[9][49] = 'c';
+            }
+            case 4 -> {
+                screenBuffer[11][48] = 's';
+                screenBuffer[11][49] = 'd';
+            }
+            case 5 -> {
+                screenBuffer[13][48] = 's';
+                screenBuffer[13][49] = 'e';
+            }
+            case 6 -> {
+                screenBuffer[15][48] = 's';
+                screenBuffer[15][49] = 'f';
+            }
+            case 7 -> {
+                screenBuffer[17][48] = 's';
+                screenBuffer[17][49] = 'g';
+            }
+            case 8 -> {
+                screenBuffer[19][48] = 's';
+                screenBuffer[19][49] = 'h';
+            }
+        }
+    }
+
 
     public static void insertItemSolo (){
-        int startingRow = 12;
+        int startingRow = 13;
         char startingLocationA = 'a';
         char startingLocationB = 'e';
+
+        screenBuffer[startingRow - 1][4] = 'i';
+        screenBuffer[startingRow - 1][5] = '1';
 
         for (int i = 0; i < 4; i++){
             screenBuffer[startingRow + i][4 ] = 'i';
@@ -185,21 +251,29 @@ public class Buffer {
     public static void insertItemListByThree(int startingRow, int itemIndex){
         char startingLocationA ;
         char startingLocationB ;
+        char resultIndex;
         switch(itemIndex){
             case 1 -> {
                 startingLocationA = 'a';
                 startingLocationB = 'e';
+                resultIndex = '1';
             }
             case 2 -> {
                 startingLocationA = 'i';
                 startingLocationB = 'm';
+                resultIndex = '2';
             }
             case 3 -> {
                 startingLocationA = 'q';
                 startingLocationB = 'u';
+                resultIndex = '3';
             }
             default -> throw new IllegalStateException("Unexpected value: " + itemIndex);
         }
+
+        screenBuffer[startingRow - 1][4] = 'i';
+        screenBuffer[startingRow - 1][5] = resultIndex;
+
         for (int i = 0; i < 4; i++){
             screenBuffer[startingRow + i][4 ] = 'i';
             screenBuffer[startingRow + i][5 ] = (char) (startingLocationA + i);
@@ -219,6 +293,7 @@ public class Buffer {
         insertAppName();
         insertCompanyName();
         insertSideBox();
+        insertVersionIndicator();
     }
 
     public static String getAppName() {
@@ -267,5 +342,21 @@ public class Buffer {
 
     public static void setPromptLineTwo(String promptLineTwo) {
         Buffer.promptLineTwo = promptLineTwo;
+    }
+
+    public static String getResultItem() {
+        return resultItem;
+    }
+
+    public static void setResultItem(String resultItem) {
+        Buffer.resultItem = resultItem;
+    }
+
+    public static String getAppVersion() {
+        return appVersion;
+    }
+
+    public static void setAppVersion(String appVersion) {
+        Buffer.appVersion = appVersion;
     }
 }

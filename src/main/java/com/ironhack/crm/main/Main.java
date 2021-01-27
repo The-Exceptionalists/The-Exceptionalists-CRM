@@ -23,13 +23,17 @@ public class Main {
 
 
         Buffer.initStringsRepository();
-        Buffer.insertStringIntoRepository("AC0000042", 10);
-        Buffer.insertStringIntoRepository("Peppino Impastato", 11);
-        Buffer.insertStringIntoRepository("peppino@gmail.com", 12);
-        Buffer.insertStringIntoRepository("Google", 13);
-        Buffer.insertStringIntoRepository("+346654345", 14);
+        Buffer.insertStringIntoRepository(Buffer.getResultItem() + "1", 7);
+        Buffer.insertStringIntoRepository("* AC0000042", 10);
+        Buffer.insertStringIntoRepository("* Peppino Impastato", 11);
+        Buffer.insertStringIntoRepository("* peppino@gmail.com", 12);
+        Buffer.insertStringIntoRepository("* Google", 13);
+        Buffer.insertStringIntoRepository("* +34665423345", 14);
 
         Buffer.setUpLayout();
+
+        Buffer.insertOptionsAnchors(1);
+        Buffer.insertStringIntoRepository("Save", 20);
 
         Buffer.insertItemSolo();
         Buffer.setPromptLineOne("Ti piace la pasta?");
