@@ -45,11 +45,11 @@ public class CommandManager {
             case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
             case "help" -> printCommandList();
-            case "exit" -> saveStateAndExit();
+            case "exit" -> saveChangesAndExit();
         }
     }
 
-    private static void saveStateAndExit() {
+    private static void saveChangesAndExit() {
         new Thread(new State()).run();
 
         System.exit(0);

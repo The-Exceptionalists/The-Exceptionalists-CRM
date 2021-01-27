@@ -47,10 +47,11 @@ public class State implements Runnable {
         List<Lead> leads = new Gson().fromJson(reader, new TypeToken<List<Lead>>() {
         }.getType());
 
-
-        for (Lead lead : leads) {
-            Storage.add(lead);
-            Storage.setUpId();
+        if (leads != null) {
+            for (Lead lead : leads) {
+                Storage.add(lead);
+                Storage.setUpId();
+            }
         }
     }
 
