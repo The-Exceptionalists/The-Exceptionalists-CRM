@@ -4,7 +4,9 @@ import com.ironhack.crm.classes.Account;
 import com.ironhack.crm.classes.Contact;
 import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
-import com.ironhack.crm.enums.*;
+import com.ironhack.crm.enums.Industry;
+import com.ironhack.crm.enums.Product;
+import com.ironhack.crm.enums.Status;
 import com.ironhack.crm.utilities.State;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
@@ -99,7 +101,7 @@ public class CommandManager {
             Storage.add(contact);
             Storage.add(opportunity);
             Storage.add(account);
-            Storage.nullifyLead("le" + zeros + id);
+            Storage.removeLead("le" + zeros + id);
         } catch (IllegalArgumentException | NullPointerException e) {
             System.out.println("Lead with id " + id + " not found.");
         }
