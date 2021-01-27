@@ -45,7 +45,7 @@ public class CommandManager {
             case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
             case "help" -> printCommandList();
-            case "exit" -> System.exit(0);
+            case "exit" -> saveStateAndExit();
         }
     }
 
