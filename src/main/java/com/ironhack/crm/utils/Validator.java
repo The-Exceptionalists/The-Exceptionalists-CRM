@@ -74,7 +74,15 @@ public class Validator {
                         }
                     }
                 }
-                case "convert", "close-won", "close-lost" -> {
+                case "convert" ->{
+                    if(word.length == 2){
+                        return validateId("lead", word[1]);
+                    }
+
+                    return false;
+                }
+
+                case "close-won", "close-lost" -> {
                     if (word.length == 2) {
                         return validateId("opportunity", word[1]);
                         //return validateNumber(word[1]);
@@ -108,14 +116,14 @@ public class Validator {
 
         switch (value){
             case "lead":
-                if(validate(id, "[l,e][0,9]+")){
+                if(validate(id, "(le)[0-9]+")){
                     if(Storage.searchLead(id).getId().equals(id)){
                         check = true;
                     }
                 }
                 break;
             case "opportunity":
-                if(validate(id, "[o,p][0,9]+")){
+                if(validate(id, "(op)[0-9]+")){
                     if(Storage.searchOpportunity(id).getId().equals(id)){
                         check = true;
                     }
