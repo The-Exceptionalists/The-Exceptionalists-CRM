@@ -137,7 +137,9 @@ public class Storage {
      * @return
      */
     public static Account searchAccount(String id) {
-        return accountHashMap.get(id);
+        if (accountHashMap.containsKey(id))
+            return accountHashMap.get(id);
+        else throw new IllegalArgumentException(id + "not found");
     }
 
     /**
@@ -147,7 +149,10 @@ public class Storage {
      * @return
      */
     public static Contact searchContact(String id) {
-        return contactHashMap.get(id);
+        if (contactHashMap.containsKey(id))
+            return contactHashMap.get(id);
+        else throw new IllegalArgumentException(id + "not found");
+
     }
 
     /**
@@ -157,7 +162,10 @@ public class Storage {
      * @return
      */
     public static Opportunity searchOpportunity(String id) {
-        return opportunityHashMap.get(id);
+        if (opportunityHashMap.containsKey(id))
+            return opportunityHashMap.get(id);
+        else throw new IllegalArgumentException(id + "not found");
+
     }
 
     /**
@@ -167,7 +175,10 @@ public class Storage {
      * @return
      */
     public static Lead searchLead(String id) {
-        return leadHashMap.get(id);
+        if (leadHashMap.containsKey(id))
+            return leadHashMap.get(id);
+        else throw new IllegalArgumentException(id + "not found");
+
     }
 
     /**

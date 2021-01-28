@@ -8,19 +8,25 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
+
+//We implement runnable so we can run the class on a specific Thread to save the database before closing the app
+
 public class State implements Runnable {
 
+    //Method called at application close to save all changes in your database. Your database is stored in JSON format stored in the resources folder
     public static void saveState() {
         writeLeads();
         writeAccounts();
     }
 
+    // This method is called at application launch to restore de JSON database, so you can keep your data
     public static void restoreState() {
         readLeads();
         readAccounts();
 
     }
 
+    //THis method gets all the leads of your current session and stores them using the Gson library
     private static void writeLeads() {
         List<Lead> leads = Storage.getAllLeads();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -36,16 +42,18 @@ public class State implements Runnable {
 
     }
 
+    //This method gets all the leads of your previous sessions
     private static void readLeads() {
         String path = "src/main/resources/Database/leads.json";
         Reader reader = null;
+        List<Lead> leads = null;
         try {
             reader = Files.newBufferedReader(Paths.get(path));
+            leads = new Gson().fromJson(reader, new TypeToken<List<Lead>>() {
+            }.getType());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("No hay leads en la base de datos");
         }
-        List<Lead> leads = new Gson().fromJson(reader, new TypeToken<List<Lead>>() {
-        }.getType());
 
         if (leads != null) {
             for (Lead lead : leads) {
@@ -55,6 +63,7 @@ public class State implements Runnable {
         }
     }
 
+    //Writing accounts to json also saves the opportunities and contacts
     private static void writeAccounts() {
         List<Account> accounts = Storage.getAllAccounts();
         Gson gson;
@@ -70,19 +79,21 @@ public class State implements Runnable {
         }
 
     }
+    //Restores accounts and puts all their opportunities and contacts in the runtime
 
     private static void readAccounts() {
 
 
         String path = "src/main/resources/Database/accounts.json";
         Reader reader = null;
+        List<Account> accounts = null;
         try {
             reader = Files.newBufferedReader(Paths.get(path));
+            accounts = new Gson().fromJson(reader, new TypeToken<List<Account>>() {
+            }.getType());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("No hay contactos en la base de datos");
         }
-        List<Account> accounts = new Gson().fromJson(reader, new TypeToken<List<Account>>() {
-        }.getType());
 
         if (accounts != null) {
 
@@ -107,6 +118,7 @@ public class State implements Runnable {
 
     }
 
+//Method overriden from Runnable to be able to launch it as new Thread
 
     @Override
     public void run() {

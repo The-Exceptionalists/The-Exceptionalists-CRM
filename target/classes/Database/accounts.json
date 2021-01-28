@@ -1,63 +1,31 @@
 [
   {
-    "id": "ac00010",
-    "companyName": "LOL",
+    "id": "ac0000000004",
+    "companyName": "Loloe",
     "industry": "PRODUCE",
-    "employeeCount": 3,
-    "city": "Csad",
-    "country": "Casd",
+    "employeeCount": 321,
+    "city": "Kolo",
+    "country": "Kilo",
     "contactList": [
       {
-        "id": "co0008",
-        "name": "Vicente Mendieta",
-        "email": "vece@cas.com",
-        "companyName": "LOL",
-        "phoneNum": "23423423423"
+        "id": "co0000000002",
+        "name": "Kolo loe",
+        "email": "kole@loe.com",
+        "companyName": "Loloe",
+        "phoneNum": "+233241313"
       }
     ],
     "opportunityList": [
       {
-        "id": "op0009",
+        "id": "op0000000003",
         "product": "HYBRID",
-        "quantity": 4,
+        "quantity": 123,
         "decisionMaker": {
-          "id": "co0008",
-          "name": "Vicente Mendieta",
-          "email": "vece@cas.com",
-          "companyName": "LOL",
-          "phoneNum": "23423423423"
-        },
-        "status": "CLOSED_WON"
-      }
-    ]
-  },
-  {
-    "id": "ac0007",
-    "companyName": "asda",
-    "industry": "PRODUCE",
-    "employeeCount": 10,
-    "city": "Madrid",
-    "country": "Usa",
-    "contactList": [
-      {
-        "id": "co0005",
-        "name": "Jose Sje",
-        "email": "jaso@ssdf.com",
-        "companyName": "asda",
-        "phoneNum": "34234"
-      }
-    ],
-    "opportunityList": [
-      {
-        "id": "op0006",
-        "product": "HYBRID",
-        "quantity": 10,
-        "decisionMaker": {
-          "id": "co0005",
-          "name": "Jose Sje",
-          "email": "jaso@ssdf.com",
-          "companyName": "asda",
-          "phoneNum": "34234"
+          "id": "co0000000002",
+          "name": "Kolo loe",
+          "email": "kole@loe.com",
+          "companyName": "Loloe",
+          "phoneNum": "+233241313"
         },
         "status": "OPEN"
       }

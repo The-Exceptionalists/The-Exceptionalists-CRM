@@ -7,11 +7,12 @@ import com.ironhack.crm.classes.Opportunity;
 import com.ironhack.crm.enums.Industry;
 import com.ironhack.crm.enums.Product;
 import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.utilities.Buffer;
+import com.ironhack.crm.utilities.Output;
 import com.ironhack.crm.utilities.State;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,8 +23,14 @@ public class CommandManager {
         return commandList;
     }
 
+    //Method that asks for a command and validates it
     public static void introduceCommand() {
-        System.out.println("Introduce a command from the list:");
+        CommandManager.setCommandList();
+        Buffer.setUpLayout();
+        Buffer.setPromptLineTwo("Introduce a command from the list:");
+        Buffer.insertCentralPromptPoints(2);
+        Buffer.insertCentralPromptPoints(1);
+        Output.printScreen();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         command = command.toLowerCase();
@@ -31,20 +38,21 @@ public class CommandManager {
         if (Validator.validateCommand(command)) {
             processCommand(command);
         } else {
-            System.out.println("Command not found");
+            Buffer.setPromptLineOne("Command not found");
         }
     }
 
+    //Method that handles all commands and calls the required method
     public static void processCommand(String command) {
         String[] words = command.toLowerCase().split(" ");
         switch (words[0]) {
             case "new" -> createObject(words[1]);
             case "show" -> showList(words[1]);
-            case "convert" -> convertLeadToOpportunity(words[1]);
-            case "lookup" -> showObject(words[1], words[2]);
-            case "close-won" -> closeOpportunity(words[1], Status.CLOSED_WON);
-            case "close-lost" -> closeOpportunity(words[1], Status.CLOSED_LOST);
-            case "help" -> printCommandList();
+            case "convert" -> convertLeadToOpportunity(Integer.parseInt(words[1]));
+            case "lookup" -> showObject(words[1], Integer.parseInt(words[2]));
+            case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
+            case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
+//            case "help" -> printCommandList();
             case "exit" -> saveChangesAndExit();
         }
     }
@@ -55,55 +63,69 @@ public class CommandManager {
         System.exit(0);
     }
 
+    //Method that handles the object creation
     private static void createObject(String word) {
-        //Switch used for future functionalities of createObject
-        switch (word) {
-            case "lead" -> {
-                Lead lead = promptLead();
-                Storage.add(lead);
-                System.out.println("New lead successfully added!");
-            }
+        if ("lead".equals(word)) {
+            Lead lead = promptLead();
+            Storage.add(lead);
+            System.out.println("New lead successfully added!");
         }
     }
 
+    //Method that handles the show command
     public static void showList(String objectType) {
         switch (objectType) {
             case "leads" -> {
                 List<Lead> leadList = Storage.getAllLeads();
-                printLeadList(leadList);
+                printLeadList(leadList, 0);
             }
             case "opportunities" -> {
                 List<Opportunity> opportunityList = Storage.getAllOpportunities();
-                printOportunityList(opportunityList);
+                printOpportunityList(opportunityList, 0);
             }
             case "contacts" -> {
                 List<Contact> contactList = Storage.getAllContacts();
-                printContactList(contactList);
+                printContactList(contactList, 0);
             }
             case "accounts" -> {
                 List<Account> accountList = Storage.getAllAccounts();
-                printAccountList(accountList);
+                printAccountList(accountList, 0);
             }
         }
     }
 
-
-    private static void convertLeadToOpportunity(String id) {
+    //Method that handles the lead to opportunity conversion
+    private static void convertLeadToOpportunity(int id) {
         try {
-
-            Lead lead = Storage.searchLead(id);
+            //Searches a lead, changing the parameter id to the format used in Storage
+            StringBuilder zeros = new StringBuilder();
+            zeros.append("0".repeat(Math.max(0, 10 - String.valueOf(id).length())));
+            Lead lead = Storage.searchLead("le" + zeros + id);
             Contact contact = leadToContact(lead);
             Opportunity opportunity = promptOpportunity(contact);
             Account account = promptAccount(contact.getCompanyName(), contact, opportunity);
+            //Adds all objects to the storage class
             Storage.add(contact);
             Storage.add(opportunity);
             Storage.add(account);
-            Storage.removeLead(id);
+            //Remove the lead
+            Storage.removeLead("le" + zeros + id);
+            //Return an error message if the id is not found
         } catch (IllegalArgumentException | NullPointerException e) {
-            System.out.println("Lead with id " + id + " not found.");
+            Buffer.setUpLayout();
+            Buffer.setPromptLineOne("Lead with id " + id + " not found.");
+            Buffer.insertCentralPromptPoints(2);
+            Buffer.insertCentralPromptPoints(1);
+            Output.printScreen();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
         }
     }
 
+    //Creates a Contact object from a Lead object
     private static Contact leadToContact(Lead lead) {
         String name = lead.getName();
         String email = lead.getEmail();
@@ -112,114 +134,218 @@ public class CommandManager {
         return new Contact(name, email, companyName, phoneNumber);
     }
 
+    //Prompts all required parameters for the opportunity creation
     private static Opportunity promptOpportunity(Contact contact) {
         //Output for prompt Opportunity
+        Buffer.resetPromptMessages();
+        Buffer.initStringsRepository();
+        Buffer.insertStringIntoRepository("New Opportunity creation", 7);
         Scanner sc = new Scanner(System.in);
-        System.out.println("Type of truck (Hybrid, Flatbed or Box): ");
+        String text = "Type of truck (Hybrid, Flatbed or Box):";
+        printItemPrompt(text);
         String product = sc.nextLine().toLowerCase();
+        //Keeps asking for the correct value
         while (!Validator.validateProduct(product)) {
-            System.out.println("Enter a correct product (Hybrid, Flatbed or Box): ");
+            Buffer.setPromptLineOne("Enter a correct product (Hybrid, Flatbed or Box): ");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             product = sc.nextLine().toLowerCase();
         }
+        Buffer.insertStringIntoRepository("Product type: " + product, 10);
         Product productEnum = findProductEnum(product);
-        System.out.println("Number of trucks: ");
+        text = "Number of trucks: ";
+        printItemPrompt(text);
         String number = sc.nextLine();
+        //Keeps asking for the correct value
         while (!Validator.validateNumber(number)) {
-            System.out.println("Enter a correct number of trucks: ");
+            Buffer.setPromptLineOne("Enter a correct number of trucks: ");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             number = sc.nextLine();
         }
-        System.out.println("Opportunity created");
-        System.out.println("\n");
-        System.out.printf("New Account creation:");
+        Buffer.insertStringIntoRepository("Number of trucks: " + number, 11);
+        printItemPrompt("Opportunity created! - press INTRO");
+        String retScanner = sc.nextLine();
         return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
     }
 
+    //Prompts all required parameters for the account creation
     private static Account promptAccount(String companyName, Contact contact, Opportunity opportunity) {
         //Output for prompt Account
+        Buffer.resetPromptMessages();
+        Buffer.initStringsRepository();
+        Buffer.insertStringIntoRepository("New Account creation", 7);
         Scanner sc = new Scanner(System.in);
-        System.out.println("Choose an Industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
+        String text = "Industries: Produce, Ecommerce, Manufacturing, Medical, Other";
+        printItemPrompt(text);
         String industry = sc.nextLine().toLowerCase();
+        //Keeps asking for the correct value
         while (!Validator.validateIndustry(industry)) {
-            System.out.println("Enter a correct industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
+            Buffer.setPromptLineOne("Enter a correct value:");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             industry = sc.nextLine().toLowerCase();
         }
+        Buffer.insertStringIntoRepository("Industry: " + industry, 10);
         Industry industryEnum = findIndustryEnum(industry);
-        System.out.println("Employee count: ");
+        text = "Insert employee count: ";
+        printItemPrompt(text);
         String employeeCount = sc.nextLine();
+        //Keeps asking for the correct value
         while (!Validator.validateNumber(employeeCount)) {
-            System.out.println("Enter a correct number of employees: ");
+            Buffer.setPromptLineOne("Enter a correct number of employees:");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             employeeCount = sc.nextLine();
         }
-        System.out.println("City: ");
+        Buffer.insertStringIntoRepository("Number of employees: " + employeeCount, 11);
+        text = "Insert city name:";
+        printItemPrompt(text);
         String city = sc.nextLine();
+        //Keeps asking for the correct value
         while (!Validator.validateName(city)) {
-            System.out.println("Enter a correct value: ");
+            Buffer.setPromptLineOne("Enter a correct value:");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             city = sc.nextLine();
         }
-        System.out.println("Country: ");
+        Buffer.insertStringIntoRepository("City name: " + city, 12);
+        text = "Insert country: ";
+        printItemPrompt(text);
         String country = sc.nextLine();
+        //Keeps asking for the correct value
         while (!Validator.validateName(country)) {
-            System.out.println("Enter a correct value: ");
+            Buffer.setPromptLineOne("Enter a correct value:");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             country = sc.nextLine();
         }
-        System.out.println("Account added");
+        Buffer.insertStringIntoRepository("Country: " + country, 13);
+        printItemPrompt("New Account created - press INTRO");
+        String retNext = sc.nextLine();
         return new Account(companyName, industryEnum, Integer.parseInt(employeeCount), city, country, contact, opportunity);
     }
 
-    public static void showObject(String objectType, String id) {
-
+    //Method that handles the lookup command
+    public static void showObject(String objectType, int id) {
+        //Searches an object, changing the parameter id to the format used in Storage
+        Buffer.resetPromptMessages();
+        Buffer.initStringsRepository();
+        Buffer.setUpLayout();
+        StringBuilder zeros = new StringBuilder();
+        zeros.append("0".repeat(Math.max(0, 10 - String.valueOf(id).length())));
         switch (objectType) {
             case "opportunity" -> {
                 try {
-                    Opportunity opportunity = Storage.searchOpportunity(id);
-                    System.out.println(opportunity);
-                    System.out.println();
+                    Opportunity opportunity = Storage.searchOpportunity("op" + zeros + id);
+                    Buffer.insertOpportunityStringRepository(opportunity, 1, 1);
+                    Buffer.insertItemSolo();
+                    Buffer.setPromptLineTwo("Lookup Opportunity - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
+                    Output.printScreen();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    System.out.println("Opportunity with id " + id + " not found.");
+                    Buffer.setPromptLineTwo("Lookup Opportunity - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
+                    normalOneLinePrint("Opportunity with id " + id + " not found.");
+                    Buffer.resetPromptMessages();
                 }
             }
             case "lead" -> {
                 try {
-                    Lead lead = Storage.searchLead(id);
-                    System.out.println(lead);
-                    System.out.println();
+                    Lead lead = Storage.searchLead("le" + zeros + id);
+                    Buffer.insertLeadStringRepository(lead, 1, 1);
+                    Buffer.insertItemSolo();
+                    Buffer.setPromptLineTwo("Lookup Lead - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
+                    Output.printScreen();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    System.out.println("Lead with id " + id + " not found.");
+                    Buffer.setPromptLineTwo("Lookup Lead - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
+                    normalOneLinePrint("Lead with id " + id + " not found.");
+                    Buffer.resetPromptMessages();
                 }
             }
             case "contact" -> {
                 try {
-                    Contact contact = Storage.searchContact(id);
-                    System.out.println(contact);
-                    System.out.println();
+                    Contact contact = Storage.searchContact("co" + zeros + id);
+                    Buffer.insertContactStringRepository(contact, 1, 1);
+                    Buffer.insertItemSolo();
+                    Buffer.setPromptLineTwo("Lookup Contact - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
+                    Output.printScreen();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    System.out.println("Contact with id " + id + " not found.");
+                    Buffer.setPromptLineTwo("Lookup Contact - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
+                    normalOneLinePrint("Contact with id " + id + " not found.");
+                    Buffer.resetPromptMessages();
                 }
             }
             case "account" -> {
                 try {
-                    Account account = Storage.searchAccount(id);
-                    System.out.println(account);
-                    System.out.println();
+                    Account account = Storage.searchAccount("ac" + zeros + id);
+                    Buffer.insertAccountStringRepository(account, 1, 1);
+                    Buffer.insertItemSolo();
+                    Buffer.setPromptLineTwo("Lookup Account - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
+                    Output.printScreen();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    System.out.println("Account with id " + id + " not found.");
+                    Buffer.setPromptLineTwo("Lookup Account - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
+                    normalOneLinePrint("Account with id " + id + " not found.");
+                    Buffer.resetPromptMessages();
                 }
             }
         }
     }
 
-
-    private static void closeOpportunity(String id, Status closedLost) {
+    //Closes an opportunity given an id and the status
+    private static void closeOpportunity(int id, Status close) {
+        Buffer.resetPromptMessages();
+        Buffer.initStringsRepository();
+        Buffer.setUpLayout();
+        String text;
         try {
-
-            Opportunity opportunity = Storage.searchOpportunity(id);
-            opportunity.setStatus(closedLost);
-            Storage.update(opportunity);
+            //Searches an opportunity, changing the parameter id to the format used in Storage
+            Opportunity opportunity = Storage.searchOpportunity("op" + "0".repeat(Math.max(0, 10 - String.valueOf(id).length())) + id);
+            //Compares the current value of status and it changes only if it's open
+            if (opportunity.getStatus() == Status.OPEN) {
+                opportunity.setStatus(close);
+                Storage.update(opportunity);
+                text = "Opportunity closed!";
+                normalOneLinePrint(text);
+            } else if (opportunity.getStatus() == Status.CLOSED_LOST) {
+                text = "Opportunity already closed as lost.";
+                normalOneLinePrint(text);
+            } else if (opportunity.getStatus() == Status.CLOSED_WON) {
+                text = "Opportunity already closed as won.";
+                normalOneLinePrint(text);
+            }
+            //Return an error message if the id is not found
         } catch (IllegalArgumentException | NullPointerException e) {
-            System.out.println("Opportunity with id " + id + " not found.");
+            text = "Opportunity with id " + id + " not found.";
+            normalOneLinePrint(text);
+
         }
     }
 
+    private static void normalOneLinePrint(String text) {
+        Buffer.setPromptLineOne(text);
+        Buffer.insertCentralPromptPoints(1);
+        Output.printScreen();
+        Buffer.resetPromptOne();
+        Scanner sc = new Scanner(System.in);
+        String next = sc.nextLine();
+    }
+
+    //Returns an enum depending on the String parameter
     private static Industry findIndustryEnum(String industry) {
         switch (industry) {
             case "produce" -> {
@@ -241,6 +367,7 @@ public class CommandManager {
         return null;
     }
 
+    //Returns an enum depending on the String parameter
     private static Product findProductEnum(String product) {
         switch (product) {
             case "hybrid" -> {
@@ -256,92 +383,219 @@ public class CommandManager {
         return null;
     }
 
+    //Prompts all required parameters for the lead creation
     private static Lead promptLead() {
-        //Output for prompt Lead
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.insertStringIntoRepository("New Lead creation", 7);
+        String text = "Insert Lead name:";
         Scanner sc = new Scanner(System.in);
-        System.out.println("Name: ");
+        printItemPrompt(text);
         String name = sc.nextLine();
         while (!Validator.validateName(name)) {
-            System.out.println("Enter a correct name"); //Be more specific with the format
+            Buffer.setPromptLineOne("Enter a correct name");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             name = sc.nextLine();
         }
-        System.out.println("Email: ");
+        Buffer.insertStringIntoRepository("Name: " + name, 11);
+        text = "Insert Lead email: ";
+        printItemPrompt(text);
         String email = sc.nextLine();
         while (!Validator.validateEmail(email)) {
-            System.out.println("Enter a correct email"); //Be more specific with the format
+            Buffer.setPromptLineOne("Enter a correct email"); //Be more specific with the format
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             email = sc.nextLine();
         }
-        System.out.println("Company name: ");
+        Buffer.insertStringIntoRepository("Email: " + email, 12);
+        text = "Company name: ";
+        printItemPrompt(text);
         String companyName = sc.nextLine();
         while (!Validator.validateCompanyName(companyName)) {
-            System.out.println("Enter a correct company name"); //Be more specific with the format
+            Buffer.setPromptLineOne("Enter a correct company name"); //Be more specific with the format
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             companyName = sc.nextLine();
         }
-        System.out.println("Phone number: ");
+        Buffer.insertStringIntoRepository("Company: " + companyName, 13);
+        text = "Phone number: ";
+        printItemPrompt(text);
         String phoneNumber = sc.nextLine();
         while (!Validator.validatePhoneNumber(phoneNumber)) {
-            System.out.println("Enter a correct phone number"); //Be more specific with the format
+            Buffer.setPromptLineOne("Enter a correct phone number"); //Be more specific with the format
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             phoneNumber = sc.nextLine();
         }
-
+        Buffer.insertStringIntoRepository("Phone: " + phoneNumber, 14);
+        printItemPrompt("Lead Created! - press INTRO");
+        String nextRet = sc.nextLine();
         return new Lead(name, email, companyName, phoneNumber);
     }
 
-    private static void printLeadList(List<Lead> leadList) {
-        System.out.println("=======List of Leads=======");
-        for (Lead lead : leadList) {
-            System.out.println(lead + "\n");
-        }
-        System.out.println();
+    private static void printItemPrompt(String text) {
+        Buffer.setPromptLineTwo(text);
+        Buffer.insertCentralPromptPoints(1);
+        Buffer.insertCentralPromptPoints(2);
+        Buffer.insertItemSolo();
+        Output.printScreen();
     }
 
-    private static void printOportunityList(List<Opportunity> oportunityList) {
-        System.out.println("=======List of Oportunities=======");
-        for (Opportunity opportunity : oportunityList) {
-            System.out.println(opportunity + "\n");
+    //Method that prints a list of leads
+    private static void printLeadList(List<Lead> leadList, int index) {
+        Buffer.resetScreenBuffer();
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.setUpLayout();
+        Buffer.insertItemList(6);
+
+        int startingRepositoryIndex = 10;
+        int finalCounter = index;
+        for (int i = index; i < leadList.size() && i < index + 15; i++) {
+            Buffer.insertStringIntoRepository(leadList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(leadList.get(i).getName(), startingRepositoryIndex++);
+            finalCounter++;
         }
-        System.out.println();
+        if (finalCounter < leadList.size()){
+            Buffer.setPromptLineOne("Leads List");
+            Buffer.insertCentralPromptPoints(1);
+            Buffer.setPromptLineTwo("press INTRO to next page");
+            printScreenBeforeAndPromptNext();
+            printLeadList(leadList, finalCounter);
+        }
+        else if (leadList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+
+        } else {
+            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+        }
     }
 
-    private static void printContactList(List<Contact> contactList) {
-        System.out.println("=======List of Contacts=======");
-        for (Contact contact : contactList) {
-            System.out.println(contact + "\n");
-        }
-        System.out.println();
+    private static void printScreenBeforeAndPromptNext() {
+        Buffer.insertCentralPromptPoints(2);
+        Output.printScreen();
+        Scanner sc = new Scanner(System.in);
+        String ret = sc.nextLine();
     }
 
-    private static void printAccountList(List<Account> accountList) {
-        System.out.println("=======List of Accounts=======");
-        for (Account account : accountList) {
-            System.out.println(account + "\n");
+    //Method that prints a list of opportunities
+    private static void printOpportunityList(List<Opportunity> opportunityList, int index) {
+        Buffer.resetScreenBuffer();
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.setUpLayout();
+        Buffer.insertItemList(6);
+
+        int startingRepositoryIndex = 10;
+        int finalCounter = index;
+        for (int i = index; i < opportunityList.size() && i < index + 15; i++) {
+            Buffer.insertStringIntoRepository(opportunityList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(opportunityList.get(i).getDecisionMaker().getName(), startingRepositoryIndex++);
+            finalCounter++;
         }
-        System.out.println();
+        if (finalCounter < opportunityList.size()){
+            Buffer.setPromptLineOne("Leads List");
+            Buffer.insertCentralPromptPoints(1);
+            Buffer.setPromptLineTwo("press INTRO to next page");
+            printScreenBeforeAndPromptNext();
+            printOpportunityList(opportunityList, finalCounter);
+        }
+        else if (opportunityList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+
+        } else {
+            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+        }
     }
 
-    public static void printCommandList() {
-        System.out.println("=====Command List=====");
-        setCommandList();
-        for (String string : commandList) {
-            System.out.println(string);
+    //Method that prints a list of contacts
+    private static void printContactList(List<Contact> contactList, int index) {
+        Buffer.resetScreenBuffer();
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.setUpLayout();
+        Buffer.insertItemList(6);
+
+        int startingRepositoryIndex = 10;
+        int finalCounter = index;
+        for (int i = index; i < contactList.size() && i < index + 15; i++) {
+            Buffer.insertStringIntoRepository(contactList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(contactList.get(i).getName(), startingRepositoryIndex++);
+            finalCounter++;
         }
-        System.out.println();
+        if (finalCounter < contactList.size()){
+            Buffer.setPromptLineOne("Leads List");
+            Buffer.insertCentralPromptPoints(1);
+            Buffer.setPromptLineTwo("press INTRO to next page");
+            printScreenBeforeAndPromptNext();
+            printContactList(contactList, finalCounter);
+        }
+        else if (contactList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+
+        } else {
+            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+        }
     }
 
+    //Method that prints a list of accounts
+    private static void printAccountList(List<Account> accountList, int index) {
+        Buffer.resetScreenBuffer();
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.setUpLayout();
+        Buffer.insertItemList(6);
+
+        int startingRepositoryIndex = 10;
+        int finalCounter = index;
+        for (int i = index; i < accountList.size() && i < index + 15; i++) {
+            Buffer.insertStringIntoRepository(accountList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(accountList.get(i).getCompanyName(), startingRepositoryIndex++);
+            finalCounter++;
+        }
+        if (finalCounter < accountList.size()){
+            Buffer.setPromptLineOne("Leads List");
+            Buffer.insertCentralPromptPoints(1);
+            Buffer.setPromptLineTwo("press INTRO to next page");
+            printScreenBeforeAndPromptNext();
+            printAccountList(accountList, finalCounter);
+        }
+        else if (accountList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+
+        } else {
+            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+        }
+    }
+
+    //Method to create the command list for printing
     public static void setCommandList() {
-        commandList = new ArrayList<>();
-        commandList.add("New Lead : Add a new Lead.");
-        commandList.add("Show Leads : Shows a list of all the Leads.");
-        commandList.add("Lookup Lead <id> : Shows a Lead.");
-        commandList.add("Convert <id> : Converts a Lead into an Opportunity.");
-        commandList.add("Show Opportunities: Shows a list of all the Opportunities.");
-        commandList.add("Lookup Opportunity <id> : Shows an Opportunity.");
-        commandList.add("Show Accounts: Shows a list of all the Accounts.");
-        commandList.add("Lookup Account <id> : Shows an Account.");
-        commandList.add("Close-Won <id> : Closes an Opportunity as won.");
-        commandList.add("Close-Lost <id> : Closes an Opportunity as lost.");
-        commandList.add("Help : Show the command list.");
-        commandList.add("Exit : Closes the CRM.");
+        Buffer.insertStringIntoRepository("=====Command List=====", 40);
+        Buffer.insertStringIntoRepository("", 41);
+        Buffer.insertStringIntoRepository("NEW LEAD", 42);
+        Buffer.insertStringIntoRepository("SHOW <ObjectInPlural>", 43);
+        Buffer.insertStringIntoRepository("Show a list of objects", 44);
+        Buffer.insertStringIntoRepository("CONVERT <Id>", 45);
+        Buffer.insertStringIntoRepository("Convert Lead -> Opportunity", 46);
+        Buffer.insertStringIntoRepository("LOOKUP <Object> <Id>", 47);
+        Buffer.insertStringIntoRepository("Show an object", 48);
+        Buffer.insertStringIntoRepository("CLOSE-WON <Id>", 49);
+        Buffer.insertStringIntoRepository("Close Opportunity as won", 50);
+        Buffer.insertStringIntoRepository("CLOSE-LOST <Id>", 51);
+        Buffer.insertStringIntoRepository("Close Opportunity as lost", 52);
+        Buffer.insertStringIntoRepository("", 53);
+        Buffer.insertStringIntoRepository("", 54);
+        Buffer.insertStringIntoRepository("EXIT", 55);
+        Buffer.insertStringIntoRepository("Save and close the CRM", 56);
     }
 
 }
