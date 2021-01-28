@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="The-Exceptionalists-CRM-2.0" />
         <module name="The-Exceptionalists-CRM" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="The-Exceptionalists-CRM" target="15" />
+      <module name="The-Exceptionalists-CRM-2.0" target="15" />
     </bytecodeTargetLevel>
   </component>
 </project>
