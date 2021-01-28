@@ -1,5 +1,7 @@
 package com.ironhack.crm.utilities;
 
+import com.ironhack.crm.classes.Opportunity;
+
 import java.util.Arrays;
 
 public class Buffer {
@@ -358,5 +360,9 @@ public class Buffer {
 
     public static void setAppVersion(String appVersion) {
         Buffer.appVersion = appVersion;
+    }
+
+    public static void insertOpportunityStringRepository(Opportunity opportunity, int resultItem, int listItem) {
+
     }
 }

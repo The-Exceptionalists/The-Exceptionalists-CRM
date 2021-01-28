@@ -251,7 +251,7 @@ public class CommandManager {
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    Buffer.setPromptLineOne("Opportunity with id " + id + " not found.");8
+                    Buffer.setPromptLineOne("Opportunity with id " + id + " not found.");
                     Buffer.insertCentralPromptPoints(1);
                     Output.printScreen();
                     Buffer.resetPromptOne();
