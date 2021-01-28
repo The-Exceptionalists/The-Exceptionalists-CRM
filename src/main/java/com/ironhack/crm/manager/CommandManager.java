@@ -81,15 +81,15 @@ public class CommandManager {
             }
             case "opportunities" -> {
                 List<Opportunity> opportunityList = Storage.getAllOpportunities();
-                printOpportunityList(opportunityList);
+                printOpportunityList(opportunityList, 0);
             }
             case "contacts" -> {
                 List<Contact> contactList = Storage.getAllContacts();
-                printContactList(contactList);
+                printContactList(contactList, 0);
             }
             case "accounts" -> {
                 List<Account> accountList = Storage.getAllAccounts();
-                printAccountList(accountList);
+                printAccountList(accountList, 0);
             }
         }
     }
@@ -146,7 +146,7 @@ public class CommandManager {
         String product = sc.nextLine().toLowerCase();
         //Keeps asking for the correct value
         while (!Validator.validateProduct(product)) {
-            Buffer.setPromptLineTwo("Enter a correct product (Hybrid, Flatbed or Box): ");
+            Buffer.setPromptLineOne("Enter a correct product (Hybrid, Flatbed or Box): ");
             printItemPrompt(text);
             Buffer.resetPromptOne();
             product = sc.nextLine().toLowerCase();
@@ -158,21 +158,14 @@ public class CommandManager {
         String number = sc.nextLine();
         //Keeps asking for the correct value
         while (!Validator.validateNumber(number)) {
-            Buffer.setPromptLineTwo("Enter a correct number of trucks: ");
+            Buffer.setPromptLineOne("Enter a correct number of trucks: ");
             printItemPrompt(text);
             Buffer.resetPromptOne();
             number = sc.nextLine();
         }
         Buffer.insertStringIntoRepository("Number of trucks: " + number, 11);
-        printItemPrompt("Opportunity created!");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-//        System.out.println("Opportunity created");
-//        System.out.println("\n");
-//        System.out.printf("New Account creation:");
+        printItemPrompt("Opportunity created! - press INTRO");
+        String retScanner = sc.nextLine();
         return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
     }
 
@@ -183,24 +176,24 @@ public class CommandManager {
         Buffer.initStringsRepository();
         Buffer.insertStringIntoRepository("New Account creation", 7);
         Scanner sc = new Scanner(System.in);
-        String text = "Choose an Industry (Produce, Ecommerce, Manufacturing, Medical, Other): ";
+        String text = "Industries: Produce, Ecommerce, Manufacturing, Medical, Other";
         printItemPrompt(text);
         String industry = sc.nextLine().toLowerCase();
         //Keeps asking for the correct value
         while (!Validator.validateIndustry(industry)) {
-            Buffer.setPromptLineTwo("Enter industry: Produce, Ecommerce, Manufacturing, Medical, Other ");
+            Buffer.setPromptLineOne("Enter a correct value:");
             printItemPrompt(text);
             Buffer.resetPromptOne();
             industry = sc.nextLine().toLowerCase();
         }
-        Buffer.insertStringIntoRepository("Industry: " + industry, 11);
+        Buffer.insertStringIntoRepository("Industry: " + industry, 10);
         Industry industryEnum = findIndustryEnum(industry);
         text = "Insert employee count: ";
         printItemPrompt(text);
         String employeeCount = sc.nextLine();
         //Keeps asking for the correct value
         while (!Validator.validateNumber(employeeCount)) {
-            Buffer.setPromptLineTwo("Enter a correct number of employees:");
+            Buffer.setPromptLineOne("Enter a correct number of employees:");
             printItemPrompt(text);
             Buffer.resetPromptOne();
             employeeCount = sc.nextLine();
@@ -211,7 +204,7 @@ public class CommandManager {
         String city = sc.nextLine();
         //Keeps asking for the correct value
         while (!Validator.validateName(city)) {
-            Buffer.setPromptLineTwo("Enter a correct value:");
+            Buffer.setPromptLineOne("Enter a correct value:");
             printItemPrompt(text);
             Buffer.resetPromptOne();
             city = sc.nextLine();
@@ -222,13 +215,14 @@ public class CommandManager {
         String country = sc.nextLine();
         //Keeps asking for the correct value
         while (!Validator.validateName(country)) {
-            Buffer.setPromptLineTwo("Enter a correct value:");
+            Buffer.setPromptLineOne("Enter a correct value:");
             printItemPrompt(text);
             Buffer.resetPromptOne();
             country = sc.nextLine();
         }
         Buffer.insertStringIntoRepository("Country: " + country, 13);
-        printItemPrompt("New Account created");
+        printItemPrompt("New Account created - press INTRO");
+        String retNext = sc.nextLine();
         return new Account(companyName, industryEnum, Integer.parseInt(employeeCount), city, country, contact, opportunity);
     }
 
@@ -246,11 +240,16 @@ public class CommandManager {
                     Opportunity opportunity = Storage.searchOpportunity("op" + zeros + id);
                     Buffer.insertOpportunityStringRepository(opportunity, 1, 1);
                     Buffer.insertItemSolo();
+                    Buffer.setPromptLineTwo("Lookup Opportunity - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
                     Output.printScreen();
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
+                    Buffer.setPromptLineTwo("Lookup Opportunity - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
                     normalOneLinePrint("Opportunity with id " + id + " not found.");
+                    Buffer.resetPromptMessages();
                 }
             }
             case "lead" -> {
@@ -258,11 +257,16 @@ public class CommandManager {
                     Lead lead = Storage.searchLead("le" + zeros + id);
                     Buffer.insertLeadStringRepository(lead, 1, 1);
                     Buffer.insertItemSolo();
+                    Buffer.setPromptLineTwo("Lookup Lead - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
                     Output.printScreen();
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
+                    Buffer.setPromptLineTwo("Lookup Lead - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
                     normalOneLinePrint("Lead with id " + id + " not found.");
+                    Buffer.resetPromptMessages();
                 }
             }
             case "contact" -> {
@@ -270,11 +274,16 @@ public class CommandManager {
                     Contact contact = Storage.searchContact("co" + zeros + id);
                     Buffer.insertContactStringRepository(contact, 1, 1);
                     Buffer.insertItemSolo();
+                    Buffer.setPromptLineTwo("Lookup Contact - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
                     Output.printScreen();
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
+                    Buffer.setPromptLineTwo("Lookup Contact - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
                     normalOneLinePrint("Contact with id " + id + " not found.");
+                    Buffer.resetPromptMessages();
                 }
             }
             case "account" -> {
@@ -282,11 +291,16 @@ public class CommandManager {
                     Account account = Storage.searchAccount("ac" + zeros + id);
                     Buffer.insertAccountStringRepository(account, 1, 1);
                     Buffer.insertItemSolo();
+                    Buffer.setPromptLineTwo("Lookup Account - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
                     Output.printScreen();
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
+                    Buffer.setPromptLineTwo("Lookup Account - press INTRO");
+                    Buffer.insertCentralPromptPoints(2);
                     normalOneLinePrint("Account with id " + id + " not found.");
+                    Buffer.resetPromptMessages();
                 }
             }
         }
@@ -379,7 +393,6 @@ public class CommandManager {
         printItemPrompt(text);
         String name = sc.nextLine();
         while (!Validator.validateName(name)) {
-
             Buffer.setPromptLineOne("Enter a correct name");
             printItemPrompt(text);
             Buffer.resetPromptOne();
@@ -392,6 +405,7 @@ public class CommandManager {
         while (!Validator.validateEmail(email)) {
             Buffer.setPromptLineOne("Enter a correct email"); //Be more specific with the format
             printItemPrompt(text);
+            Buffer.resetPromptOne();
             email = sc.nextLine();
         }
         Buffer.insertStringIntoRepository("Email: " + email, 12);
@@ -401,6 +415,7 @@ public class CommandManager {
         while (!Validator.validateCompanyName(companyName)) {
             Buffer.setPromptLineOne("Enter a correct company name"); //Be more specific with the format
             printItemPrompt(text);
+            Buffer.resetPromptOne();
             companyName = sc.nextLine();
         }
         Buffer.insertStringIntoRepository("Company: " + companyName, 13);
@@ -410,15 +425,12 @@ public class CommandManager {
         while (!Validator.validatePhoneNumber(phoneNumber)) {
             Buffer.setPromptLineOne("Enter a correct phone number"); //Be more specific with the format
             printItemPrompt(text);
+            Buffer.resetPromptOne();
             phoneNumber = sc.nextLine();
         }
         Buffer.insertStringIntoRepository("Phone: " + phoneNumber, 14);
-        printItemPrompt("Lead Created!");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        printItemPrompt("Lead Created! - press INTRO");
+        String nextRet = sc.nextLine();
         return new Lead(name, email, companyName, phoneNumber);
     }
 
@@ -438,8 +450,6 @@ public class CommandManager {
         Buffer.setUpLayout();
         Buffer.insertItemList(6);
 
-//        System.out.println("=======List of Leads=======");
-
         int startingRepositoryIndex = 10;
         int finalCounter = index;
         for (int i = index; i < leadList.size() && i < index + 15; i++) {
@@ -448,21 +458,23 @@ public class CommandManager {
             finalCounter++;
         }
         if (finalCounter < leadList.size()){
-            Buffer.setPromptLineTwo("Leads List");
+            Buffer.setPromptLineOne("Leads List");
             Buffer.insertCentralPromptPoints(1);
-            Buffer.setPromptLineTwo("Go Next Page");
-            Buffer.insertCentralPromptPoints(2);
-            Output.printScreen();
-            Scanner sc = new Scanner(System.in);
-            String ret = sc.nextLine();
+            Buffer.setPromptLineTwo("press INTRO to next page");
+            printScreenBeforeAndPromptNext();
             printLeadList(leadList, finalCounter);
         }
-        if (leadList.size() == 0){
-            Buffer.setPromptLineTwo("Empty leads List - press intro to continue");
+        else if (leadList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
 
         } else {
-            Buffer.setPromptLineTwo("Leads List - go next");
+            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
         }
+    }
+
+    private static void printScreenBeforeAndPromptNext() {
         Buffer.insertCentralPromptPoints(2);
         Output.printScreen();
         Scanner sc = new Scanner(System.in);
@@ -470,49 +482,100 @@ public class CommandManager {
     }
 
     //Method that prints a list of opportunities
-    private static void printOpportunityList(List<Opportunity> oportunityList) {
-        System.out.println("=======List of Oportunities=======");
-        for (Opportunity opportunity : oportunityList) {
-            System.out.println(opportunity + "\n");
+    private static void printOpportunityList(List<Opportunity> opportunityList, int index) {
+        Buffer.resetScreenBuffer();
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.setUpLayout();
+        Buffer.insertItemList(6);
+
+        int startingRepositoryIndex = 10;
+        int finalCounter = index;
+        for (int i = index; i < opportunityList.size() && i < index + 15; i++) {
+            Buffer.insertStringIntoRepository(opportunityList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(opportunityList.get(i).getDecisionMaker().getName(), startingRepositoryIndex++);
+            finalCounter++;
         }
-        System.out.println();
+        if (finalCounter < opportunityList.size()){
+            Buffer.setPromptLineOne("Leads List");
+            Buffer.insertCentralPromptPoints(1);
+            Buffer.setPromptLineTwo("press INTRO to next page");
+            printScreenBeforeAndPromptNext();
+            printOpportunityList(opportunityList, finalCounter);
+        }
+        else if (opportunityList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+
+        } else {
+            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+        }
     }
 
     //Method that prints a list of contacts
-    private static void printContactList(List<Contact> contactList) {
-        System.out.println("=======List of Contacts=======");
-        for (Contact contact : contactList) {
-            System.out.println(contact + "\n");
+    private static void printContactList(List<Contact> contactList, int index) {
+        Buffer.resetScreenBuffer();
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.setUpLayout();
+        Buffer.insertItemList(6);
+
+        int startingRepositoryIndex = 10;
+        int finalCounter = index;
+        for (int i = index; i < contactList.size() && i < index + 15; i++) {
+            Buffer.insertStringIntoRepository(contactList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(contactList.get(i).getName(), startingRepositoryIndex++);
+            finalCounter++;
         }
-        System.out.println();
+        if (finalCounter < contactList.size()){
+            Buffer.setPromptLineOne("Leads List");
+            Buffer.insertCentralPromptPoints(1);
+            Buffer.setPromptLineTwo("press INTRO to next page");
+            printScreenBeforeAndPromptNext();
+            printContactList(contactList, finalCounter);
+        }
+        else if (contactList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+
+        } else {
+            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+        }
     }
 
     //Method that prints a list of accounts
-    private static void printAccountList(List<Account> accountList) {
-        System.out.println("=======List of Accounts=======");
-        for (Account account : accountList) {
-            System.out.println(account + "\n");
-        }
-        System.out.println();
-    }
+    private static void printAccountList(List<Account> accountList, int index) {
+        Buffer.resetScreenBuffer();
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.setUpLayout();
+        Buffer.insertItemList(6);
 
-//    public static void printCommandList() {
-//        System.out.println("=====Command List=====");
-//        setCommandList();
-//        for (String string : commandList) {
-//            System.out.println(string);
-//        }
-//        System.out.println();
-//    }
-//    //Method that prints a list of commands
-//    public static void printCommandList() {
-//        System.out.println("=====Command List=====");
-//        setCommandList();
-//        for (String string : commandList) {
-//            System.out.println(string);
-//        }
-//        System.out.println();
-//    }
+        int startingRepositoryIndex = 10;
+        int finalCounter = index;
+        for (int i = index; i < accountList.size() && i < index + 15; i++) {
+            Buffer.insertStringIntoRepository(accountList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(accountList.get(i).getCompanyName(), startingRepositoryIndex++);
+            finalCounter++;
+        }
+        if (finalCounter < accountList.size()){
+            Buffer.setPromptLineOne("Leads List");
+            Buffer.insertCentralPromptPoints(1);
+            Buffer.setPromptLineTwo("press INTRO to next page");
+            printScreenBeforeAndPromptNext();
+            printAccountList(accountList, finalCounter);
+        }
+        else if (accountList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+
+        } else {
+            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            printScreenBeforeAndPromptNext();
+        }
+    }
 
     //Method to create the command list for printing
     public static void setCommandList() {
