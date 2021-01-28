@@ -53,8 +53,6 @@ public class Buffer {
             {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
     };
 
-
-
     private static String singleSpace = " ";
     private static String appName = singleSpace + "DÉJÀ VU: your console CRM ";
     private static String companyName = singleSpace + "GlobalService Co.";
@@ -95,7 +93,6 @@ public class Buffer {
         }
     }
 
-
     public static void printSize() {
         System.out.println("Map size:");
         System.out.println("w: " + screenBuffer[0].length);
@@ -103,19 +100,14 @@ public class Buffer {
     }
 
     public static void insertCentralBox() {
-        //h6 18 w 2 42
         for (int i = 0; i < 17; i++){
             for (int j = 0; j < 42; j++){
                 screenBuffer[6 + i][2 + j] = 'B';
             }
-
         }
     }
 
-
-
     public static void insertCentralPrompt() {
-        //h21 25 w 2 42
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 42; j++){
                 screenBuffer[24 + i][2 + j] = 'P';
@@ -142,8 +134,6 @@ public class Buffer {
     }
 
     public static void insertLogo() {
-        //h 0 3 w 2 6
-
         screenBuffer[1][2] = ' ';
         screenBuffer[1][3] = ' ';
         screenBuffer[1][4] = 'm';
@@ -167,25 +157,19 @@ public class Buffer {
     }
 
     public static void insertAppName() {
-        //h 0 3 w 2 6
             screenBuffer[1 ][8] = 'A';
-
     }
 
     public static void insertUserName() {
-        //h 0 3 w 2 6
         screenBuffer[1 ][47] = 'U';
-
     }
 
     public static void insertCompanyName() {
-        //h 0 3 w 2 6
         screenBuffer[3 ][8] = 'C';
 
     }
 
     public static void insertSideBox() {
-        //h4 24 w 47 57
         for (int i = 0; i < 21; i++){
             for (int j = 0; j < 15; j++){
                 screenBuffer[4 + i][47 + j] = 'S';
@@ -199,7 +183,6 @@ public class Buffer {
             screenBuffer[4 + i][48 + 1] = (char) ('a' + i);
         }
     }
-
 
     public static void insertItemSolo (){
         int startingRow = 13;
@@ -227,7 +210,6 @@ public class Buffer {
             screenBuffer[startingRow + i][4 ] = 'g';
             screenBuffer[startingRow + i][5 ] = (char) (startingLocation + i);
         }
-
     }
 
     /**
@@ -403,6 +385,4 @@ public class Buffer {
     public static void setAppVersion(String appVersion) {
         Buffer.appVersion = appVersion;
     }
-
-
 }
