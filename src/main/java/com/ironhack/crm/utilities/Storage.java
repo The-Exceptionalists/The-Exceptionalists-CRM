@@ -1,10 +1,17 @@
 package com.ironhack.crm.utilities;
 
-import com.ironhack.crm.classes.*;
-import com.ironhack.crm.enums.*;
+import com.ironhack.crm.classes.Account;
+import com.ironhack.crm.classes.Contact;
+import com.ironhack.crm.classes.Lead;
+import com.ironhack.crm.classes.Opportunity;
+import com.ironhack.crm.enums.ItemType;
 
-import java.util.*;
-import java.util.concurrent.locks.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 public class Storage {
@@ -168,9 +175,15 @@ public class Storage {
      *
      * @param id
      */
-    public static void nullifyLead(String id) {
+
+    /*public static void nullifyLead(String id) {
         if (leadHashMap.containsKey(id))
             leadHashMap.replace(id, null);
+        else throw new IllegalArgumentException(id + "not found");
+    }*/
+    public static void removeLead(String id) {
+        if (leadHashMap.containsKey(id))
+            leadHashMap.remove(id);
         else throw new IllegalArgumentException(id + "not found");
     }
 

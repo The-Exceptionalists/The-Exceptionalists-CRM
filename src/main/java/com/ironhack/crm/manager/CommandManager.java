@@ -4,7 +4,9 @@ import com.ironhack.crm.classes.Account;
 import com.ironhack.crm.classes.Contact;
 import com.ironhack.crm.classes.Lead;
 import com.ironhack.crm.classes.Opportunity;
-import com.ironhack.crm.enums.*;
+import com.ironhack.crm.enums.Industry;
+import com.ironhack.crm.enums.Product;
+import com.ironhack.crm.enums.Status;
 import com.ironhack.crm.utilities.State;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
@@ -43,11 +45,11 @@ public class CommandManager {
             case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
             case "help" -> printCommandList();
-            case "exit" -> System.exit(0);
+            case "exit" -> saveChangesAndExit();
         }
     }
 
-    private static void saveStateAndExit() {
+    private static void saveChangesAndExit() {
         new Thread(new State()).run();
 
         System.exit(0);
@@ -88,15 +90,19 @@ public class CommandManager {
 
     private static void convertLeadToOpportunity(int id) {
         try {
-            Lead lead = Storage.searchLead("le" + id);
+            StringBuilder zeros = new StringBuilder();
+            for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
+                zeros.append("0");
+            }
+            Lead lead = Storage.searchLead("le" + zeros + id);
             Contact contact = leadToContact(lead);
             Opportunity opportunity = promptOpportunity(contact);
             Account account = promptAccount(contact.getCompanyName(), contact, opportunity);
             Storage.add(contact);
             Storage.add(opportunity);
             Storage.add(account);
-            Storage.nullifyLead("le" + id);
-        } catch (IllegalArgumentException e) {
+            Storage.removeLead("le" + zeros + id);
+        } catch (IllegalArgumentException | NullPointerException e) {
             System.out.println("Lead with id " + id + " not found.");
         }
     }
@@ -164,40 +170,44 @@ public class CommandManager {
     }
 
     public static void showObject(String objectType, int id) {
+        StringBuilder zeros = new StringBuilder();
+        for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
+            zeros.append("0");
+        }
         switch (objectType) {
             case "opportunity" -> {
                 try {
-                    Opportunity opportunity = Storage.searchOpportunity("op" + id);
+                    Opportunity opportunity = Storage.searchOpportunity("op" + zeros + id);
                     System.out.println(opportunity);
                     System.out.println();
-                } catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException | NullPointerException e) {
                     System.out.println("Opportunity with id " + id + " not found.");
                 }
             }
             case "lead" -> {
                 try {
-                    Lead lead = Storage.searchLead("le" + id);
+                    Lead lead = Storage.searchLead("le" + zeros + id);
                     System.out.println(lead);
                     System.out.println();
-                } catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException | NullPointerException e) {
                     System.out.println("Lead with id " + id + " not found.");
                 }
             }
             case "contact" -> {
                 try {
-                    Contact contact = Storage.searchContact("co" + id);
+                    Contact contact = Storage.searchContact("co" + zeros + id);
                     System.out.println(contact);
                     System.out.println();
-                } catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException | NullPointerException e) {
                     System.out.println("Contact with id " + id + " not found.");
                 }
             }
             case "account" -> {
                 try {
-                    Account account = Storage.searchAccount("ac" + id);
+                    Account account = Storage.searchAccount("ac" + zeros + id);
                     System.out.println(account);
                     System.out.println();
-                } catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException | NullPointerException e) {
                     System.out.println("Account with id " + id + " not found.");
                 }
             }
@@ -206,13 +216,16 @@ public class CommandManager {
 
     private static void closeOpportunity(int id, Status closedLost) {
         try {
-            Opportunity opportunity = Storage.searchOpportunity("op" + id);
+            StringBuilder zeros = new StringBuilder();
+            for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
+                zeros.append("0");
+            }
+            Opportunity opportunity = Storage.searchOpportunity("op" + zeros + id);
             opportunity.setStatus(closedLost);
             Storage.update(opportunity);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             System.out.println("Opportunity with id " + id + " not found.");
         }
-
     }
 
     private static Industry findIndustryEnum(String industry) {
