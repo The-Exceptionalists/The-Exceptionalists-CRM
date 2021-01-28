@@ -13,7 +13,6 @@ import com.ironhack.crm.utilities.State;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
-import java.io.BufferedReader;
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,7 +77,7 @@ public class CommandManager {
         switch (objectType) {
             case "leads" -> {
                 List<Lead> leadList = Storage.getAllLeads();
-                printLeadList(leadList);
+                printLeadList(leadList, 0);
             }
             case "opportunities" -> {
                 List<Opportunity> opportunityList = Storage.getAllOpportunities();
@@ -251,12 +250,7 @@ public class CommandManager {
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    Buffer.setPromptLineOne("Opportunity with id " + id + " not found.");
-                    Buffer.insertCentralPromptPoints(1);
-                    Output.printScreen();
-                    Buffer.resetPromptOne();
-                    Scanner sc = new Scanner(System.in);
-                    String next = sc.nextLine();
+                    normalOneLinePrint("Opportunity with id " + id + " not found.");
                 }
             }
             case "lead" -> {
@@ -268,12 +262,7 @@ public class CommandManager {
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    Buffer.setPromptLineOne("Lead with id " + id + " not found.");
-                    Buffer.insertCentralPromptPoints(1);
-                    Output.printScreen();
-                    Buffer.resetPromptOne();
-                    Scanner sc = new Scanner(System.in);
-                    String next = sc.nextLine();
+                    normalOneLinePrint("Lead with id " + id + " not found.");
                 }
             }
             case "contact" -> {
@@ -285,12 +274,7 @@ public class CommandManager {
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    Buffer.setPromptLineOne("Contact with id " + id + " not found.");
-                    Buffer.insertCentralPromptPoints(1);
-                    Output.printScreen();
-                    Buffer.resetPromptOne();
-                    Scanner sc = new Scanner(System.in);
-                    String next = sc.nextLine();
+                    normalOneLinePrint("Contact with id " + id + " not found.");
                 }
             }
             case "account" -> {
@@ -302,12 +286,7 @@ public class CommandManager {
                     Scanner sc = new Scanner(System.in);
                     String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    Buffer.setPromptLineOne("Account with id " + id + " not found.");
-                    Buffer.insertCentralPromptPoints(1);
-                    Output.printScreen();
-                    Buffer.resetPromptOne();
-                    Scanner sc = new Scanner(System.in);
-                    String next = sc.nextLine();
+                    normalOneLinePrint("Account with id " + id + " not found.");
                 }
             }
         }
@@ -315,6 +294,10 @@ public class CommandManager {
 
     //Closes an opportunity given an id and the status
     private static void closeOpportunity(int id, Status close) {
+        Buffer.resetPromptMessages();
+        Buffer.initStringsRepository();
+        Buffer.setUpLayout();
+        String text;
         try {
             //Searches an opportunity, changing the parameter id to the format used in Storage
             Opportunity opportunity = Storage.searchOpportunity("op" + "0".repeat(Math.max(0, 10 - String.valueOf(id).length())) + id);
@@ -322,16 +305,30 @@ public class CommandManager {
             if (opportunity.getStatus() == Status.OPEN) {
                 opportunity.setStatus(close);
                 Storage.update(opportunity);
-                System.out.println("Opportunity closed!");
+                text = "Opportunity closed!";
+                normalOneLinePrint(text);
             } else if (opportunity.getStatus() == Status.CLOSED_LOST) {
-                System.out.println("Opportunity already closed as lost.");
+                text = "Opportunity already closed as lost.";
+                normalOneLinePrint(text);
             } else if (opportunity.getStatus() == Status.CLOSED_WON) {
-                System.out.println("Opportunity already closed as won.");
+                text = "Opportunity already closed as won.";
+                normalOneLinePrint(text);
             }
             //Return an error message if the id is not found
         } catch (IllegalArgumentException | NullPointerException e) {
-            System.out.println("Opportunity with id " + id + " not found.");
+            text = "Opportunity with id " + id + " not found.";
+            normalOneLinePrint(text);
+
         }
+    }
+
+    private static void normalOneLinePrint(String text) {
+        Buffer.setPromptLineOne(text);
+        Buffer.insertCentralPromptPoints(1);
+        Output.printScreen();
+        Buffer.resetPromptOne();
+        Scanner sc = new Scanner(System.in);
+        String next = sc.nextLine();
     }
 
     //Returns an enum depending on the String parameter
@@ -434,12 +431,42 @@ public class CommandManager {
     }
 
     //Method that prints a list of leads
-    private static void printLeadList(List<Lead> leadList) {
-        System.out.println("=======List of Leads=======");
-        for (Lead lead : leadList) {
-            System.out.println(lead + "\n");
+    private static void printLeadList(List<Lead> leadList, int index) {
+        Buffer.resetScreenBuffer();
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.setUpLayout();
+        Buffer.insertItemList(6);
+
+//        System.out.println("=======List of Leads=======");
+
+        int startingRepositoryIndex = 10;
+        int finalCounter = index;
+        for (int i = index; i < leadList.size() && i < index + 15; i++) {
+            Buffer.insertStringIntoRepository(leadList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(leadList.get(i).getName(), startingRepositoryIndex++);
+            finalCounter++;
         }
-        System.out.println();
+        if (finalCounter < leadList.size()){
+            Buffer.setPromptLineTwo("Leads List");
+            Buffer.insertCentralPromptPoints(1);
+            Buffer.setPromptLineTwo("Go Next Page");
+            Buffer.insertCentralPromptPoints(2);
+            Output.printScreen();
+            Scanner sc = new Scanner(System.in);
+            String ret = sc.nextLine();
+            printLeadList(leadList, finalCounter);
+        }
+        if (leadList.size() == 0){
+            Buffer.setPromptLineTwo("Empty leads List - press intro to continue");
+
+        } else {
+            Buffer.setPromptLineTwo("Leads List - go next");
+        }
+        Buffer.insertCentralPromptPoints(2);
+        Output.printScreen();
+        Scanner sc = new Scanner(System.in);
+        String ret = sc.nextLine();
     }
 
     //Method that prints a list of opportunities
