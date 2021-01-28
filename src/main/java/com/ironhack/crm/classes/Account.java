@@ -126,8 +126,17 @@ public class Account {
     }
 
     public String toString() {
+        //Shows only the part of the id string that the user needs to see
+        char[] idArray = id.toCharArray();
+        int charCount = 0;
+        for (int i = 2; i < idArray.length; i++) {
+            if (idArray[i] != '0') {
+                charCount = i;
+                break;
+            }
+        }
         return "Account{" +
-                "id=" + id +
+                "id=" + id.substring(charCount) +
                 ", companyName='" + companyName + '\'' +
                 ", industry=" + industry +
                 ", employeeCount=" + employeeCount +
