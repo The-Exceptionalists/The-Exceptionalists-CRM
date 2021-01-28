@@ -43,6 +43,7 @@ public class Contact {
         return name;
     }
 
+    //Checks if 'name' is a valid name (see Validator class)
     public void setName(String name) {
         if (!Validator.validateName(name))
             throw new IllegalArgumentException("Name must be between 1 and 31 characters");
@@ -53,6 +54,7 @@ public class Contact {
         return email;
     }
 
+    //Checks if 'email' is a valid email (see Validator class)
     public void setEmail(String email) {
         if (!Validator.validateEmail(email)) throw new IllegalArgumentException();
         this.email = email;
@@ -62,6 +64,7 @@ public class Contact {
         return companyName;
     }
 
+    //Checks if 'companyName' is a valid Company Name (see Validator class)
     public void setCompanyName(String companyName) {
         if (!Validator.validateCompanyName(companyName))
             throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
@@ -72,6 +75,7 @@ public class Contact {
         return phoneNum;
     }
 
+    //Checks if 'phoneNum' is a valid Phone Number (see Validator class)
     public void setPhoneNum(String phoneNum) {
         if (!Validator.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException();
 

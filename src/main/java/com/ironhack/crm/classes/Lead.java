@@ -44,6 +44,7 @@ public class Lead {
         return name;
     }
 
+    //Checks if 'name' is a valid name (see Validator class)
     public void setName(String name) {
 
         if (!Validator.validateName(name)) {
@@ -56,6 +57,7 @@ public class Lead {
         return email;
     }
 
+    //Checks if 'email' is a valid email (see Validator class)
     public void setEmail(String email) {
         if (!Validator.validateEmail(email)) {
             throw new IllegalArgumentException("Name wasn't correct");
@@ -67,6 +69,7 @@ public class Lead {
         return companyName;
     }
 
+    //Checks if 'companyName' is a valid Company Name (see Validator class)
     public void setCompanyName(String companyName) {
 
         if (!Validator.validateCompanyName(companyName)) {
@@ -81,6 +84,7 @@ public class Lead {
         return phoneNumber;
     }
 
+    //Checks if 'phoneNumber' is a valid Phone Number (see Validator class)
     public void setPhoneNumber(String phoneNumber) {
 
         if (!Validator.validatePhoneNumber(phoneNumber)) {

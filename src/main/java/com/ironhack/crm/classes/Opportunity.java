@@ -4,6 +4,9 @@ import com.ironhack.crm.enums.ItemType;
 import com.ironhack.crm.enums.Product;
 import com.ironhack.crm.enums.Status;
 import com.ironhack.crm.utilities.Storage;
+import com.ironhack.crm.utils.Validator;
+
+import java.util.Locale;
 
 public class Opportunity {
     //Properties
@@ -52,6 +55,7 @@ public class Opportunity {
         return quantity;
     }
 
+    //The Quantity must be a positive number
     public void setQuantity(int quantity) {
         if (quantity <= 0) {
             throw new IllegalArgumentException("The number of trucks must be greater than zero.");

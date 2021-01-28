@@ -3,6 +3,7 @@ package com.ironhack.crm.classes;
 import com.ironhack.crm.enums.Industry;
 import com.ironhack.crm.enums.ItemType;
 import com.ironhack.crm.utilities.Storage;
+import com.ironhack.crm.utils.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,10 @@ public class Account {
         return companyName;
     }
 
+    //Checks if 'companyName' is a valid Company Name (see Validator class)
     public void setCompanyName(String companyName) {
+        if (!Validator.validateCompanyName(companyName))
+            throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
         this.companyName = companyName;
     }
 
@@ -80,6 +84,7 @@ public class Account {
         return employeeCount;
     }
 
+    //Employee must be at least 1
     public void setEmployeeCount(int employeeCount) {
         if (employeeCount <= 0) {
             throw new IllegalArgumentException("The employee count must be at least 1.");
@@ -107,6 +112,7 @@ public class Account {
         return contactList;
     }
 
+    //The List can't be empty
     public void setContactList(List<Contact> contactList) {
         if (contactList.size() == 0) {
             throw new IllegalArgumentException("The contact list is empty!");
@@ -118,6 +124,7 @@ public class Account {
         return opportunityList;
     }
 
+    //The List can't be empty
     public void setOpportunityList(List<Opportunity> opportunityList) {
         if (opportunityList.size() == 0) {
             throw new IllegalArgumentException("The opportunity list is empty!");

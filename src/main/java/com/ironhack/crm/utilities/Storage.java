@@ -126,10 +126,6 @@ public class Storage {
         else throw new IllegalArgumentException(item.getId() + "not found");
     }
 
-
-//    example on how it should be used work
-//    if (idIsAccount(id)){ searchAccount(id)}
-
     /**
      * Search for an item and returns it
      *
@@ -187,11 +183,6 @@ public class Storage {
      * @param id
      */
 
-    /*public static void nullifyLead(String id) {
-        if (leadHashMap.containsKey(id))
-            leadHashMap.replace(id, null);
-        else throw new IllegalArgumentException(id + "not found");
-    }*/
     public static void removeLead(String id) {
         if (leadHashMap.containsKey(id))
             leadHashMap.remove(id);
@@ -262,19 +253,19 @@ public class Storage {
     }
 
     public static boolean idIsAccount(String id) {
-        return id.startsWith("ac") ? true : false;
+        return id.startsWith("ac");
     }
 
     public static boolean idIsContact(String id) {
-        return id.startsWith("ct") ? true : false;
+        return id.startsWith("ct");
     }
 
     public static boolean idIsLead(String id) {
-        return id.startsWith("le") ? true : false;
+        return id.startsWith("le");
     }
 
     public static boolean idIsOpportunity(String id) {
-        return id.startsWith("op") ? true : false;
+        return id.startsWith("op");
     }
 
     public static int getId() {
