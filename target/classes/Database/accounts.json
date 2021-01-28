@@ -1,0 +1,34 @@
+[
+  {
+    "id": "ac0000000004",
+    "companyName": "Grefil",
+    "industry": "PRODUCE",
+    "employeeCount": 10,
+    "city": "Madrid",
+    "country": "Spain",
+    "contactList": [
+      {
+        "id": "co0000000002",
+        "name": "Salva Corsi",
+        "email": "ludo@hot.com",
+        "companyName": "Grefil",
+        "phoneNum": "+34656463345"
+      }
+    ],
+    "opportunityList": [
+      {
+        "id": "op0000000003",
+        "product": "BOX",
+        "quantity": 10,
+        "decisionMaker": {
+          "id": "co0000000002",
+          "name": "Salva Corsi",
+          "email": "ludo@hot.com",
+          "companyName": "Grefil",
+          "phoneNum": "+34656463345"
+        },
+        "status": "OPEN"
+      }
+    ]
+  }
+]
