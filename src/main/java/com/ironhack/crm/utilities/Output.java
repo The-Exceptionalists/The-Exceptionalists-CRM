@@ -6,6 +6,7 @@ public class Output {
     private static final String BLOCK = "  ";
     private static final String BOLD = (char) 27 + "[1m";
     private static final String ITALIC = (char) 27 + "[3m";
+    private static final String INVERSE = (char) 27 + "[7m";
     private static final String UNDERLINE = (char) 27 + "[4m";
     private static final String MAGENTA_BCK = (char) 27 + "[45m";
     private static final String YELLOW_BCK = (char) 27 + "[43m";
@@ -19,8 +20,9 @@ public class Output {
     private static final String ORANGE_BCK = (char) 27 + "[48;5;166m";
     private static final String CORAL_BCK = (char) 27 + "[48;5;170m";
     private static final String LIGHT_GREY_BCK = (char) 27 + "[48;5;241m";
-    private static final String DARK_TEXT = (char) 27 + "[38;5;233m";
+    private static final String DARK_TEXT = (char) 27 + "[38;5;234m";
     private static final String RED_TEXT = (char) 27 + "[38;5;196m";
+    private static final String BLACK_TEXT = (char) 27 + "[38;5;232m";
     private static final String YELLOW_TEXT = (char) 27 + "[38;5;226m";
     private static final String GREEN_TEXT = (char) 27 + "[48;5;82m";
 
@@ -149,12 +151,12 @@ public class Output {
                     case 'p' -> {
                         switch(Buffer.screenBuffer[i][j + 1]){
                             case '1' -> {
-                                System.out.print(YELLOW_BCK + DARK_TEXT + insertText(Buffer.getPromptLineOne(), 30) + DEFAULT);
-                                j += 14;
+                                System.out.print(YELLOW_BCK + DARK_TEXT + insertText(Buffer.getPromptLineOne(), 60) + DEFAULT);
+                                j += 29;
                             }
                             case '2' -> {
-                                System.out.print(YELLOW_BCK + DARK_TEXT + insertText(Buffer.getPromptLineTwo(), 30) + DEFAULT);
-                                j += 14;
+                                System.out.print(YELLOW_BCK + DARK_TEXT + insertText(Buffer.getPromptLineTwo(), 60) + DEFAULT);
+                                j += 29;
                             }
                         }
                     }
@@ -162,36 +164,72 @@ public class Output {
                     case 's' -> {
                         switch(Buffer.screenBuffer[i][j + 1]){
                             case 'a' -> {
-                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(20), 18) + DEFAULT);
-                                j += 8;
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(40), 28) + DEFAULT);
+                                j += 13;
                             }
                             case 'b' -> {
-                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(21), 20) + DEFAULT);
-                                j += 9;
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(41), 28) + DEFAULT);
+                                j += 13;
                             }
                             case 'c' -> {
-                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(22), 20) + DEFAULT);
-                                j += 9;
+                                System.out.print(LIGHT_GREY_BCK + BLACK_TEXT + BOLD  + insertText(Buffer.getStringFromRepository(42) , 28) + DEFAULT);
+                                j += 13;
                             }
                             case 'd' -> {
-                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(23), 20) + DEFAULT);
-                                j += 9;
+                                System.out.print(LIGHT_GREY_BCK + BLACK_TEXT + BOLD  +  insertText(Buffer.getStringFromRepository(43), 28) + DEFAULT);
+                                j += 13;
                             }
                             case 'e' -> {
-                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(24), 20) + DEFAULT);
-                                j += 9;
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(44), 28) + DEFAULT);
+                                j += 13;
                             }
                             case 'f' -> {
-                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(25), 20) + DEFAULT);
-                                j += 9;
+                                System.out.print(LIGHT_GREY_BCK + BLACK_TEXT + BOLD  + insertText(Buffer.getStringFromRepository(45), 28) + DEFAULT);
+                                j += 13;
                             }
                             case 'g' -> {
-                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(26), 20) + DEFAULT);
-                                j += 9;
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(46), 28) + DEFAULT);
+                                j += 13;
                             }
                             case 'h' -> {
-                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(27), 20) + DEFAULT);
-                                j += 9;
+                                System.out.print(LIGHT_GREY_BCK + BLACK_TEXT + BOLD  + insertText(Buffer.getStringFromRepository(47), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'i' -> {
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(48), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'j' -> {
+                                System.out.print(LIGHT_GREY_BCK + BLACK_TEXT + BOLD  + insertText(Buffer.getStringFromRepository(49), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'k' -> {
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(50), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'l' -> {
+                                System.out.print(LIGHT_GREY_BCK + BLACK_TEXT + BOLD  + insertText(Buffer.getStringFromRepository(51), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'm' -> {
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(52), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'n' -> {
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(53), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'o' -> {
+                                System.out.print(LIGHT_GREY_BCK + BLACK_TEXT + BOLD  + insertText(Buffer.getStringFromRepository(54), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'p' -> {
+                                System.out.print(LIGHT_GREY_BCK + BLACK_TEXT + BOLD + insertText(Buffer.getStringFromRepository(55), 28) + DEFAULT);
+                                j += 13;
+                            }
+                            case 'q' -> {
+                                System.out.print(LIGHT_GREY_BCK + DARK_TEXT + insertText(Buffer.getStringFromRepository(56), 28) + DEFAULT);
+                                j += 13;
                             }
                         }
                     }
