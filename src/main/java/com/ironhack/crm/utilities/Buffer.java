@@ -230,6 +230,12 @@ public class Buffer {
 
     }
 
+    /**
+     * Extract data from Lead
+     * @param lead
+     * @param resultIndex
+     * @param listIndex
+     */
     public static void insertLeadStringRepository(Lead lead, int resultIndex, int listIndex){
         int startingRepository = 0;
         switch (listIndex){
@@ -245,6 +251,12 @@ public class Buffer {
         insertStringIntoRepository(lead.getCompanyName(), startingRepository++);
     }
 
+    /**
+     * Extract data from Opportunity
+     * @param opportunity
+     * @param resultIndex
+     * @param listIndex
+     */
     public static void insertOpportunityStringRepository(Opportunity opportunity, int resultIndex, int listIndex) {
         int startingRepository = 0;
         switch (listIndex){
@@ -260,6 +272,12 @@ public class Buffer {
         insertStringIntoRepository(opportunity.getStatus().toString(), startingRepository++);
     }
 
+    /**
+     * Extract data from Contact
+     * @param contact
+     * @param resultIndex
+     * @param listIndex
+     */
     public static void insertContactStringRepository(Contact contact, int resultIndex, int listIndex) {
         int startingRepository = 0;
         switch (listIndex){
@@ -275,6 +293,12 @@ public class Buffer {
         insertStringIntoRepository(contact.getCompanyName(), startingRepository++);
     }
 
+    /**
+     * Insert data from account
+     * @param account
+     * @param resultIndex
+     * @param listIndex
+     */
     public static void insertAccountStringRepository(Account account, int resultIndex, int listIndex) {
         int startingRepository = 0;
         switch (listIndex){
@@ -291,6 +315,9 @@ public class Buffer {
         insertStringIntoRepository(account.getCountry(), startingRepository++);
     }
 
+    /**
+     * Method that prepare the screen layout
+     */
     public static void setUpLayout() {
         resetScreenBuffer();
         insertCentralBox();

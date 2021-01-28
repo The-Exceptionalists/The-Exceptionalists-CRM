@@ -1,5 +1,37 @@
 [
   {
+    "id": "ac0000000010",
+    "companyName": "Ger",
+    "industry": "OTHER",
+    "employeeCount": 32,
+    "city": "Remo",
+    "country": "Gelo",
+    "contactList": [
+      {
+        "id": "co0000000008",
+        "name": "Galo",
+        "email": "ge@lfew.com",
+        "companyName": "Ger",
+        "phoneNum": "12314312"
+      }
+    ],
+    "opportunityList": [
+      {
+        "id": "op0000000009",
+        "product": "BOX",
+        "quantity": 32,
+        "decisionMaker": {
+          "id": "co0000000008",
+          "name": "Galo",
+          "email": "ge@lfew.com",
+          "companyName": "Ger",
+          "phoneNum": "12314312"
+        },
+        "status": "OPEN"
+      }
+    ]
+  },
+  {
     "id": "ac0000000004",
     "companyName": "Loloe",
     "industry": "PRODUCE",

@@ -27,6 +27,9 @@ public class Output {
     private static final String GREEN_TEXT = (char) 27 + "[48;5;82m";
 
 
+    /**
+     * Method that print the screen, it uses a switch to determine what to print
+     */
     public static void printScreen() {
         for (int i = 0; i < Buffer.screenBuffer.length; ++i) {
             for (int j = 0; j < Buffer.screenBuffer[i].length; ++j) {
@@ -223,12 +226,12 @@ public class Output {
                     case 'p' -> {
                         switch (Buffer.screenBuffer[i][j + 1]) {
                             case '1' -> {
-                                System.out.print(YELLOW_BCK + DARK_TEXT + insertText(Buffer.getPromptLineOne(), 60) + DEFAULT);
-                                j += 29;
+                                System.out.print(YELLOW_BCK + DARK_TEXT + insertText(Buffer.getPromptLineOne(), 64) + DEFAULT);
+                                j += 31;
                             }
                             case '2' -> {
-                                System.out.print(YELLOW_BCK + DARK_TEXT + insertText(Buffer.getPromptLineTwo(), 60) + DEFAULT);
-                                j += 29;
+                                System.out.print(YELLOW_BCK + DARK_TEXT + insertText(Buffer.getPromptLineTwo(), 64) + DEFAULT);
+                                j += 31;
                             }
                         }
                     }
@@ -337,24 +340,46 @@ public class Output {
         }
     }
 
+    /**
+     * As name said, it prints spaces
+     * @param len
+     * @return
+     */
     public static String fillWithSpaces(int len) {
         StringBuilder r = new StringBuilder();
         if (len > 0) r.append(" ".repeat(len));
         return r.toString();
     }
 
+    /**
+     * Print a line int the middle
+     * @param len
+     * @return
+     */
     public static String fillWithMidLine(int len) {
         StringBuilder r = new StringBuilder();
         if (len > 0) r.append("-".repeat(len));
         return r.toString();
     }
 
+    /**
+     * Method that insert a line of a max certain len
+     * @param text
+     * @param len
+     * @return
+     */
     public static String insertText(String text, int len) {
         int strLen = text.length();
         text = strLen > len ? text.substring(0, len) : text;
         return text + Output.fillWithSpaces(len - strLen);
     }
 
+    /**
+     * Method that print a text in a colorful way
+     * @param text
+     * @param color starting index of the color
+     * @return
+     */
     public static int stringWithGradient(String text, int color) {
         char[] textArray = text.toCharArray();
         String rString = "";

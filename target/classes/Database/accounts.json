@@ -30,5 +30,37 @@
         "status": "OPEN"
       }
     ]
+  },
+  {
+    "id": "ac0000000007",
+    "companyName": "Ger",
+    "industry": "PRODUCE",
+    "employeeCount": 43,
+    "city": "Mole",
+    "country": "Moli",
+    "contactList": [
+      {
+        "id": "co0000000005",
+        "name": "Loco Laco",
+        "email": "loco@fhds.com",
+        "companyName": "Ger",
+        "phoneNum": "+2131423232"
+      }
+    ],
+    "opportunityList": [
+      {
+        "id": "op0000000006",
+        "product": "HYBRID",
+        "quantity": 32,
+        "decisionMaker": {
+          "id": "co0000000005",
+          "name": "Loco Laco",
+          "email": "loco@fhds.com",
+          "companyName": "Ger",
+          "phoneNum": "+2131423232"
+        },
+        "status": "OPEN"
+      }
+    ]
   }
 ]
