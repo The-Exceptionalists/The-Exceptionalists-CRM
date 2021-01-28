@@ -7,11 +7,13 @@ import com.ironhack.crm.classes.Opportunity;
 import com.ironhack.crm.enums.Industry;
 import com.ironhack.crm.enums.Product;
 import com.ironhack.crm.enums.Status;
+import com.ironhack.crm.utilities.Buffer;
+import com.ironhack.crm.utilities.Output;
 import com.ironhack.crm.utilities.State;
 import com.ironhack.crm.utilities.Storage;
 import com.ironhack.crm.utils.Validator;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,7 +25,12 @@ public class CommandManager {
     }
 
     public static void introduceCommand() {
-        System.out.println("Introduce a command from the list:");
+        CommandManager.setCommandList();
+        Buffer.setUpLayout();
+        Buffer.setPromptLineTwo("Introduce a command from the list:");
+        Buffer.insertCentralPromptPoints(2);
+        Buffer.insertCentralPromptPoints(1);
+        Output.printScreen();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         command = command.toLowerCase();
@@ -31,7 +38,7 @@ public class CommandManager {
         if (Validator.validateCommand(command)) {
             processCommand(command);
         } else {
-            System.out.println("Command not found");
+            Buffer.setPromptLineOne("Command not found");
         }
     }
 
@@ -44,7 +51,7 @@ public class CommandManager {
             case "lookup" -> showObject(words[1], Integer.parseInt(words[2]));
             case "close-won" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_WON);
             case "close-lost" -> closeOpportunity(Integer.parseInt(words[1]), Status.CLOSED_LOST);
-            case "help" -> printCommandList();
+//            case "help" -> printCommandList();
             case "exit" -> saveChangesAndExit();
         }
     }
@@ -103,7 +110,16 @@ public class CommandManager {
             Storage.add(account);
             Storage.removeLead("le" + zeros + id);
         } catch (IllegalArgumentException | NullPointerException e) {
-            System.out.println("Lead with id " + id + " not found.");
+            Buffer.setUpLayout();
+            Buffer.setPromptLineOne("Lead with id " + id + " not found.");
+            Buffer.insertCentralPromptPoints(2);
+            Buffer.insertCentralPromptPoints(1);
+            Output.printScreen();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
         }
     }
 
@@ -117,59 +133,98 @@ public class CommandManager {
 
     private static Opportunity promptOpportunity(Contact contact) {
         //Output for prompt Opportunity
+        Buffer.resetPromptMessages();
+        Buffer.initStringsRepository();
+        Buffer.insertStringIntoRepository("New Opportunity creation", 7);
         Scanner sc = new Scanner(System.in);
-        System.out.println("Type of truck (Hybrid, Flatbed or Box): ");
+        String text = "Type of truck (Hybrid, Flatbed or Box):";
+        printItemPrompt(text);
         String product = sc.nextLine().toLowerCase();
         while (!Validator.validateProduct(product)) {
-            System.out.println("Enter a correct product (Hybrid, Flatbed or Box): ");
+            Buffer.setPromptLineTwo("Enter a correct product (Hybrid, Flatbed or Box): ");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             product = sc.nextLine().toLowerCase();
         }
+        Buffer.insertStringIntoRepository("Product type: " + product, 10);
         Product productEnum = findProductEnum(product);
-        System.out.println("Number of trucks: ");
+        text = "Number of trucks: ";
+        printItemPrompt(text);
         String number = sc.nextLine();
         while (!Validator.validateNumber(number)) {
-            System.out.println("Enter a correct number of trucks: ");
+            Buffer.setPromptLineTwo("Enter a correct number of trucks: ");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             number = sc.nextLine();
         }
-        System.out.println("Opportunity created");
-        System.out.println("\n");
-        System.out.printf("New Account creation:");
+        Buffer.insertStringIntoRepository("Number of trucks: " + number, 11);
+        printItemPrompt("Opportunity created!");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        System.out.println("Opportunity created");
+//        System.out.println("\n");
+//        System.out.printf("New Account creation:");
         return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
     }
 
     private static Account promptAccount(String companyName, Contact contact, Opportunity opportunity) {
         //Output for prompt Account
+        Buffer.resetPromptMessages();
+        Buffer.initStringsRepository();
+        Buffer.insertStringIntoRepository("New Account creation", 7);
         Scanner sc = new Scanner(System.in);
-        System.out.println("Choose an Industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
+        String text = "Choose an Industry (Produce, Ecommerce, Manufacturing, Medical, Other): ";
+        printItemPrompt(text);
         String industry = sc.nextLine().toLowerCase();
         while (!Validator.validateIndustry(industry)) {
-            System.out.println("Enter a correct industry (Produce, Ecommerce, Manufacturing, Medical, Other): ");
+            Buffer.setPromptLineTwo("Enter industry: Produce, Ecommerce, Manufacturing, Medical, Other ");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             industry = sc.nextLine().toLowerCase();
         }
+        Buffer.insertStringIntoRepository("Industry: " + industry, 11);
         Industry industryEnum = findIndustryEnum(industry);
-        System.out.println("Employee count: ");
+        text = "Insert employee count: ";
+        printItemPrompt(text);
         String employeeCount = sc.nextLine();
         while (!Validator.validateNumber(employeeCount)) {
-            System.out.println("Enter a correct number of employees: ");
+            Buffer.setPromptLineTwo("Enter a correct number of employees:");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             employeeCount = sc.nextLine();
         }
-        System.out.println("City: ");
+        Buffer.insertStringIntoRepository("Number of employees: " + employeeCount, 11);
+        text = "Insert city name:";
+        printItemPrompt(text);
         String city = sc.nextLine();
         while (!Validator.validateName(city)) {
-            System.out.println("Enter a correct value: ");
+            Buffer.setPromptLineTwo("Enter a correct value:");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             city = sc.nextLine();
         }
-        System.out.println("Country: ");
+        Buffer.insertStringIntoRepository("City name: " + city, 12);
+        text = "Insert country: ";
+        printItemPrompt(text);
         String country = sc.nextLine();
         while (!Validator.validateName(country)) {
-            System.out.println("Enter a correct value: ");
+            Buffer.setPromptLineTwo("Enter a correct value:");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             country = sc.nextLine();
         }
-        System.out.println("Account added");
+        Buffer.insertStringIntoRepository("Country: " + country, 13);
+        printItemPrompt("New Account created");
         return new Account(companyName, industryEnum, Integer.parseInt(employeeCount), city, country, contact, opportunity);
     }
 
     public static void showObject(String objectType, int id) {
+        Buffer.resetPromptMessages();
+        Buffer.initStringsRepository();
+        Buffer.setUpLayout();
         StringBuilder zeros = new StringBuilder();
         for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
             zeros.append("0");
@@ -178,37 +233,69 @@ public class CommandManager {
             case "opportunity" -> {
                 try {
                     Opportunity opportunity = Storage.searchOpportunity("op" + zeros + id);
-                    System.out.println(opportunity);
-                    System.out.println();
+                    Buffer.insertOpportunityStringRepository(opportunity, 1, 1);
+                    Buffer.insertItemSolo();
+                    Output.printScreen();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    System.out.println("Opportunity with id " + id + " not found.");
+                    Buffer.setPromptLineOne("Opportunity with id " + id + " not found.");8
+                    Buffer.insertCentralPromptPoints(1);
+                    Output.printScreen();
+                    Buffer.resetPromptOne();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 }
             }
             case "lead" -> {
                 try {
                     Lead lead = Storage.searchLead("le" + zeros + id);
-                    System.out.println(lead);
-                    System.out.println();
+                    Buffer.insertLeadStringRepository(lead, 1, 1);
+                    Buffer.insertItemSolo();
+                    Output.printScreen();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    System.out.println("Lead with id " + id + " not found.");
+                    Buffer.setPromptLineOne("Lead with id " + id + " not found.");
+                    Buffer.insertCentralPromptPoints(1);
+                    Output.printScreen();
+                    Buffer.resetPromptOne();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 }
             }
             case "contact" -> {
                 try {
                     Contact contact = Storage.searchContact("co" + zeros + id);
-                    System.out.println(contact);
-                    System.out.println();
+                    Buffer.insertContactStringRepository(contact, 1, 1);
+                    Buffer.insertItemSolo();
+                    Output.printScreen();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    System.out.println("Contact with id " + id + " not found.");
+                    Buffer.setPromptLineOne("Contact with id " + id + " not found.");
+                    Buffer.insertCentralPromptPoints(1);
+                    Output.printScreen();
+                    Buffer.resetPromptOne();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 }
             }
             case "account" -> {
                 try {
                     Account account = Storage.searchAccount("ac" + zeros + id);
-                    System.out.println(account);
-                    System.out.println();
+                    Buffer.insertAccountStringRepository(account, 1, 1);
+                    Buffer.insertItemSolo();
+                    Output.printScreen();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    System.out.println("Account with id " + id + " not found.");
+                    Buffer.setPromptLineOne("Account with id " + id + " not found.");
+                    Buffer.insertCentralPromptPoints(1);
+                    Output.printScreen();
+                    Buffer.resetPromptOne();
+                    Scanner sc = new Scanner(System.in);
+                    String next = sc.nextLine();
                 }
             }
         }
@@ -265,34 +352,63 @@ public class CommandManager {
     }
 
     private static Lead promptLead() {
-        //Output for prompt Lead
+        Buffer.initStringsRepository();
+        Buffer.resetPromptMessages();
+        Buffer.insertStringIntoRepository("New Lead creation", 7);
+        String text = "Insert Lead name:";
         Scanner sc = new Scanner(System.in);
-        System.out.println("Name: ");
+        printItemPrompt(text);
         String name = sc.nextLine();
         while (!Validator.validateName(name)) {
-            System.out.println("Enter a correct name"); //Be more specific with the format
+
+            Buffer.setPromptLineOne("Enter a correct name");
+            printItemPrompt(text);
+            Buffer.resetPromptOne();
             name = sc.nextLine();
         }
-        System.out.println("Email: ");
+        Buffer.insertStringIntoRepository("Name: " + name, 11);
+        text = "Insert Lead email: ";
+        printItemPrompt(text);
         String email = sc.nextLine();
         while (!Validator.validateEmail(email)) {
-            System.out.println("Enter a correct email"); //Be more specific with the format
+            Buffer.setPromptLineOne("Enter a correct email"); //Be more specific with the format
+            printItemPrompt(text);
             email = sc.nextLine();
         }
-        System.out.println("Company name: ");
+        Buffer.insertStringIntoRepository("Email: " + email, 12);
+        text = "Company name: ";
+        printItemPrompt(text);
         String companyName = sc.nextLine();
         while (!Validator.validateCompanyName(companyName)) {
-            System.out.println("Enter a correct company name"); //Be more specific with the format
+            Buffer.setPromptLineOne("Enter a correct company name"); //Be more specific with the format
+            printItemPrompt(text);
             companyName = sc.nextLine();
         }
-        System.out.println("Phone number: ");
+        Buffer.insertStringIntoRepository("Company: " + companyName, 13);
+        text = "Phone number: ";
+        printItemPrompt(text);
         String phoneNumber = sc.nextLine();
         while (!Validator.validatePhoneNumber(phoneNumber)) {
-            System.out.println("Enter a correct phone number"); //Be more specific with the format
+            Buffer.setPromptLineOne("Enter a correct phone number"); //Be more specific with the format
+            printItemPrompt(text);
             phoneNumber = sc.nextLine();
         }
-
+        Buffer.insertStringIntoRepository("Phone: " + phoneNumber, 14);
+        printItemPrompt("Lead Created!");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new Lead(name, email, companyName, phoneNumber);
+    }
+
+    private static void printItemPrompt(String text) {
+        Buffer.setPromptLineTwo(text);
+        Buffer.insertCentralPromptPoints(1);
+        Buffer.insertCentralPromptPoints(2);
+        Buffer.insertItemSolo();
+        Output.printScreen();
     }
 
     private static void printLeadList(List<Lead> leadList) {
@@ -327,26 +443,33 @@ public class CommandManager {
         System.out.println();
     }
 
-    public static void printCommandList() {
-        System.out.println("=====Command List=====");
-        setCommandList();
-        for (String string : commandList) {
-            System.out.println(string);
-        }
-        System.out.println();
-    }
+//    public static void printCommandList() {
+//        System.out.println("=====Command List=====");
+//        setCommandList();
+//        for (String string : commandList) {
+//            System.out.println(string);
+//        }
+//        System.out.println();
+//    }
 
     public static void setCommandList() {
-        commandList = new ArrayList<>();
-        commandList.add("New Lead : Add a new Lead.");
-        commandList.add("Show Leads : Shows a list of all the Leads.");
-        commandList.add("Convert <id> : Converts a Lead into an Opportunity.");
-        commandList.add("Show Opportunities: Shows a list of all the leads.");
-        commandList.add("Lookup Opportunity <id> : Shows an Opportunity.");
-        commandList.add("Close-Won <id> : Closes an Opportunity as won.");
-        commandList.add("Close-Lost <id> : Closes an Opportunity as lost.");
-        commandList.add("Help : Show the command list.");
-        commandList.add("Exit : Closes the CRM.");
+        Buffer.insertStringIntoRepository("=====Command List=====", 40);
+        Buffer.insertStringIntoRepository("", 41);
+        Buffer.insertStringIntoRepository("NEW LEAD", 42);
+        Buffer.insertStringIntoRepository("SHOW <ObjectInPlural>", 43);
+        Buffer.insertStringIntoRepository("Show a list of objects", 44);
+        Buffer.insertStringIntoRepository("CONVERT <Id>", 45);
+        Buffer.insertStringIntoRepository("Convert Lead -> Opportunity", 46);
+        Buffer.insertStringIntoRepository("LOOKUP <Object> <Id>", 47);
+        Buffer.insertStringIntoRepository("Show an object", 48);
+        Buffer.insertStringIntoRepository("CLOSE-WON <Id>", 49);
+        Buffer.insertStringIntoRepository("Close Opportunity as won", 50);
+        Buffer.insertStringIntoRepository("CLOSE-LOST <Id>", 51);
+        Buffer.insertStringIntoRepository("Close Opportunity as lost", 52);
+        Buffer.insertStringIntoRepository("", 53);
+        Buffer.insertStringIntoRepository("", 54);
+        Buffer.insertStringIntoRepository("EXIT", 55);
+        Buffer.insertStringIntoRepository("Save and close the CRM", 56);
     }
 
 }
