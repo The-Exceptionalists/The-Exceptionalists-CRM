@@ -1,7 +1,7 @@
 [
   {
     "id": "ac0000000007",
-    "companyName": "asda",
+    "companyName": "Microsoft",
     "industry": "PRODUCE",
     "employeeCount": 10,
     "city": "Madrid",
@@ -9,7 +9,7 @@
     "contactList": [
       {
         "id": "co0000000005",
-        "name": "Jose Sje",
+        "name": "Jose Perez",
         "email": "jaso@ssdf.com",
         "companyName": "asda",
         "phoneNum": "34234"

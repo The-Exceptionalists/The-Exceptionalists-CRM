@@ -79,8 +79,17 @@ public class Contact {
     }
 
     public String toString() {
+        //Shows only the part of the id string that the user needs to see
+        char[] idArray = id.toCharArray();
+        int charCount = 0;
+        for (int i = 2; i < idArray.length; i++) {
+            if (idArray[i] != '0') {
+                charCount = i;
+                break;
+            }
+        }
         return "Contact{" +
-                "id='" + id + '\'' +
+                "id='" + id.substring(charCount) + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", companyName='" + companyName + '\'' +
