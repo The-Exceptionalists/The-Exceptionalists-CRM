@@ -246,7 +246,7 @@ public class Storage {
         }
         Storage.id++;
         StringBuilder zeros = new StringBuilder();
-        for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
+        for (int i = 0; i < 4 - String.valueOf(id).length(); i++) {
             zeros.append("0");
         }
         return prefix + zeros + Storage.id;
