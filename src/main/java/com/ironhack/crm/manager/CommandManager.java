@@ -24,6 +24,7 @@ public class CommandManager {
         return commandList;
     }
 
+    //Method that asks for a command and validates it
     public static void introduceCommand() {
         CommandManager.setCommandList();
         Buffer.setUpLayout();
@@ -42,6 +43,7 @@ public class CommandManager {
         }
     }
 
+    //Method that handles all commands and calls the required method
     public static void processCommand(String command) {
         String[] words = command.toLowerCase().split(" ");
         switch (words[0]) {
@@ -62,17 +64,16 @@ public class CommandManager {
         System.exit(0);
     }
 
+    //Method that handles the object creation
     private static void createObject(String word) {
-        //Switch used for future functionalities of createObject
-        switch (word) {
-            case "lead" -> {
-                Lead lead = promptLead();
-                Storage.add(lead);
-                System.out.println("New lead successfully added!");
-            }
+        if ("lead".equals(word)) {
+            Lead lead = promptLead();
+            Storage.add(lead);
+            System.out.println("New lead successfully added!");
         }
     }
 
+    //Method that handles the show command
     public static void showList(String objectType) {
         switch (objectType) {
             case "leads" -> {
@@ -81,7 +82,7 @@ public class CommandManager {
             }
             case "opportunities" -> {
                 List<Opportunity> opportunityList = Storage.getAllOpportunities();
-                printOportunityList(opportunityList);
+                printOpportunityList(opportunityList);
             }
             case "contacts" -> {
                 List<Contact> contactList = Storage.getAllContacts();
@@ -94,21 +95,23 @@ public class CommandManager {
         }
     }
 
-
+    //Method that handles the lead to opportunity conversion
     private static void convertLeadToOpportunity(int id) {
         try {
+            //Searches a lead, changing the parameter id to the format used in Storage
             StringBuilder zeros = new StringBuilder();
-            for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
-                zeros.append("0");
-            }
+            zeros.append("0".repeat(Math.max(0, 10 - String.valueOf(id).length())));
             Lead lead = Storage.searchLead("le" + zeros + id);
             Contact contact = leadToContact(lead);
             Opportunity opportunity = promptOpportunity(contact);
             Account account = promptAccount(contact.getCompanyName(), contact, opportunity);
+            //Adds all objects to the storage class
             Storage.add(contact);
             Storage.add(opportunity);
             Storage.add(account);
+            //Remove the lead
             Storage.removeLead("le" + zeros + id);
+            //Return an error message if the id is not found
         } catch (IllegalArgumentException | NullPointerException e) {
             Buffer.setUpLayout();
             Buffer.setPromptLineOne("Lead with id " + id + " not found.");
@@ -123,6 +126,7 @@ public class CommandManager {
         }
     }
 
+    //Creates a Contact object from a Lead object
     private static Contact leadToContact(Lead lead) {
         String name = lead.getName();
         String email = lead.getEmail();
@@ -131,6 +135,7 @@ public class CommandManager {
         return new Contact(name, email, companyName, phoneNumber);
     }
 
+    //Prompts all required parameters for the opportunity creation
     private static Opportunity promptOpportunity(Contact contact) {
         //Output for prompt Opportunity
         Buffer.resetPromptMessages();
@@ -140,6 +145,7 @@ public class CommandManager {
         String text = "Type of truck (Hybrid, Flatbed or Box):";
         printItemPrompt(text);
         String product = sc.nextLine().toLowerCase();
+        //Keeps asking for the correct value
         while (!Validator.validateProduct(product)) {
             Buffer.setPromptLineTwo("Enter a correct product (Hybrid, Flatbed or Box): ");
             printItemPrompt(text);
@@ -151,6 +157,7 @@ public class CommandManager {
         text = "Number of trucks: ";
         printItemPrompt(text);
         String number = sc.nextLine();
+        //Keeps asking for the correct value
         while (!Validator.validateNumber(number)) {
             Buffer.setPromptLineTwo("Enter a correct number of trucks: ");
             printItemPrompt(text);
@@ -170,6 +177,7 @@ public class CommandManager {
         return new Opportunity(productEnum, Integer.parseInt(number), contact, Status.OPEN);
     }
 
+    //Prompts all required parameters for the account creation
     private static Account promptAccount(String companyName, Contact contact, Opportunity opportunity) {
         //Output for prompt Account
         Buffer.resetPromptMessages();
@@ -179,6 +187,7 @@ public class CommandManager {
         String text = "Choose an Industry (Produce, Ecommerce, Manufacturing, Medical, Other): ";
         printItemPrompt(text);
         String industry = sc.nextLine().toLowerCase();
+        //Keeps asking for the correct value
         while (!Validator.validateIndustry(industry)) {
             Buffer.setPromptLineTwo("Enter industry: Produce, Ecommerce, Manufacturing, Medical, Other ");
             printItemPrompt(text);
@@ -190,6 +199,7 @@ public class CommandManager {
         text = "Insert employee count: ";
         printItemPrompt(text);
         String employeeCount = sc.nextLine();
+        //Keeps asking for the correct value
         while (!Validator.validateNumber(employeeCount)) {
             Buffer.setPromptLineTwo("Enter a correct number of employees:");
             printItemPrompt(text);
@@ -200,6 +210,7 @@ public class CommandManager {
         text = "Insert city name:";
         printItemPrompt(text);
         String city = sc.nextLine();
+        //Keeps asking for the correct value
         while (!Validator.validateName(city)) {
             Buffer.setPromptLineTwo("Enter a correct value:");
             printItemPrompt(text);
@@ -210,6 +221,7 @@ public class CommandManager {
         text = "Insert country: ";
         printItemPrompt(text);
         String country = sc.nextLine();
+        //Keeps asking for the correct value
         while (!Validator.validateName(country)) {
             Buffer.setPromptLineTwo("Enter a correct value:");
             printItemPrompt(text);
@@ -221,14 +233,14 @@ public class CommandManager {
         return new Account(companyName, industryEnum, Integer.parseInt(employeeCount), city, country, contact, opportunity);
     }
 
+    //Method that handles the lookup command
     public static void showObject(String objectType, int id) {
+        //Searches an object, changing the parameter id to the format used in Storage
         Buffer.resetPromptMessages();
         Buffer.initStringsRepository();
         Buffer.setUpLayout();
         StringBuilder zeros = new StringBuilder();
-        for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
-            zeros.append("0");
-        }
+        zeros.append("0".repeat(Math.max(0, 10 - String.valueOf(id).length())));
         switch (objectType) {
             case "opportunity" -> {
                 try {
@@ -301,20 +313,28 @@ public class CommandManager {
         }
     }
 
-    private static void closeOpportunity(int id, Status closedLost) {
+    //Closes an opportunity given an id and the status
+    private static void closeOpportunity(int id, Status close) {
         try {
-            StringBuilder zeros = new StringBuilder();
-            for (int i = 0; i < 10 - String.valueOf(id).length(); i++) {
-                zeros.append("0");
+            //Searches an opportunity, changing the parameter id to the format used in Storage
+            Opportunity opportunity = Storage.searchOpportunity("op" + "0".repeat(Math.max(0, 10 - String.valueOf(id).length())) + id);
+            //Compares the current value of status and it changes only if it's open
+            if (opportunity.getStatus() == Status.OPEN) {
+                opportunity.setStatus(close);
+                Storage.update(opportunity);
+                System.out.println("Opportunity closed!");
+            } else if (opportunity.getStatus() == Status.CLOSED_LOST) {
+                System.out.println("Opportunity already closed as lost.");
+            } else if (opportunity.getStatus() == Status.CLOSED_WON) {
+                System.out.println("Opportunity already closed as won.");
             }
-            Opportunity opportunity = Storage.searchOpportunity("op" + zeros + id);
-            opportunity.setStatus(closedLost);
-            Storage.update(opportunity);
+            //Return an error message if the id is not found
         } catch (IllegalArgumentException | NullPointerException e) {
             System.out.println("Opportunity with id " + id + " not found.");
         }
     }
 
+    //Returns an enum depending on the String parameter
     private static Industry findIndustryEnum(String industry) {
         switch (industry) {
             case "produce" -> {
@@ -336,6 +356,7 @@ public class CommandManager {
         return null;
     }
 
+    //Returns an enum depending on the String parameter
     private static Product findProductEnum(String product) {
         switch (product) {
             case "hybrid" -> {
@@ -351,6 +372,7 @@ public class CommandManager {
         return null;
     }
 
+    //Prompts all required parameters for the lead creation
     private static Lead promptLead() {
         Buffer.initStringsRepository();
         Buffer.resetPromptMessages();
@@ -411,6 +433,7 @@ public class CommandManager {
         Output.printScreen();
     }
 
+    //Method that prints a list of leads
     private static void printLeadList(List<Lead> leadList) {
         System.out.println("=======List of Leads=======");
         for (Lead lead : leadList) {
@@ -419,7 +442,8 @@ public class CommandManager {
         System.out.println();
     }
 
-    private static void printOportunityList(List<Opportunity> oportunityList) {
+    //Method that prints a list of opportunities
+    private static void printOpportunityList(List<Opportunity> oportunityList) {
         System.out.println("=======List of Oportunities=======");
         for (Opportunity opportunity : oportunityList) {
             System.out.println(opportunity + "\n");
@@ -427,6 +451,7 @@ public class CommandManager {
         System.out.println();
     }
 
+    //Method that prints a list of contacts
     private static void printContactList(List<Contact> contactList) {
         System.out.println("=======List of Contacts=======");
         for (Contact contact : contactList) {
@@ -435,6 +460,7 @@ public class CommandManager {
         System.out.println();
     }
 
+    //Method that prints a list of accounts
     private static void printAccountList(List<Account> accountList) {
         System.out.println("=======List of Accounts=======");
         for (Account account : accountList) {
@@ -451,7 +477,17 @@ public class CommandManager {
 //        }
 //        System.out.println();
 //    }
+//    //Method that prints a list of commands
+//    public static void printCommandList() {
+//        System.out.println("=====Command List=====");
+//        setCommandList();
+//        for (String string : commandList) {
+//            System.out.println(string);
+//        }
+//        System.out.println();
+//    }
 
+    //Method to create the command list for printing
     public static void setCommandList() {
         Buffer.insertStringIntoRepository("=====Command List=====", 40);
         Buffer.insertStringIntoRepository("", 41);

@@ -53,7 +53,7 @@ public class Opportunity {
     }
 
     public void setQuantity(int quantity) {
-        if(quantity <= 0) {
+        if (quantity <= 0) {
             throw new IllegalArgumentException("The number of trucks must be greater than zero.");
         }
         this.quantity = quantity;
@@ -77,8 +77,17 @@ public class Opportunity {
 
     @Override
     public String toString() {
+        //Shows only the part of the id string that the user needs to see
+        char[] idArray = id.toCharArray();
+        int charCount = 0;
+        for (int i = 2; i < idArray.length; i++) {
+            if (idArray[i] != '0') {
+                charCount = i;
+                break;
+            }
+        }
         return "Opportunity{" +
-                "id=" + id +
+                "id=" + id.substring(charCount) +
                 ", product=" + product +
                 ", quantity=" + quantity +
                 ", decisionMaker=" + decisionMaker +
