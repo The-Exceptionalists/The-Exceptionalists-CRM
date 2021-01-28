@@ -1,5 +1,7 @@
 package com.ironhack.crm.utils;
 
+import com.ironhack.crm.utilities.Storage;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,7 @@ public class Validator {
     }
 
     public static boolean validateName(String name) {
-        return validate(name, "^[ÁÉÍÓÚA-Z][a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*${1,31}");
+        return validate(name, "^[ÁÉÍÓÚA-Z]?[a-záéíóú]+(\\s+[ÁÉÍÓÚA-Z]?[a-záéíóú]+)*${1,31}");
     }
 
     public static boolean validateProduct(String product) {
@@ -65,15 +67,25 @@ public class Validator {
                     switch (word[1]) {
                         case "opportunity", "contact", "lead", "account" -> {
                             if (word.length == 3) {
-                                return validateNumber(word[2]);
+                                return validateId(word[1], word[2]);
+                                //return validateNumber(word[2]);
                             }
                             return false;
                         }
                     }
                 }
-                case "convert", "close-won", "close-lost" -> {
+                case "convert" ->{
+                    if(word.length == 2){
+                        return validateId("lead", word[1]);
+                    }
+
+                    return false;
+                }
+
+                case "close-won", "close-lost" -> {
                     if (word.length == 2) {
-                        return validateNumber(word[1]);
+                        return validateId("opportunity", word[1]);
+                        //return validateNumber(word[1]);
                     }
                     return false;
                 }
@@ -97,6 +109,42 @@ public class Validator {
             }
         }
         return false;
+    }
+
+    public static boolean validateId(String value, String id) {
+        boolean check = false;
+
+        switch (value){
+            case "lead":
+                if(validate(id, "(le)[0-9]+")){
+                    if(Storage.searchLead(id).getId().equals(id)){
+                        check = true;
+                    }
+                }
+                break;
+            case "opportunity":
+                if(validate(id, "(op)[0-9]+")){
+                    if(Storage.searchOpportunity(id).getId().equals(id)){
+                        check = true;
+                    }
+                }
+                break;
+            case "contact":
+                if(Storage.searchContact(id).getId().equals(id)){
+                    check = true;
+                }
+                break;
+            case "account":
+                if(Storage.searchAccount(id).getId().equals(id)){
+                    check = true;
+                }
+                break;
+            default:
+                check = false;
+
+        }
+
+        return check;
     }
 
     public static boolean validateIndustry(String industry) {

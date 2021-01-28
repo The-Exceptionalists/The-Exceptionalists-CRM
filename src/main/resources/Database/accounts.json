@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "id": "ac0000000004",
+    "companyName": "Loloe",
+    "industry": "PRODUCE",
+    "employeeCount": 321,
+    "city": "Kolo",
+    "country": "Kilo",
+    "contactList": [
+      {
+        "id": "co0000000002",
+        "name": "Kolo loe",
+        "email": "kole@loe.com",
+        "companyName": "Loloe",
+        "phoneNum": "+233241313"
+      }
+    ],
+    "opportunityList": [
+      {
+        "id": "op0000000003",
+        "product": "HYBRID",
+        "quantity": 123,
+        "decisionMaker": {
+          "id": "co0000000002",
+          "name": "Kolo loe",
+          "email": "kole@loe.com",
+          "companyName": "Loloe",
+          "phoneNum": "+233241313"
+        },
+        "status": "OPEN"
+      }
+    ]
+  },
+  {
+    "id": "ac0000000007",
+    "companyName": "Ger",
+    "industry": "PRODUCE",
+    "employeeCount": 43,
+    "city": "Mole",
+    "country": "Moli",
+    "contactList": [
+      {
+        "id": "co0000000005",
+        "name": "Loco Laco",
+        "email": "loco@fhds.com",
+        "companyName": "Ger",
+        "phoneNum": "+2131423232"
+      }
+    ],
+    "opportunityList": [
+      {
+        "id": "op0000000006",
+        "product": "HYBRID",
+        "quantity": 32,
+        "decisionMaker": {
+          "id": "co0000000005",
+          "name": "Loco Laco",
+          "email": "loco@fhds.com",
+          "companyName": "Ger",
+          "phoneNum": "+2131423232"
+        },
+        "status": "OPEN"
+      }
+    ]
+  }
+]
