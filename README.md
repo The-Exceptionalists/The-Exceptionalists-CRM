@@ -26,7 +26,10 @@ Developed in bright 16-bit colors, you can easily store all you customer-related
 - **CLOSE-LOST <id>**: Closes an opportunity and marks it  as lost.
 - **EXIT:** Write exit to save your database and terminate the session.
 
+## Diagrams
 
+- Case Diagram: https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM-UseCase-Diagram.jpg
+- Class Diagram: https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM_Exceptionalists.jpeg
 
 ## Usage
 
