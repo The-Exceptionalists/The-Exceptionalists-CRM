@@ -450,18 +450,17 @@ public class CommandManager {
         int startingRepositoryIndex = 10;
         int finalCounter = index;
         for (int i = index; i < leadList.size() && i < index + 15; i++) {
-            Buffer.insertStringIntoRepository(leadList.get(i).getId(), startingRepositoryIndex++);
-            Buffer.insertStringIntoRepository(leadList.get(i).getName(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(leadList.get(i).getIdToPrint(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(leadList.get(i).getNameToPrint(), startingRepositoryIndex++);
             finalCounter++;
         }
-        if (finalCounter < leadList.size()){
+        if (finalCounter < leadList.size()) {
             Buffer.setPromptLineOne("Leads List");
             Buffer.insertCentralPromptPoints(1);
             Buffer.setPromptLineTwo("press INTRO to next page");
             printScreenBeforeAndPromptNext();
             printLeadList(leadList, finalCounter);
-        }
-        else if (leadList.size() == 0){
+        } else if (leadList.size() == 0) {
             Buffer.setPromptLineTwo("Empty leads List - press INTRO");
             printScreenBeforeAndPromptNext();
 
@@ -489,23 +488,22 @@ public class CommandManager {
         int startingRepositoryIndex = 10;
         int finalCounter = index;
         for (int i = index; i < opportunityList.size() && i < index + 15; i++) {
-            Buffer.insertStringIntoRepository(opportunityList.get(i).getId(), startingRepositoryIndex++);
-            Buffer.insertStringIntoRepository(opportunityList.get(i).getDecisionMaker().getName(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(opportunityList.get(i).getIdToPrint(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(opportunityList.get(i).getDecisionMaker().getNameToPrint(), startingRepositoryIndex++);
             finalCounter++;
         }
-        if (finalCounter < opportunityList.size()){
-            Buffer.setPromptLineOne("Leads List");
+        if (finalCounter < opportunityList.size()) {
+            Buffer.setPromptLineOne("Opportunities List");
             Buffer.insertCentralPromptPoints(1);
             Buffer.setPromptLineTwo("press INTRO to next page");
             printScreenBeforeAndPromptNext();
             printOpportunityList(opportunityList, finalCounter);
-        }
-        else if (opportunityList.size() == 0){
-            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+        } else if (opportunityList.size() == 0) {
+            Buffer.setPromptLineTwo("Empty Opportunities List - press INTRO");
             printScreenBeforeAndPromptNext();
 
         } else {
-            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            Buffer.setPromptLineTwo("Opportunities List - press INTRO");
             printScreenBeforeAndPromptNext();
         }
     }
@@ -521,23 +519,22 @@ public class CommandManager {
         int startingRepositoryIndex = 10;
         int finalCounter = index;
         for (int i = index; i < contactList.size() && i < index + 15; i++) {
-            Buffer.insertStringIntoRepository(contactList.get(i).getId(), startingRepositoryIndex++);
-            Buffer.insertStringIntoRepository(contactList.get(i).getName(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(contactList.get(i).getIdToPrint(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(contactList.get(i).getNameToPrint(), startingRepositoryIndex++);
             finalCounter++;
         }
-        if (finalCounter < contactList.size()){
-            Buffer.setPromptLineOne("Leads List");
+        if (finalCounter < contactList.size()) {
+            Buffer.setPromptLineOne("Contacts List");
             Buffer.insertCentralPromptPoints(1);
             Buffer.setPromptLineTwo("press INTRO to next page");
             printScreenBeforeAndPromptNext();
             printContactList(contactList, finalCounter);
-        }
-        else if (contactList.size() == 0){
-            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+        } else if (contactList.size() == 0) {
+            Buffer.setPromptLineTwo("Empty Contacts List - press INTRO");
             printScreenBeforeAndPromptNext();
 
         } else {
-            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            Buffer.setPromptLineTwo("Contacts List - press INTRO");
             printScreenBeforeAndPromptNext();
         }
     }
@@ -553,23 +550,22 @@ public class CommandManager {
         int startingRepositoryIndex = 10;
         int finalCounter = index;
         for (int i = index; i < accountList.size() && i < index + 15; i++) {
-            Buffer.insertStringIntoRepository(accountList.get(i).getId(), startingRepositoryIndex++);
+            Buffer.insertStringIntoRepository(accountList.get(i).getIdToPrint(), startingRepositoryIndex++);
             Buffer.insertStringIntoRepository(accountList.get(i).getCompanyName(), startingRepositoryIndex++);
             finalCounter++;
         }
-        if (finalCounter < accountList.size()){
-            Buffer.setPromptLineOne("Leads List");
+        if (finalCounter < accountList.size()) {
+            Buffer.setPromptLineOne("Accounts List");
             Buffer.insertCentralPromptPoints(1);
             Buffer.setPromptLineTwo("press INTRO to next page");
             printScreenBeforeAndPromptNext();
             printAccountList(accountList, finalCounter);
-        }
-        else if (accountList.size() == 0){
-            Buffer.setPromptLineTwo("Empty leads List - press INTRO");
+        } else if (accountList.size() == 0) {
+            Buffer.setPromptLineTwo("Accounts leads List - press INTRO");
             printScreenBeforeAndPromptNext();
 
         } else {
-            Buffer.setPromptLineTwo("Leads List - press INTRO");
+            Buffer.setPromptLineTwo("Accounts List - press INTRO");
             printScreenBeforeAndPromptNext();
         }
     }

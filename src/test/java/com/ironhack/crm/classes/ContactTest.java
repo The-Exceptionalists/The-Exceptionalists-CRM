@@ -116,46 +116,46 @@ class ContactTest {
 
     @Test
     void setPhoneNum_regularPhone_OK() {
-        contact.setPhoneNum("666666666");
-        assertEquals("666666666", contact.getPhoneNum());
+        contact.setPhoneNumber("666666666");
+        assertEquals("666666666", contact.getPhoneNumber());
     }
 
     @Test
     void setPhoneNum_withSpaces_OK() {
-        contact.setPhoneNum("666 666 666");
-        assertEquals("666 666 666", contact.getPhoneNum());
+        contact.setPhoneNumber("666 666 666");
+        assertEquals("666 666 666", contact.getPhoneNumber());
     }
 
     @Test
     void setPhoneNum_countryCode_OK() {
-        contact.setPhoneNum("+34 666 666 666");
-        assertEquals("+34 666 666 666", contact.getPhoneNum());
-        contact.setPhoneNum("+34666666666");
-        assertEquals("+34666666666", contact.getPhoneNum());
+        contact.setPhoneNumber("+34 666 666 666");
+        assertEquals("+34 666 666 666", contact.getPhoneNumber());
+        contact.setPhoneNumber("+34666666666");
+        assertEquals("+34666666666", contact.getPhoneNumber());
     }
 
     @Test
     void setPhoneNum_withBrackets_OK() {
-        contact.setPhoneNum("+34 (666) 666 666");
-        assertEquals("+34 (666) 666 666", contact.getPhoneNum());
-        contact.setPhoneNum("(346)66666666");
-        assertEquals("(346)66666666", contact.getPhoneNum());
+        contact.setPhoneNumber("+34 (666) 666 666");
+        assertEquals("+34 (666) 666 666", contact.getPhoneNumber());
+        contact.setPhoneNumber("(346)66666666");
+        assertEquals("(346)66666666", contact.getPhoneNumber());
     }
 
     @Test
     void setPhoneNum_withLetters_throwsException() {
 
-        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum("66i553328"));
-        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum("abc222111"));
-        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum("96I4234"));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNumber("66i553328"));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNumber("abc222111"));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNumber("96I4234"));
     }
 
     @Test
     void setPhoneNum_emptyOrBlankSpaces_throwsException() {
 
-        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum(""));
-        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum(" "));
-        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNum("  "));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNumber(""));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNumber(" "));
+        assertThrows(IllegalArgumentException.class, () -> contact.setPhoneNumber("  "));
     }
 
 }

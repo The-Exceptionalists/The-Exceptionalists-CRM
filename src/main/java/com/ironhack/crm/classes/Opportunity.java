@@ -36,6 +36,19 @@ public class Opportunity {
         return id;
     }
 
+    public String getIdToPrint() {
+        //Shows only the part of the id string that the user needs to see
+        char[] idArray = id.toCharArray();
+        int charCount = 0;
+        for (int i = 2; i < idArray.length; i++) {
+            if (idArray[i] != '0') {
+                charCount = i;
+                break;
+            }
+        }
+        return "Id: " + id.substring(charCount);
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -44,12 +57,20 @@ public class Opportunity {
         return product;
     }
 
+    public String getProductToPrint() {
+        return "Product: " + product.toString();
+    }
+
     public void setProduct(Product product) {
         this.product = product;
     }
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public String getQuantityToPrint() {
+        return "Quantity: " + quantity;
     }
 
     public void setQuantity(int quantity) {
@@ -71,6 +92,10 @@ public class Opportunity {
         return status;
     }
 
+    public String getStatusToPrint() {
+        return "Status: " + status.toString();
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
@@ -87,7 +112,7 @@ public class Opportunity {
             }
         }
         return "Opportunity{" +
-                "id=" + id.substring(charCount) +
+                "id=" + id +
                 ", product=" + product +
                 ", quantity=" + quantity +
                 ", decisionMaker=" + decisionMaker +

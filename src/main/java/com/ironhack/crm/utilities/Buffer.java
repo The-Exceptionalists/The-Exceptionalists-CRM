@@ -53,7 +53,7 @@ public class Buffer {
             {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
     };
 
-    private static String singleSpace = " ";
+    private static final String singleSpace = " ";
     private static String appName = singleSpace + "DÉJÀ VU: your console CRM ";
     private static String companyName = singleSpace + "GlobalService Co.";
     private static String userName = singleSpace + "IronHacker";
@@ -62,7 +62,6 @@ public class Buffer {
     private static String promptLineTwo = "";
     private static String resultItem = "Result ";
     private static String appVersion = "ver: 1.0";
-
 
 
     private static String[] stringsRepository;
@@ -170,21 +169,21 @@ public class Buffer {
     }
 
     public static void insertSideBox() {
-        for (int i = 0; i < 21; i++){
-            for (int j = 0; j < 15; j++){
+        for (int i = 0; i < 21; i++) {
+            for (int j = 0; j < 15; j++) {
                 screenBuffer[4 + i][47 + j] = 'S';
             }
         }
     }
 
-    public static void insertOptionsAnchors(){
-        for (int i = 0; i < 17; i++){
-            screenBuffer[4 + i][48 ] = 's';
+    public static void insertOptionsAnchors() {
+        for (int i = 0; i < 17; i++) {
+            screenBuffer[4 + i][48] = 's';
             screenBuffer[4 + i][48 + 1] = (char) ('a' + i);
         }
     }
 
-    public static void insertItemSolo (){
+    public static void insertItemSolo() {
         int startingRow = 13;
         char startingLocationA = 'a';
         char startingLocationB = 'e';
@@ -192,14 +191,14 @@ public class Buffer {
         screenBuffer[startingRow - 1][4] = 'i';
         screenBuffer[startingRow - 1][5] = '1';
 
-        for (int i = 0; i < 4; i++){
-            screenBuffer[startingRow + i][4 ] = 'i';
-            screenBuffer[startingRow + i][5 ] = (char) (startingLocationA + i);
+        for (int i = 0; i < 4; i++) {
+            screenBuffer[startingRow + i][4] = 'i';
+            screenBuffer[startingRow + i][5] = (char) (startingLocationA + i);
         }
 
-        for (int i = 0; i < 4; i++){
-            screenBuffer[startingRow + i][24 ] = 'i';
-            screenBuffer[startingRow + i][25 ] = (char) (startingLocationB + i);
+        for (int i = 0; i < 4; i++) {
+            screenBuffer[startingRow + i][24] = 'i';
+            screenBuffer[startingRow + i][25] = (char) (startingLocationB + i);
         }
     }
 
@@ -214,23 +213,24 @@ public class Buffer {
 
     /**
      * Extract data from Lead
+     *
      * @param lead
      * @param resultIndex
      * @param listIndex
      */
-    public static void insertLeadStringRepository(Lead lead, int resultIndex, int listIndex){
+    public static void insertLeadStringRepository(Lead lead, int resultIndex, int listIndex) {
         int startingRepository = 0;
-        switch (listIndex){
+        switch (listIndex) {
             case 1 -> startingRepository = 10;
             case 2 -> startingRepository = 16;
             case 3 -> startingRepository = 22;
         }
         insertStringIntoRepository(getResultItem() + resultIndex, startingRepository++);
-        insertStringIntoRepository(lead.getId(), startingRepository++);
-        insertStringIntoRepository(lead.getName(), startingRepository++);
-        insertStringIntoRepository(lead.getPhoneNumber(), startingRepository++);
-        insertStringIntoRepository(lead.getEmail(), startingRepository++);
-        insertStringIntoRepository(lead.getCompanyName(), startingRepository++);
+        insertStringIntoRepository(lead.getIdToPrint(), startingRepository++);
+        insertStringIntoRepository(lead.getNameToPrint(), startingRepository++);
+        insertStringIntoRepository(lead.getPhoneNumberToPrint(), startingRepository++);
+        insertStringIntoRepository(lead.getEmailToPrint(), startingRepository++);
+        insertStringIntoRepository(lead.getCompanyNameToPrint(), startingRepository++);
     }
 
     /**
@@ -241,17 +241,17 @@ public class Buffer {
      */
     public static void insertOpportunityStringRepository(Opportunity opportunity, int resultIndex, int listIndex) {
         int startingRepository = 0;
-        switch (listIndex){
+        switch (listIndex) {
             case 1 -> startingRepository = 10;
             case 2 -> startingRepository = 16;
             case 3 -> startingRepository = 22;
         }
         insertStringIntoRepository(getResultItem() + resultIndex, startingRepository++);
-        insertStringIntoRepository(opportunity.getId(), startingRepository++);
-        insertStringIntoRepository(opportunity.getDecisionMaker().getName(), startingRepository++);
-        insertStringIntoRepository(opportunity.getProduct().toString(), startingRepository++);
-        insertStringIntoRepository("Quantity: " + opportunity.getQuantity(), startingRepository++);
-        insertStringIntoRepository(opportunity.getStatus().toString(), startingRepository++);
+        insertStringIntoRepository(opportunity.getIdToPrint(), startingRepository++);
+        insertStringIntoRepository(opportunity.getDecisionMaker().getNameToPrint(), startingRepository++);
+        insertStringIntoRepository(opportunity.getProductToPrint(), startingRepository++);
+        insertStringIntoRepository(opportunity.getQuantityToPrint(), startingRepository++);
+        insertStringIntoRepository(opportunity.getStatusToPrint(), startingRepository++);
     }
 
     /**
@@ -262,15 +262,15 @@ public class Buffer {
      */
     public static void insertContactStringRepository(Contact contact, int resultIndex, int listIndex) {
         int startingRepository = 0;
-        switch (listIndex){
+        switch (listIndex) {
             case 1 -> startingRepository = 10;
             case 2 -> startingRepository = 16;
             case 3 -> startingRepository = 22;
         }
         insertStringIntoRepository(getResultItem() + resultIndex, startingRepository++);
-        insertStringIntoRepository(contact.getId(), startingRepository++);
-        insertStringIntoRepository(contact.getName(), startingRepository++);
-        insertStringIntoRepository(contact.getPhoneNum(), startingRepository++);
+        insertStringIntoRepository(contact.getIdToPrint(), startingRepository++);
+        insertStringIntoRepository(contact.getNameToPrint(), startingRepository++);
+        insertStringIntoRepository(contact.getPhoneNumber(), startingRepository++);
         insertStringIntoRepository(contact.getEmail(), startingRepository++);
         insertStringIntoRepository(contact.getCompanyName(), startingRepository++);
     }
@@ -283,18 +283,18 @@ public class Buffer {
      */
     public static void insertAccountStringRepository(Account account, int resultIndex, int listIndex) {
         int startingRepository = 0;
-        switch (listIndex){
+        switch (listIndex) {
             case 1 -> startingRepository = 10;
             case 2 -> startingRepository = 16;
             case 3 -> startingRepository = 22;
         }
         insertStringIntoRepository(getResultItem() + resultIndex, startingRepository++);
-        insertStringIntoRepository(account.getId(), startingRepository++);
-        insertStringIntoRepository(account.getCompanyName(), startingRepository++);
-        insertStringIntoRepository(account.getIndustry().toString(), startingRepository++);
-        insertStringIntoRepository("Employee count: " + account.getEmployeeCount(), startingRepository++);
-        insertStringIntoRepository(account.getCity(), startingRepository++);
-        insertStringIntoRepository(account.getCountry(), startingRepository++);
+        insertStringIntoRepository(account.getIdToPrint(), startingRepository++);
+        insertStringIntoRepository(account.getCompanyNameToPrint(), startingRepository++);
+        insertStringIntoRepository(account.getIndustryToPrint(), startingRepository++);
+        insertStringIntoRepository(account.getEmployeeCountToPrint(), startingRepository++);
+        insertStringIntoRepository(account.getCityToPrint(), startingRepository++);
+        insertStringIntoRepository(account.getCountryToPrint(), startingRepository++);
     }
 
     /**
@@ -318,8 +318,8 @@ public class Buffer {
         promptLineTwo = "";
     }
 
-    public static void resetPromptOne(){
-        promptLineOne ="";
+    public static void resetPromptOne() {
+        promptLineOne = "";
     }
 
     public static String getAppName() {
