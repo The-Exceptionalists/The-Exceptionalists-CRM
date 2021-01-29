@@ -40,7 +40,7 @@ The application starts with a fancy layout where a list of all the commands is s
 
 ## Screenshots
 
-![alt text]('https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/screen1.jpg')
+![alt text](https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/screen1.jpg)
 
 ## Authors
 **The Excepcionalist Team**: Adrià López, Jaume Sánchez, Salvatore Corsaro, Antonio Navarro, Iván Trujillo.
