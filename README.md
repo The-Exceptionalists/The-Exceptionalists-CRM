@@ -29,8 +29,11 @@ Developed in bright 16-bit colors, you can easily store all you customer-related
 
 ## Diagrams
 
-- Case Diagram: https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM-UseCase-Diagram.jpg
-- Class Diagram: https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM_Exceptionalists.jpeg
+- Case Diagram:
+
+![alt text](https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM-UseCase-Diagram.jpg)
+
+- Class Diagram:
 
 ![alt text](https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM_Exceptionalists.jpeg)
 
