@@ -45,7 +45,6 @@ public class Storage {
         reentrantLock.writeLock();
         contactHashMap.put(item.getId(), item);
         reentrantLock.writeLock();
-
     }
 
     /**
@@ -58,7 +57,6 @@ public class Storage {
         reentrantLock.writeLock();
         opportunityHashMap.put(item.getId(), item);
         reentrantLock.writeLock();
-
     }
 
     /**
@@ -71,7 +69,6 @@ public class Storage {
         reentrantLock.writeLock();
         leadHashMap.put(item.getId(), item);
         reentrantLock.writeLock();
-
     }
 
     public static void setUpId() {
@@ -79,7 +76,6 @@ public class Storage {
         reentrantLock.writeLock();
         id++;
         reentrantLock.writeLock();
-
     }
 
     /**
@@ -152,7 +148,6 @@ public class Storage {
         if (contactHashMap.containsKey(id))
             return contactHashMap.get(id);
         else throw new IllegalArgumentException(id + "not found");
-
     }
 
     /**
@@ -186,12 +181,6 @@ public class Storage {
      *
      * @param id
      */
-
-    /*public static void nullifyLead(String id) {
-        if (leadHashMap.containsKey(id))
-            leadHashMap.replace(id, null);
-        else throw new IllegalArgumentException(id + "not found");
-    }*/
     public static void removeLead(String id) {
         if (leadHashMap.containsKey(id))
             leadHashMap.remove(id);
@@ -284,6 +273,5 @@ public class Storage {
     public static void setId(int id) {
         Storage.id = id;
     }
-
 
 }

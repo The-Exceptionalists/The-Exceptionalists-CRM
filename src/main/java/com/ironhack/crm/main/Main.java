@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 
 public class Main {
     public static void main(String[] args) {
+        Output.introResolutionAlert();
         Buffer.initStringsRepository();
         State.restoreState();
         while (true) {
