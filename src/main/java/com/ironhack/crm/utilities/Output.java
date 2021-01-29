@@ -1,6 +1,7 @@
 package com.ironhack.crm.utilities;
 
 import java.util.Locale;
+import java.util.Scanner;
 
 public class Output {
 
@@ -470,26 +471,24 @@ public class Output {
     }
 
     public static void introResolutionAlert(){
-        System.out.println(DEFAULT + "\n\n\n");
+        System.out.println(DEFAULT + "\n\n\n\n");
         System.out.println(fillWithSpaces(25) + "RECEIVING DATA FROM DATABASE");
         System.out.print(fillWithSpaces(10));
-        System.out.println(DEFAULT + "\n\n\n");
+        System.out.println(DEFAULT + "\n\n\n\n");
         for (int i = 0; i < 40; i++){
             System.out.print(GREEN_BCK + BLOCK);
             try {
-                Thread.sleep(170);
+                Thread.sleep(140);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(DEFAULT + "\n\n\n\n\n\n");
+        System.out.println(DEFAULT + "\n\n\n\n\n\n\n");
         System.out.println(fillWithSpaces(18) + "Resize your screen for a better experience.".toUpperCase(Locale.ROOT));
         System.out.println("\n\n\n\n\n\n");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        System.out.println(fillWithSpaces(32) + "PRESS INTRO".toUpperCase(Locale.ROOT));
+        System.out.println(DEFAULT + "\n\n\n\n");
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
     }
 }
