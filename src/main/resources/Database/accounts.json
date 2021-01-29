@@ -11,8 +11,7 @@
         "id": "co0000000008",
         "name": "Galo",
         "email": "ge@lfew.com",
-        "companyName": "Ger",
-        "phoneNum": "12314312"
+        "companyName": "Ger"
       }
     ],
     "opportunityList": [
@@ -24,8 +23,7 @@
           "id": "co0000000008",
           "name": "Galo",
           "email": "ge@lfew.com",
-          "companyName": "Ger",
-          "phoneNum": "12314312"
+          "companyName": "Ger"
         },
         "status": "OPEN"
       }
@@ -43,8 +41,7 @@
         "id": "co0000000002",
         "name": "Kolo loe",
         "email": "kole@loe.com",
-        "companyName": "Loloe",
-        "phoneNum": "+233241313"
+        "companyName": "Loloe"
       }
     ],
     "opportunityList": [
@@ -56,8 +53,7 @@
           "id": "co0000000002",
           "name": "Kolo loe",
           "email": "kole@loe.com",
-          "companyName": "Loloe",
-          "phoneNum": "+233241313"
+          "companyName": "Loloe"
         },
         "status": "OPEN"
       }
@@ -75,8 +71,7 @@
         "id": "co0000000005",
         "name": "Loco Laco",
         "email": "loco@fhds.com",
-        "companyName": "Ger",
-        "phoneNum": "+2131423232"
+        "companyName": "Ger"
       }
     ],
     "opportunityList": [
@@ -88,8 +83,7 @@
           "id": "co0000000005",
           "name": "Loco Laco",
           "email": "loco@fhds.com",
-          "companyName": "Ger",
-          "phoneNum": "+2131423232"
+          "companyName": "Ger"
         },
         "status": "OPEN"
       }
