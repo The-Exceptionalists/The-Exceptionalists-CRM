@@ -32,6 +32,8 @@ Developed in bright 16-bit colors, you can easily store all you customer-related
 - Case Diagram: https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM-UseCase-Diagram.jpg
 - Class Diagram: https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM_Exceptionalists.jpeg
 
+![alt text](https://github.com/The-Exceptionalists/The-Exceptionalists-CRM/blob/develop/src/main/resources/CRM_Exceptionalists.jpeg)
+
 ## Usage
 
 The application starts with a fancy layout where a list of all the commands is shown in a window at the right side. The central window will contain the information of the objects the user wants to check, while the window at the bottom will prompt the required values in some of the operations. 
