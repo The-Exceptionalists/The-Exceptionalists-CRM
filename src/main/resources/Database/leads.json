@@ -1,135 +1,37 @@
 [
   {
-    "id": "le0000000019",
-    "name": "Camron Alvarado",
-    "email": "bisdifw@fw.com",
-    "companyName": "ger",
-    "phoneNumber": "12314512"
+    "id": "le0000000001",
+    "name": "Salva",
+    "email": "dev@theexceptionalist.com",
+    "companyName": "TheExceptionalist",
+    "phoneNumber": "+3434567892"
   },
   {
-    "id": "le0000000018",
-    "name": "Cornelius Lawson",
-    "email": "sgjhfbs@gfw.com",
-    "companyName": "Terwef",
-    "phoneNumber": "23524242"
+    "id": "le0000000002",
+    "name": "Adri",
+    "email": "dev@theexceptionalist.com",
+    "companyName": "TheExceptionalist",
+    "phoneNumber": "+3434994392"
   },
   {
-    "id": "le0000000015",
-    "name": "Amari Fitzpatrick",
-    "email": "fsfs@fsfs.org",
-    "companyName": "Tresdf",
-    "phoneNumber": "12314341"
+    "id": "le0000000003",
+    "name": "Ivan",
+    "email": "dev@theexceptionalist.com",
+    "companyName": "TheExceptionalist",
+    "phoneNumber": "+3436467892"
   },
   {
-    "id": "le0000000026",
-    "name": "Roman Jimenez",
-    "email": "fe@re.cc",
-    "companyName": "1fw",
-    "phoneNumber": "1241231"
+    "id": "le0000000004",
+    "name": "Antonio",
+    "email": "dev@theexceptionalist.com",
+    "companyName": "TheExceptionalist",
+    "phoneNumber": "+3433367892"
   },
   {
-    "id": "le0000000014",
-    "name": "Mariyah Wade",
-    "email": "fsfdfsd@fsfs.com",
-    "companyName": "Refer",
-    "phoneNumber": "3124324234"
-  },
-  {
-    "id": "le0000000025",
-    "name": "Aiden Hoover",
-    "email": "wefw@leew.com",
-    "companyName": "fe",
-    "phoneNumber": "123151"
-  },
-  {
-    "id": "le0000000017",
-    "name": "Ana Hayes",
-    "email": "fsfs@ffew.it",
-    "companyName": "Treads",
-    "phoneNumber": "123531"
-  },
-  {
-    "id": "le0000000028",
-    "name": "Adriel Garcia",
-    "email": "fwfe@cnwoe.com",
-    "companyName": "fsfs",
-    "phoneNumber": "12341"
-  },
-  {
-    "id": "le0000000016",
-    "name": "Tate Figueroa",
-    "email": "sfdsfsgr@scew.com",
-    "companyName": "Tere",
-    "phoneNumber": "124532"
-  },
-  {
-    "id": "le0000000027",
-    "name": "Luka Harding",
-    "email": "fdwf@dsfdfdw.com",
-    "companyName": "Gregegegege",
-    "phoneNumber": "123141"
-  },
-  {
-    "id": "le0000000011",
-    "name": "Madalyn Romero",
-    "email": "fsdfs@fsf.com",
-    "companyName": "Fele",
-    "phoneNumber": "2324243123"
-  },
-  {
-    "id": "le0000000022",
-    "name": "Elvis Short",
-    "email": "fe@few.com",
-    "companyName": "Ter",
-    "phoneNumber": "1231412"
-  },
-  {
-    "id": "le0000000010",
-    "name": "Janae Romero",
-    "email": "fds@eww.com",
-    "companyName": "Cole",
-    "phoneNumber": "23242"
-  },
-  {
-    "id": "le0000000021",
-    "name": "Arabella Chambers",
-    "email": "cwfdw@mvk.com",
-    "companyName": "Fwrew",
-    "phoneNumber": "123151"
-  },
-  {
-    "id": "le0000000013",
-    "name": "Yuliana Pittman",
-    "email": "fsfdf@fsdfs.com",
-    "companyName": "Teret",
-    "phoneNumber": "2235342"
-  },
-  {
-    "id": "le0000000024",
-    "name": "Donna Schmidt",
-    "email": "ferf@few.com",
-    "companyName": "Fres",
-    "phoneNumber": "12315132"
-  },
-  {
-    "id": "le0000000012",
-    "name": "Brielle Jensen",
-    "email": "fsfsf2fsf@gsfsdf.com",
-    "companyName": "fdsfs",
-    "phoneNumber": "32424242321"
-  },
-  {
-    "id": "le0000000023",
-    "name": "Frances Mclaugh",
-    "email": "e@evev.com",
-    "companyName": "gr",
-    "phoneNumber": "125121231"
-  },
-  {
-    "id": "le0000000020",
-    "name": "Haleigh Prince",
-    "email": "caf@dsonwe.com",
-    "companyName": "FGrew",
-    "phoneNumber": "1231412421"
+    "id": "le0000000005",
+    "name": "Jaume",
+    "email": "dev@theexceptionalist.com",
+    "companyName": "TheExceptionalist",
+    "phoneNumber": "+3434567792"
   }
 ]

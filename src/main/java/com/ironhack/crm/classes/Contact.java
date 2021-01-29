@@ -22,7 +22,7 @@ public class Contact {
     }
 
     //Constructor for a new Contact
-    public Contact(String name, String email, String companyName, String phoneNum) {
+    public Contact(String name, String email, String companyName, String phoneNumber) {
         setId(Storage.getNewId(ItemType.CONTACT));
         setName(name);
         setEmail(email);
