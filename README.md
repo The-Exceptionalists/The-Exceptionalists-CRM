@@ -13,7 +13,7 @@ Developed in bright 16-bit colors, you can easily store all you customer-related
 3. Run the Main.java file on the path:
 
 ```bash
- ./src/com/ironhack/rpg_simulator/main
+ ./src/main/java/com/ironhack/crm/main/Main.java
 ```
 
 ## Functionalities
