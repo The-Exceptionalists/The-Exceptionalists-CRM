@@ -35,6 +35,19 @@ public class Lead {
         return id;
     }
 
+    public String getIdToPrint() {
+        //Shows only the part of the id string that the user needs to see
+        char[] idArray = id.toCharArray();
+        int charCount = 0;
+        for (int i = 2; i < idArray.length; i++) {
+            if (idArray[i] != '0') {
+                charCount = i;
+                break;
+            }
+        }
+        return "Id: " + id.substring(charCount);
+    }
+
     public void setId(String id) {
 
         this.id = id;
@@ -42,6 +55,10 @@ public class Lead {
 
     public String getName() {
         return name;
+    }
+
+    public String getNameToPrint() {
+        return "Name: " + name;
     }
 
     public void setName(String name) {
@@ -56,6 +73,10 @@ public class Lead {
         return email;
     }
 
+    public String getEmailToPrint() {
+        return "Email: " + email;
+    }
+
     public void setEmail(String email) {
         if (!Validator.validateEmail(email)) {
             throw new IllegalArgumentException("Name wasn't correct");
@@ -65,6 +86,10 @@ public class Lead {
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public String getCompanyNameToPrint() {
+        return "Company: " + companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -81,6 +106,10 @@ public class Lead {
         return phoneNumber;
     }
 
+    public String getPhoneNumberToPrint() {
+        return "Phone: " + phoneNumber;
+    }
+
     public void setPhoneNumber(String phoneNumber) {
 
         if (!Validator.validatePhoneNumber(phoneNumber)) {
@@ -91,17 +120,8 @@ public class Lead {
     }
 
     public String toString() {
-        //Shows only the part of the id string that the user needs to see
-        char[] idArray = id.toCharArray();
-        int charCount = 0;
-        for (int i = 2; i < idArray.length; i++) {
-            if (idArray[i] != '0') {
-                charCount = i;
-                break;
-            }
-        }
         return "Lead{" +
-                "id='" + id.substring(charCount) + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", companyName='" + companyName + '\'' +

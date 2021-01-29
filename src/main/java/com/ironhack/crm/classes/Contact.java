@@ -10,7 +10,7 @@ public class Contact {
     private String name;
     private String email;
     private String companyName;
-    private String phoneNum;
+    private String phoneNumber;
 
     //Constructor for the database
     public Contact(String id, String name, String email, String companyName, String phoneNum) {
@@ -18,7 +18,7 @@ public class Contact {
         setName(name);
         setEmail(email);
         setCompanyName(companyName);
-        setPhoneNum(phoneNum);
+        setPhoneNumber(phoneNumber);
     }
 
     //Constructor for a new Contact
@@ -27,12 +27,25 @@ public class Contact {
         setName(name);
         setEmail(email);
         setCompanyName(companyName);
-        setPhoneNum(phoneNum);
+        setPhoneNumber(phoneNumber);
     }
 
     //Getters and setters
     public String getId() {
         return id;
+    }
+
+    public String getIdToPrint() {
+        //Shows only the part of the id string that the user needs to see
+        char[] idArray = id.toCharArray();
+        int charCount = 0;
+        for (int i = 2; i < idArray.length; i++) {
+            if (idArray[i] != '0') {
+                charCount = i;
+                break;
+            }
+        }
+        return "Id: " + id.substring(charCount);
     }
 
     public void setId(String id) {
@@ -41,6 +54,10 @@ public class Contact {
 
     public String getName() {
         return name;
+    }
+
+    public String getNameToPrint() {
+        return "Name: " + name;
     }
 
     public void setName(String name) {
@@ -62,20 +79,28 @@ public class Contact {
         return companyName;
     }
 
+    public String getCompanyNameToPrint() {
+        return "Company: " + companyName;
+    }
+
     public void setCompanyName(String companyName) {
         if (!Validator.validateCompanyName(companyName))
             throw new IllegalArgumentException("Company name must be between 1 and 31 characters");
         this.companyName = companyName;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        if (!Validator.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException();
+    public String getPhoneNumberToPrint() {
+        return "Phone: " + phoneNumber;
+    }
 
-        this.phoneNum = phoneNum;
+    public void setPhoneNumber(String phoneNumber) {
+        if (!Validator.validatePhoneNumber(phoneNumber)) throw new IllegalArgumentException();
+
+        this.phoneNumber = phoneNumber;
     }
 
     public String toString() {
@@ -89,11 +114,11 @@ public class Contact {
             }
         }
         return "Contact{" +
-                "id='" + id.substring(charCount) + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", companyName='" + companyName + '\'' +
-                ", phoneNum='" + phoneNum + '\'' +
+                ", phoneNum='" + phoneNumber + '\'' +
                 '}';
     }
 }

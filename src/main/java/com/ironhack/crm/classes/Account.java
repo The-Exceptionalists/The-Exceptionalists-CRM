@@ -56,12 +56,29 @@ public class Account {
         return id;
     }
 
+    public String getIdToPrint() {
+        //Shows only the part of the id string that the user needs to see
+        char[] idArray = id.toCharArray();
+        int charCount = 0;
+        for (int i = 2; i < idArray.length; i++) {
+            if (idArray[i] != '0') {
+                charCount = i;
+                break;
+            }
+        }
+        return "Id: " + id.substring(charCount);
+    }
+
     public void setId(String id) {
         this.id = id;
     }
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public String getCompanyNameToPrint() {
+        return "Company: " + companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -72,12 +89,20 @@ public class Account {
         return industry;
     }
 
+    public String getIndustryToPrint() {
+        return "Industry: " + industry.toString();
+    }
+
     public void setIndustry(Industry industry) {
         this.industry = industry;
     }
 
     public int getEmployeeCount() {
         return employeeCount;
+    }
+
+    public String getEmployeeCountToPrint() {
+        return "Employee Count: " + employeeCount;
     }
 
     public void setEmployeeCount(int employeeCount) {
@@ -91,12 +116,20 @@ public class Account {
         return city;
     }
 
+    public String getCityToPrint() {
+        return "City: " + city;
+    }
+
     public void setCity(String city) {
         this.city = city;
     }
 
     public String getCountry() {
         return country;
+    }
+
+    public String getCountryToPrint() {
+        return "Country: " + country;
     }
 
     public void setCountry(String country) {
@@ -126,17 +159,9 @@ public class Account {
     }
 
     public String toString() {
-        //Shows only the part of the id string that the user needs to see
-        char[] idArray = id.toCharArray();
-        int charCount = 0;
-        for (int i = 2; i < idArray.length; i++) {
-            if (idArray[i] != '0') {
-                charCount = i;
-                break;
-            }
-        }
+
         return "Account{" +
-                "id=" + id.substring(charCount) +
+                "id=" +
                 ", companyName='" + companyName + '\'' +
                 ", industry=" + industry +
                 ", employeeCount=" + employeeCount +
