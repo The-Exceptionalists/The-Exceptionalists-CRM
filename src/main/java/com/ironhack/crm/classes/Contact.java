@@ -13,7 +13,7 @@ public class Contact {
     private String phoneNumber;
 
     //Constructor for the database
-    public Contact(String id, String name, String email, String companyName, String phoneNum) {
+    public Contact(String id, String name, String email, String companyName, String phoneNumber) {
         setId(id);
         setName(name);
         setEmail(email);
